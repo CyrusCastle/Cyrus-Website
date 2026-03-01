@@ -25,15 +25,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.DpRect
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import uk.cyruscastle.www.ui.theme.ColorPalette
+import androidx.compose.ui.zIndex
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
+import uk.cyruscastle.www.ui.theme.ColorPalette
 import kotlin.reflect.KClass
 
 @Composable
@@ -144,6 +144,7 @@ fun DesktopGrid(
             }
 
             val isInside = selectionBox.top != (-1).dp && (checkIsInside())
+            var isDragging by remember { mutableStateOf(false) }
 
             item.first.desktopShortcut(
                 selectedShortcut = grid.selectedShortcut,
@@ -154,16 +155,20 @@ fun DesktopGrid(
                 selectedTextColor = selectedTextColor,
                 modifier = Modifier
                     .offset { IntOffset(dragOffset.x.toInt(), dragOffset.y.toInt()) }
+                    .zIndex(if (isDragging) 999f else 0f)
                     .pointerInput(Unit) {
                         detectDragGestures(
                             onDrag = { change, dragAmount ->
                                 change.consume()
+                                isDragging = true
 
                                 if (canMoveIcons){
                                     dragOffset += dragAmount
                                 }
                             },
                             onDragEnd = {
+                                isDragging = false
+
                                 val newPosition = grid.clampOffset(dragOffset, Size(maxWidth.value - 50.dp.value, maxHeight.value - 50.dp.value))
 
                                 if (!offsetMap.entries.any { entry -> entry.key != item.first::class && entry.value == newPosition }){
