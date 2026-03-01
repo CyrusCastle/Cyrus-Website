@@ -26,6 +26,8 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import cyruswebsite.composeapp.generated.resources.Res
+import cyruswebsite.composeapp.generated.resources.shortcutOverlay
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import kotlin.math.max
@@ -34,6 +36,7 @@ import kotlin.math.max
 fun DesktopShortcut( // TODO can this be fed into Facsimile Window?
     text: String,
     icon: DrawableResource,
+    isShortcut: Boolean,
     selected: Boolean,
     textColor: Color,
     selectedColor: Color,
@@ -45,16 +48,28 @@ fun DesktopShortcut( // TODO can this be fed into Facsimile Window?
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier.width(75.dp).height(if (selected) 150.dp else 75.dp)
     ){
-        Image(
-            painter = painterResource(icon),
-            contentDescription = null,
-            colorFilter = if (selected) ColorFilter.tint(selectedColor, BlendMode.Hue) else null, // TODO a better colour filter
-            modifier = Modifier.height(37.5.dp).pointerInput(Unit) {
-                detectTapGestures(onTap = {
-                    onClick() // TODO split this into onTap and onDoubleTap??
-                })
+        Box(){
+            Image(
+                painter = painterResource(icon),
+                contentDescription = null,
+                colorFilter = if (selected) ColorFilter.tint(selectedColor, BlendMode.Hue) else null, // TODO a better colour filter
+                modifier = Modifier.height(37.5.dp).pointerInput(Unit) {
+                    detectTapGestures(onTap = {
+                        onClick() // TODO split this into onTap and onDoubleTap??
+                    })
+                }
+            )
+
+            if (isShortcut){
+                Image(
+                    painter = painterResource(Res.drawable.shortcutOverlay),
+                    contentDescription = null,
+                    colorFilter = if (selected) ColorFilter.tint(selectedColor, BlendMode.Hue) else null, // TODO a better colour filter
+                    modifier = Modifier.height(37.5.dp)
+                )
             }
-        )
+        }
+
         Box(Modifier.weight(1f)) {
             var displayText by remember(selected) { mutableStateOf(text) }
 

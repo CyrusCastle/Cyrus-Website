@@ -49,6 +49,7 @@ open class FacsimileWindow(
     val shortcutIcon: DrawableResource = icon,
     val creationOrder: Int = WindowController.windows.value.size,
     initiallyVisible: Boolean,
+    val isShortcut: Boolean = false,
     private val topBarContent: List<@Composable (() -> Unit)> = ArrayList(),
     private val bottomBarContent: @Composable (() -> Unit)? = null,
     private val defaultSize: Size = Size(600f, 600f),
@@ -163,6 +164,7 @@ open class FacsimileWindow(
         DesktopShortcut(
             fileTitle ?: programTitle,
             shortcutIcon,
+            isShortcut,
             isSelected || pseudoSelected,
             textColor,
             selectedColor,

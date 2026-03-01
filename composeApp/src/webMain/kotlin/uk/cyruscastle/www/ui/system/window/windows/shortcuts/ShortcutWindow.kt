@@ -15,6 +15,7 @@ open class ShortcutWindow(
     fileTitle = title,
     icon = shortcutIcon,
     initiallyVisible = true,
+    isShortcut = true,
     content = content@{
         openShortcut(
             websiteURL
