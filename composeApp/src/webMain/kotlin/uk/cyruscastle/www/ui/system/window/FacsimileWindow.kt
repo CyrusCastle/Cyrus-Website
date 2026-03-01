@@ -155,7 +155,7 @@ open class FacsimileWindow(
         textColor: Color,
         selectedColor: Color,
         selectedTextColor: Color,
-        modifier: Modifier = Modifier.Companion
+        modifier: Modifier = Modifier
     ){
         val selectedShortcutAsState by selectedShortcut.collectAsState()
         val isSelected = selectedShortcutAsState?.equals(this::class) ?: false
@@ -192,7 +192,7 @@ open class FacsimileWindow(
 
     @Composable
     fun Window(
-        modifier: Modifier = Modifier.Companion,
+        modifier: Modifier = Modifier,
     ) {
         LaunchedEffect(Unit) {
             _offset.value = WindowController.getStartingOffset()
