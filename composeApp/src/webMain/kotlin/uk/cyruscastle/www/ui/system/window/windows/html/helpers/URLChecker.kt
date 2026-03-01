@@ -4,7 +4,8 @@ object URLChecker {
     private val validDomains = arrayOf(
         "http://localhost:8080",
         "https://codecymru.uk",
-        "https://emilyprust.com"
+        "https://emilyprust.com",
+        "https://web.archive.org/"
     )
 
     fun validateURL(url: String): String {

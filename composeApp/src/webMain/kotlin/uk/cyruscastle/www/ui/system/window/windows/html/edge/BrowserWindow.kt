@@ -11,6 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.unit.dp
 import cyruswebsite.composeapp.generated.resources.Res
 import cyruswebsite.composeapp.generated.resources.internet
@@ -39,6 +40,7 @@ open class BrowserWindow(
     icon = Res.drawable.internetExplorer,
     shortcutIcon = shortcutIcon,
     initiallyVisible = true,
+    defaultSize = Size(750f, 650f),
     topBarContent = listOf(
         { WindowTopBarMenus() },
         {
