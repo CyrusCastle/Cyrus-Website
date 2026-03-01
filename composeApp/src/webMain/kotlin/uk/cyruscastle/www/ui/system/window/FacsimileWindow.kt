@@ -35,7 +35,6 @@ import uk.cyruscastle.www.controller.WindowController
 import uk.cyruscastle.www.ui.extensions.modifier.intrudeExtrudeBorder
 import uk.cyruscastle.www.ui.system.desktop.DesktopShortcut
 import uk.cyruscastle.www.ui.system.toolbar.TOOL_BAR_HEIGHT
-import uk.cyruscastle.www.ui.system.toolbar.ToolBarEntry
 import uk.cyruscastle.www.ui.system.window.resize.WindowResizeControls
 import uk.cyruscastle.www.ui.system.window.topbar.TopBarSpacer
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarControls
@@ -158,16 +157,6 @@ open class FacsimileWindow(
     ///////////////////////////////////
     // CREATE HELPERS I.E. SHORTCUTS //
     ///////////////////////////////////
-
-    @Composable
-    fun bottomBarIcon(shouldEmphasize: Boolean, onClick: () -> Unit){
-        ToolBarEntry(
-            programTitle,
-            icon,
-            shouldEmphasize,
-            onClick = onClick
-        )
-    }
 
     @Composable
     fun desktopShortcut( // We have to work directly with a state or flow etc type here - if we deal with the emitted values directly they're always out of date by one composition
