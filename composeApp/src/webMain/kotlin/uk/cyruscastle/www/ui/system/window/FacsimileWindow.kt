@@ -46,7 +46,6 @@ open class FacsimileWindow(
     val fileTitle: String? = null,
     val longTitle: String = programTitle + if (fileTitle == null) "" else " - [$fileTitle]",
     val icon: DrawableResource,
-    startingData: String? = null,
     val shortcutIcon: DrawableResource = icon,
     val creationOrder: Int = WindowController.windows.value.size,
     initiallyVisible: Boolean,
@@ -144,16 +143,6 @@ open class FacsimileWindow(
         // Default window doesn't need to react to this
     }
 
-
-    ////////////////////////
-    // OTHER BITS OF DATA //
-    ////////////////////////
-
-    private var _data = MutableStateFlow(startingData)
-    val data: StateFlow<String?> = _data.asStateFlow()
-
-    fun updateData(newData: String) { _data.value = newData }
-
     ///////////////////////////////////
     // CREATE HELPERS I.E. SHORTCUTS //
     ///////////////////////////////////
@@ -235,9 +224,6 @@ open class FacsimileWindow(
                 },
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // State
-            val dataState by data.collectAsState()
-
             // Drag handle
             WindowTopBarControls(
                 longTitle,

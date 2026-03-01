@@ -38,7 +38,6 @@ open class BrowserWindow(
     fileTitle = websiteName,
     icon = Res.drawable.internetExplorer,
     shortcutIcon = shortcutIcon,
-    startingData = websiteURL,
     initiallyVisible = true,
     topBarContent = listOf(
         { WindowTopBarMenus() },
@@ -50,7 +49,7 @@ open class BrowserWindow(
     content = {
         view.getContent()
     },
-    bottomBarContent = { ->
+    bottomBarContent = {
 //        val trueUrl by view.trueUrl.collectAsState()
 
         Row(verticalAlignment = Alignment.CenterVertically) {
