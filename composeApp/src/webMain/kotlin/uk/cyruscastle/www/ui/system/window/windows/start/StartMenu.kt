@@ -47,7 +47,6 @@ import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import uk.cyruscastle.www.controller.WindowController
 import uk.cyruscastle.www.ui.extensions.modifier.intrudeExtrudeBorder
-import uk.cyruscastle.www.ui.theme.ColorPalette
 import uk.cyruscastle.www.ui.extensions.underlineFirst
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
 import uk.cyruscastle.www.ui.system.window.windows.folders.XXCawlfytholFolder
@@ -56,10 +55,12 @@ import uk.cyruscastle.www.ui.system.window.windows.html.edge.ZZInternetExplorer
 import uk.cyruscastle.www.ui.system.window.windows.html.pdf.ZZSamplePdf
 import uk.cyruscastle.www.ui.system.window.windows.map.GlobeWindow
 import uk.cyruscastle.www.ui.system.window.windows.picture.PaintWindow
+import uk.cyruscastle.www.ui.system.window.windows.picture.ZZImageWindow
 import uk.cyruscastle.www.ui.system.window.windows.text.NotepadWindow
 import uk.cyruscastle.www.ui.system.window.windows.text.WordpadWindow
 import uk.cyruscastle.www.ui.system.window.windows.text.ZZHelpWordpad
 import uk.cyruscastle.www.ui.system.window.windows.theme.ThemeEditorWindow
+import uk.cyruscastle.www.ui.theme.ColorPalette
 
 @Composable
 fun StartMenu(
@@ -69,10 +70,12 @@ fun StartMenu(
     val entries = listOf(
         StartMenuEntry(
             "Programs", Res.drawable.smallProgram, listOf(
-                // TODO come up with example web page
+                StartMenuSubentry(
+                    ZZImageWindow()
+                ),
                 StartMenuSubentry(
                     ZZInternetExplorer()
-                ), // TODO example opening page
+                ),
                 StartMenuSubentry(
                     NotepadWindow()
                 ),
