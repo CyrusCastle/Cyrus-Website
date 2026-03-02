@@ -36,9 +36,11 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import cyruswebsite.composeapp.generated.resources.Res
 import org.jetbrains.compose.resources.painterResource
+import uk.cyruscastle.www.controller.WindowController
 import uk.cyruscastle.www.ui.extensions.RowContainerScope
 import uk.cyruscastle.www.ui.system.scroll.ScrollBar
 import uk.cyruscastle.www.ui.system.scroll.ScrollBarType
+import uk.cyruscastle.www.ui.system.window.windows.picture.ImageWindow
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -110,8 +112,10 @@ fun BoxScope.GlobeMarkerDetailsBox(
             horizontalArrangement = Arrangement.Center
         ){
             location.pictures.forEach { picture ->
+                val path = GlobeMarker.getImageDirectory() + picture.fileName
+
                 AsyncImage(
-                    model = Res.getUri(GlobeMarker.getImageDirectory() + picture.fileName),
+                    model = Res.getUri(path),
                     contentDescription = picture.fileName,
                     contentScale = ContentScale.Fit,
                     modifier = Modifier
@@ -123,14 +127,12 @@ fun BoxScope.GlobeMarkerDetailsBox(
                             setHoveredPicture(null)
                         }
                         .clickable {
-//                            WindowController.addWindow(
-//                                window = object : PaintWindow(
-//                                    title = picture.fileName,
-//                                    startingBitmap = bitmap,
-//                                    pictureIcon = true,
-//                                    resolution = Size(bitmap.width.dp.value, bitmap.height.dp.value)
-//                                ) {}
-//                            )
+                            WindowController.addWindow(
+                                window = object : ImageWindow(
+                                    title = picture.fileName,
+                                    path = path,
+                                ) {}
+                            )
                         }
                         .pointerHoverIcon(PointerIcon.Hand)
                 )
