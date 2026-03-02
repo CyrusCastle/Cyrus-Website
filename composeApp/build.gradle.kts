@@ -34,6 +34,8 @@ kotlin {
             implementation("io.github.vinceglb:filekit-core:0.12.0")
             implementation("io.github.vinceglb:filekit-dialogs:0.12.0")
             implementation("io.github.vinceglb:filekit-dialogs-compose:0.12.0")
+            implementation("io.coil-kt.coil3:coil-compose:3.4.0")
+            implementation("io.coil-kt.coil3:coil-network-ktor3:3.4.0")
 //            implementation("com.dshatz.pdfmp:pdfmp-compose:1.0.4")
 //            implementation("androidx.pdf:pdf-viewer-fragment:1.0.0-alpha12")
 //            implementation("androidx.compose.material:material-icons-extended")
