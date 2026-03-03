@@ -22,6 +22,12 @@ import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.focus.focusProperties
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.KeyEventType
+import androidx.compose.ui.input.key.isCtrlPressed
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.onPreviewKeyEvent
+import androidx.compose.ui.input.key.type
 import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLayoutResult
@@ -201,6 +207,27 @@ open class WordpadWindow (
                         .width(450.dp)
                         .height((pageHeight * pageCount.toFloat()).dp)
                         .background(Color.White)
+                        .onPreviewKeyEvent { event ->
+                            if (event.type != KeyEventType.KeyDown){
+                                return@onPreviewKeyEvent false
+                            }
+
+                            if (!event.isCtrlPressed){
+                                return@onPreviewKeyEvent false
+                            }
+
+                            when (event.key){
+                                Key.B -> { _textState.value.toggleFormatting(SpanStyle(fontWeight = FontWeight.Bold)) }
+                                Key.I -> { _textState.value.toggleFormatting(SpanStyle(fontStyle = FontStyle.Italic)) }
+                                Key.U -> { _textState.value.toggleFormatting(SpanStyle(textDecoration = TextDecoration.Underline)) }
+                                Key.P -> { printPage(_textState.value.toHtml()) } // Won't work because of browser's default print behaviour methinks
+                                Key.Z -> {  } // TODO undo
+                                Key.Y -> {  } // TODO redo
+                                else -> { return@onPreviewKeyEvent false }
+                            }
+
+                            return@onPreviewKeyEvent true
+                        }
                         .drawWithContent {
                             drawContent()
 
