@@ -95,7 +95,7 @@ open class WordpadWindow (
             { TopBarEntry(null, false) { } },
 
             { TopBarEntry(Res.drawable.buttonPrint, false) {
-                print()
+                printPage(_textState.value.toHtml())
             } },
             { TopBarEntry(Res.drawable.buttonFind, false) { } },
             { TopBarEntry(Res.drawable.buttonSpellcheck, false) { } },
@@ -342,6 +342,29 @@ private fun SpanStyle.matches(other: SpanStyle): Boolean {
 }
 
 @OptIn(ExperimentalWasmJsInterop::class)
-private fun print(){
-    js("print()")
+private fun printPage(html: String){
+    js("""
+    const iframe = document.createElement('iframe');
+    iframe.style.position = 'fixed';
+    iframe.style.right = '0';
+    iframe.style.bottom = '0';
+    iframe.style.width = '0';
+    iframe.style.height = '0';
+    iframe.style.border = '0';
+    
+    document.body.appendChild(iframe);
+    
+    iframe.onload = function () {
+        iframe.contentWindow.focus();
+        iframe.contentWindow.print();
+    
+        // Cleanup after printing
+        setTimeout(() => {
+            document.body.removeChild(iframe);
+        }, 1000);
+    };
+    
+    
+    iframe.srcdoc = html;
+    """)
 }
