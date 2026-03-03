@@ -155,10 +155,7 @@ fun StartMenu(
     var hoveredMenu by remember { mutableStateOf<StartMenuEntry?>(null) }
 
     Box(modifier = modifier.size(220.dp, 300.dp)){
-        MainStartMenu(
-            entries,
-            hoveredMenu,
-        ) { hoveredMenu = it }
+        MainStartMenu(entries) { hoveredMenu = it }
 
 
         hoveredMenu?.let { master ->
@@ -181,7 +178,6 @@ fun StartMenu(
 @Composable
 fun MainStartMenu(
     entries: List<StartMenuEntry>,
-    hovered: StartMenuEntry?,
     setHovered: (StartMenuEntry?) -> Unit
 ) {
     Row(
