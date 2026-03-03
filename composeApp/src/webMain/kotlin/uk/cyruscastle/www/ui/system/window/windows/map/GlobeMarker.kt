@@ -13,7 +13,6 @@ import cyruswebsite.composeapp.generated.resources.mapFlagOrange
 import cyruswebsite.composeapp.generated.resources.mapFlagRed
 import cyruswebsite.composeapp.generated.resources.mapFlagScotland
 import cyruswebsite.composeapp.generated.resources.mapFlagad
-import cyruswebsite.composeapp.generated.resources.mapFlagaf
 import cyruswebsite.composeapp.generated.resources.mapFlagam
 import cyruswebsite.composeapp.generated.resources.mapFlagar
 import cyruswebsite.composeapp.generated.resources.mapFlagat
@@ -26,7 +25,6 @@ import cyruswebsite.composeapp.generated.resources.mapFlagcy
 import cyruswebsite.composeapp.generated.resources.mapFlagcz
 import cyruswebsite.composeapp.generated.resources.mapFlagde
 import cyruswebsite.composeapp.generated.resources.mapFlagdk
-import cyruswebsite.composeapp.generated.resources.mapFlagdz
 import cyruswebsite.composeapp.generated.resources.mapFlagee
 import cyruswebsite.composeapp.generated.resources.mapFlages
 import cyruswebsite.composeapp.generated.resources.mapFlagfi
@@ -43,7 +41,6 @@ import cyruswebsite.composeapp.generated.resources.mapFlaglu
 import cyruswebsite.composeapp.generated.resources.mapFlaglv
 import cyruswebsite.composeapp.generated.resources.mapFlagmd
 import cyruswebsite.composeapp.generated.resources.mapFlagmk
-import cyruswebsite.composeapp.generated.resources.mapFlagmn
 import cyruswebsite.composeapp.generated.resources.mapFlagnl
 import cyruswebsite.composeapp.generated.resources.mapFlagno
 import cyruswebsite.composeapp.generated.resources.mapFlagnp
@@ -53,7 +50,6 @@ import cyruswebsite.composeapp.generated.resources.mapFlagrw
 import cyruswebsite.composeapp.generated.resources.mapFlagse
 import cyruswebsite.composeapp.generated.resources.mapFlagsk
 import cyruswebsite.composeapp.generated.resources.mapFlagsy
-import cyruswebsite.composeapp.generated.resources.mapFlagtn
 import cyruswebsite.composeapp.generated.resources.mapFlagus
 import cyruswebsite.composeapp.generated.resources.mapFlagza
 import cyruswebsite.composeapp.generated.resources.mapFlagzw
@@ -165,7 +161,7 @@ fun getMarkers() = listOf(
 
     GlobeMarker(
         name = "London",
-        description = "I",
+        description = "I have family in London and have spent quite a lot of time all over the city.",
         location = DpOffset(5316.6665.dp, 2373.3333.dp),
         type = GlobeMarkerType.FREQUENTED,
         country = Res.drawable.mapFlaggb,
@@ -179,7 +175,7 @@ fun getMarkers() = listOf(
 
     GlobeMarker(
         name = "Edinburgh",
-        description = "...",
+        description = "I've been to Edinburgh quite a lot, seeing friends & family, and think it's probably the most beautiful city in the UK.",
         location = DpOffset(5213.333.dp, 2156.6665.dp),
         type = GlobeMarkerType.FREQUENTED,
         country = Res.drawable.mapFlagScotland,
@@ -671,7 +667,7 @@ fun getMarkers() = listOf(
     // AMERICA
     GlobeMarker(
         name = "Greenland",
-        description = "...",
+        description = "It would be interesting to spend some time in the arctic circle, in Greenland, Svalbard, or somewhere else.",
         location = DpOffset(4063.9575.dp, 1171.376.dp),
         type = GlobeMarkerType.WANT_TO_GO,
         country = Res.drawable.mapFlaggl
@@ -679,7 +675,7 @@ fun getMarkers() = listOf(
 
     GlobeMarker(
         name = "Canada",
-        description = "...",
+        description = "When I was younger I wanted to portage through parts of Canada, although I don't think I'm fit enough for that anymore.",
         location = DpOffset(3193.3333.dp, 1206.6666.dp),
         type = GlobeMarkerType.WANT_TO_GO,
         country = Res.drawable.mapFlagca
@@ -687,7 +683,7 @@ fun getMarkers() = listOf(
 
     GlobeMarker(
         name = "Alaska",
-        description = "...",
+        description = "If I were a rich man I would get a pilot's license and hop between the remote settlements of Alaska from the Alexander Archipelago to the Beaufort sea. Instead, I'll probably take the Alaska Railroad from Anchorage.",
         location = DpOffset(590.0.dp, 1106.6666.dp),
         type = GlobeMarkerType.WANT_TO_GO,
         country = Res.drawable.mapFlagus
@@ -695,7 +691,7 @@ fun getMarkers() = listOf(
 
     GlobeMarker(
         name = "Washington",
-        description = "...",
+        description = "The mountains and meadows of Washington seem unreal.",
         location = DpOffset(1110.0.dp, 2423.3333.dp),
         type = GlobeMarkerType.WANT_TO_GO,
         country = Res.drawable.mapFlagus
@@ -703,7 +699,7 @@ fun getMarkers() = listOf(
 
     GlobeMarker(
         name = "Montana",
-        description = "...",
+        description = "While not quite being Washington, the landscapes around Montana also seem worth a visit.",
         location = DpOffset(1503.3333.dp, 2403.3333.dp),
         type = GlobeMarkerType.WANT_TO_GO,
         country = Res.drawable.mapFlagus
@@ -711,7 +707,7 @@ fun getMarkers() = listOf(
 
     GlobeMarker(
         name = "Patagonia",
-        description = "...",
+        description = "It would be cool to go to Y Wladfa and see the Welsh language in a completely different context - with connotations of prestige and 'Europeanism', compared to the connotations one may find in Wales.",
         location = DpOffset(3149.9998.dp, 5650.0.dp),
         type = GlobeMarkerType.WANT_TO_GO,
         country = Res.drawable.mapFlagar
@@ -720,7 +716,7 @@ fun getMarkers() = listOf(
     // Scandinavia
     GlobeMarker(
         name = "Narvik",
-        description = "...",
+        description = "I wanted to take a year abroad during university to study in Tromsø, but never did. It would still be nice to fly to Narvik and travel up the coast to Ráissa and so on.",
         location = DpOffset(5806.6665.dp, 1473.3333.dp),
         type = GlobeMarkerType.WANT_TO_GO,
         country = Res.drawable.mapFlagno
@@ -728,7 +724,7 @@ fun getMarkers() = listOf(
 
     GlobeMarker(
         name = "Finland",
-        description = "...",
+        description = "I wouldn't mind trekking through the fells of Northern Sweden and Finland, but I imagine there's a balance between it being too cold to comfortably wild camp and there being too many mosquitoes in the Finnish erämaa...",
         location = DpOffset(6136.6665.dp, 1559.9999.dp),
         type = GlobeMarkerType.WANT_TO_GO,
         country = Res.drawable.mapFlagfi
@@ -736,16 +732,19 @@ fun getMarkers() = listOf(
 
     GlobeMarker(
         name = "Karelia",
-        description = "...",
+        description = "I find the different heimo (nations) of Finnic people quite interesting, particularly the history of their cultures and how their languages (of which I speak absolutely zero) split-up and developed in parallel.",
         location = DpOffset(6346.6665.dp, 1773.3333.dp),
         type = GlobeMarkerType.WANT_TO_GO,
-        country = Res.drawable.mapFlagKarelia
+        country = Res.drawable.mapFlagKarelia,
+        pictures = listOf(
+            GlobeMarkerPicture("kalevala.jpg", "I am quite interested in tracing how the interactions between different culture groups influence the later development of those groups. I think no where is this more obvious than when there is a dominant (imperialist) nation and a subjugated nation, which definitely happened here. It's interesting to see what a 'cultural resurgence' looks like, then, in these contexts. I quite like the shift towards Karelianism that seemed to naturally happen when the Finns were in their artistic/cultural renaissance; it feels very real that a people, who are trying to rediscover (or establish) a true national identity, need to explore and borrow from the groups around them to make up an interruption in oral tradition.")
+        )
     ),
 
     // On-Continent
     GlobeMarker(
         name = "Zealand",
-        description = "...",
+        description = "I've been to Denmark, but when I passed through Copenhagen I never left the train station. I ought to rectify that. Also, near Zealand is an island called Ærø which is the setting of one of my favourite books.",
         location = DpOffset(5733.333.dp, 2216.6665.dp),
         type = GlobeMarkerType.WANT_TO_GO,
         country = Res.drawable.mapFlagdk,
@@ -756,7 +755,7 @@ fun getMarkers() = listOf(
 
     GlobeMarker(
         name = "Luxembourg",
-        description = "...",
+        description = "A cool mix of architecture and geography here, definitely seems worth at least a weekend visit.",
         location = DpOffset(5540.0.dp, 2480.0.dp),
         type = GlobeMarkerType.WANT_TO_GO,
         country = Res.drawable.mapFlaglu
@@ -765,7 +764,7 @@ fun getMarkers() = listOf(
     // Off-Continent
     GlobeMarker(
         name = "Ireland",
-        description = "...",
+        description = "It feels wrong that I've never really experienced Ireland considering I've lived so close for so long.",
         location = DpOffset(4956.6665.dp, 2253.3333.dp),
         type = GlobeMarkerType.WANT_TO_GO,
         country = Res.drawable.mapFlagie
@@ -773,7 +772,7 @@ fun getMarkers() = listOf(
 
     GlobeMarker(
         name = "Highlands",
-        description = "...",
+        description = "I'm going to the highlands for the first time this August.",
         location = DpOffset(5146.6665.dp, 2056.6665.dp),
         type = GlobeMarkerType.WANT_TO_GO,
         country = Res.drawable.mapFlagScotland
@@ -782,7 +781,7 @@ fun getMarkers() = listOf(
     // Baltics
     GlobeMarker(
         name = "Lithuania",
-        description = "...",
+        description = "There are some places I've marked out in Lithuania I'd like to see, including Tarakai Island, the Kernave Mounds, ",
         location = DpOffset(6130.0.dp, 2213.3333.dp),
         type = GlobeMarkerType.WANT_TO_GO,
         country = Res.drawable.mapFlaglt
@@ -790,7 +789,7 @@ fun getMarkers() = listOf(
 
     GlobeMarker(
         name = "Latvia",
-        description = "...",
+        description = "I'm not sure that I'm interested in Riga, but there are a couple of castles I'd like to see: Krimuldas, Sigulda, Cēsis, Turaida, among others.",
         location = DpOffset(6173.333.dp, 2136.6665.dp),
         type = GlobeMarkerType.WANT_TO_GO,
         country = Res.drawable.mapFlaglv
@@ -798,7 +797,7 @@ fun getMarkers() = listOf(
 
     GlobeMarker(
         name = "Estonia",
-        description = "...",
+        description = "Of all the Baltics, Estonia (particularly Tallinn) interests me the most. It seems wonderful.",
         location = DpOffset(6163.333.dp, 2036.6666.dp),
         type = GlobeMarkerType.WANT_TO_GO,
         country = Res.drawable.mapFlagee
@@ -807,7 +806,7 @@ fun getMarkers() = listOf(
     // Balkans etc
     GlobeMarker(
         name = "Pridnestrovie",
-        description = "...",
+        description = "I almost went here instead of Bosnia, I'd like to see the fortresses around Bender and Tiraspol, maybe when I can rent a car down there.",
         location = DpOffset(6313.333.dp, 2570.0.dp),
         type = GlobeMarkerType.WANT_TO_GO,
         country = Res.drawable.mapFlagmd
@@ -815,7 +814,7 @@ fun getMarkers() = listOf(
 
     GlobeMarker(
         name = "Kosovo",
-        description = "...",
+        description = "To the mountains on the western border, the Vragove Vodenice in the south, or perhaps even Mt. Korab in Albania.",
         location = DpOffset(6046.6665.dp, 2786.6665.dp),
         type = GlobeMarkerType.WANT_TO_GO,
         country = Res.drawable.mapFlagKosovo
@@ -823,7 +822,7 @@ fun getMarkers() = listOf(
 
     GlobeMarker(
         name = "North Macedonia",
-        description = "...",
+        description = "I think I'd like to travel through the rural communities south of Skopje, towards Solunska Glava and the forests around Aldinci. Plus the lakes and mountains around Galicica.",
         location = DpOffset(6086.6665.dp, 2823.3333.dp),
         type = GlobeMarkerType.WANT_TO_GO,
         country = Res.drawable.mapFlagmk
@@ -832,7 +831,7 @@ fun getMarkers() = listOf(
     // M.E.
     GlobeMarker(
         name = "Georgia",
-        description = "...",
+        description = "All of Georgia, its landscapes, architecture and history, all of it seems incredible. I'd love to spend a couple of months there and travel from east to west.",
         location = DpOffset(6886.6665.dp, 2806.6665.dp),
         type = GlobeMarkerType.WANT_TO_GO,
         country = Res.drawable.mapFlagge
@@ -840,7 +839,7 @@ fun getMarkers() = listOf(
 
     GlobeMarker(
         name = "Armenia",
-        description = "Harichavank",
+        description = "I'd like to see some of the architecture like Harichavank and Noravank, but the landscapes around Shahbuz and that southern enclave of Azerbaijan seem incredible as well.",
         location = DpOffset(6893.333.dp, 2860.0.dp),
         type = GlobeMarkerType.WANT_TO_GO,
         country = Res.drawable.mapFlagam
@@ -848,7 +847,7 @@ fun getMarkers() = listOf(
 
     GlobeMarker(
         name = "Rojava",
-        description = "...",
+        description = "I find the political theories of Öcalan particularly fascinating, particularly Apoism and Jineology. I'd like to travel there to see how they manifest in reality rather than just on paper (if things continue with al-Sharaa in power).",
         location = DpOffset(6709.9995.dp, 3050.0.dp),
         type = GlobeMarkerType.WANT_TO_GO,
         country = Res.drawable.mapFlagsy
@@ -856,7 +855,7 @@ fun getMarkers() = listOf(
 
     GlobeMarker(
         name = "Baghdad",
-        description = "...",
+        description = "I'd like to see the landscapes of Iraqi Kurdistan, but also the history of Baghdad as a city of learning is something I'd like to explore.",
         location = DpOffset(6899.9995.dp, 3146.6665.dp),
         type = GlobeMarkerType.WANT_TO_GO,
         country = Res.drawable.mapFlagiq
@@ -864,19 +863,19 @@ fun getMarkers() = listOf(
 
     GlobeMarker(
         name = "Iran",
-        description = "...",
+        description = "As a Cyrus I've always been interested in Iran, I'd like to go to Pasargadae and the tomb of Cyrus the Great, but also I've picked out various spots in the south and along the northern coast of Iran that I'd like to see.",
         location = DpOffset(7156.6665.dp, 3060.0.dp),
         type = GlobeMarkerType.WANT_TO_GO,
         country = Res.drawable.mapFlagir
     ),
 
-    GlobeMarker(
-        name = "Afghanistan",
-        description = "...",
-        location = DpOffset(7776.6665.dp, 3076.6665.dp),
-        type = GlobeMarkerType.WANT_TO_GO,
-        country = Res.drawable.mapFlagaf
-    ),
+//    GlobeMarker(
+//        name = "Afghanistan",
+//        description = "...",
+//        location = DpOffset(7776.6665.dp, 3076.6665.dp),
+//        type = GlobeMarkerType.WANT_TO_GO,
+//        country = Res.drawable.mapFlagaf
+//    ),
 
     GlobeMarker(
         name = "Kashmir",
@@ -904,25 +903,25 @@ fun getMarkers() = listOf(
     ),
 
     // Africa Proper
-    GlobeMarker(
-        name = "Tunisia",
-        description = "...",
-        location = DpOffset(5673.333.dp, 3056.6665.dp),
-        type = GlobeMarkerType.WANT_TO_GO,
-        country = Res.drawable.mapFlagtn
-    ),
-
-    GlobeMarker(
-        name = "Algeria",
-        description = "...",
-        location = DpOffset(5490.0.dp, 3103.3333.dp),
-        type = GlobeMarkerType.WANT_TO_GO,
-        country = Res.drawable.mapFlagdz
-    ),
+//    GlobeMarker(
+//        name = "Tunisia",
+//        description = "...",
+//        location = DpOffset(5673.333.dp, 3056.6665.dp),
+//        type = GlobeMarkerType.WANT_TO_GO,
+//        country = Res.drawable.mapFlagtn
+//    ),
+//
+//    GlobeMarker(
+//        name = "Algeria",
+//        description = "...",
+//        location = DpOffset(5490.0.dp, 3103.3333.dp),
+//        type = GlobeMarkerType.WANT_TO_GO,
+//        country = Res.drawable.mapFlagdz
+//    ),
 
     GlobeMarker(
         name = "Rwanda",
-        description = "...",
+        description = "My granny was a missionary in Rwanda during the Hutu revolution and has lots of stories of Rwanda. I'd like to see it.",
         location = DpOffset(6436.6665.dp, 4413.333.dp),
         type = GlobeMarkerType.WANT_TO_GO,
         country = Res.drawable.mapFlagrw
@@ -930,7 +929,7 @@ fun getMarkers() = listOf(
 
     GlobeMarker(
         name = "Zimbabwe",
-        description = "...",
+        description = "My grandad grew up in what was Rhodesia, it would be nice to see where his family was from.",
         location = DpOffset(6443.333.dp, 4960.0.dp),
         type = GlobeMarkerType.WANT_TO_GO,
         country = Res.drawable.mapFlagzw
@@ -938,7 +937,7 @@ fun getMarkers() = listOf(
 
     GlobeMarker(
         name = "KwaZulu-Natal",
-        description = "...",
+        description = "A lovely part of Africa geographically, and I'd like to see where Isandlwana & Rorke's Drift happened.",
         location = DpOffset(6413.333.dp, 5323.333.dp),
         type = GlobeMarkerType.WANT_TO_GO,
         country = Res.drawable.mapFlagza
@@ -947,19 +946,19 @@ fun getMarkers() = listOf(
     // Asia Proper
     GlobeMarker(
         name = "Qinghai",
-        description = "...",
+        description = "I watched the Japanese TV show Monkey growing up, which was based on the Journey to the West. It would be cool to follow an approximate of the route, maybe from Xi'an to Qinghai, Dunhuang, over to Kashgar.",
         location = DpOffset(8853.333.dp, 2913.3333.dp),
         type = GlobeMarkerType.WANT_TO_GO,
         country = Res.drawable.mapFlagcn
     ),
 
-    GlobeMarker(
-        name = "Mongolia",
-        description = "...",
-        location = DpOffset(8830.0.dp, 2440.0.dp),
-        type = GlobeMarkerType.WANT_TO_GO,
-        country = Res.drawable.mapFlagmn
-    ),
+//    GlobeMarker(
+//        name = "Mongolia",
+//        description = "",
+//        location = DpOffset(8830.0.dp, 2440.0.dp),
+//        type = GlobeMarkerType.WANT_TO_GO,
+//        country = Res.drawable.mapFlagmn
+//    ),
 
     // Antarctic
     GlobeMarker(
