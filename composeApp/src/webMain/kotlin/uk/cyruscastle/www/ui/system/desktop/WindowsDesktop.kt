@@ -31,6 +31,7 @@ import uk.cyruscastle.www.controller.WindowController
 import uk.cyruscastle.www.ui.system.toolbar.ToolBar
 import uk.cyruscastle.www.ui.system.window.windows.folders.XXCawlfytholFolder
 import uk.cyruscastle.www.ui.system.window.windows.folders.XXFriendSitesFolder
+import uk.cyruscastle.www.ui.system.window.windows.folders.XXGithubFolder
 import uk.cyruscastle.www.ui.system.window.windows.html.edge.ZZInternetExplorer
 import uk.cyruscastle.www.ui.system.window.windows.html.pdf.ZZCVPdfWindow
 import uk.cyruscastle.www.ui.system.window.windows.html.pdf.ZZWelshForSoldiersWindow
@@ -69,6 +70,7 @@ fun WindowsDesktop() {
 
                     Pair(XXCawlfytholFolder(), IntOffset(1, 0)),
                     Pair(XXFriendSitesFolder(), IntOffset(1, 1)),
+                    Pair(XXGithubFolder(), IntOffset(1, 2)),
 
                     Pair(GlobeWindow(), IntOffset(2, 0)),
 

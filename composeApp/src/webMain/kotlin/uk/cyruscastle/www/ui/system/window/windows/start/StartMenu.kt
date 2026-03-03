@@ -51,6 +51,7 @@ import uk.cyruscastle.www.ui.extensions.underlineFirst
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
 import uk.cyruscastle.www.ui.system.window.windows.folders.XXCawlfytholFolder
 import uk.cyruscastle.www.ui.system.window.windows.folders.XXFriendSitesFolder
+import uk.cyruscastle.www.ui.system.window.windows.folders.XXGithubFolder
 import uk.cyruscastle.www.ui.system.window.windows.html.edge.ZZInternetExplorer
 import uk.cyruscastle.www.ui.system.window.windows.html.pdf.ZZSamplePdf
 import uk.cyruscastle.www.ui.system.window.windows.map.GlobeWindow
@@ -124,9 +125,8 @@ fun StartMenu(
                     "Friends' Sites"
                 ),
                 StartMenuSubentry(
-                    null,
-                    "GitHub Projects *TODO?*",
-                    Res.drawable.confused
+                    XXGithubFolder(),
+                    "GitHub Projects"
                 ),
             )
         ),
