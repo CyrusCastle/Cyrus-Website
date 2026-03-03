@@ -29,6 +29,8 @@ To avoid trying to re-invent the wheel, I am using a couple of libraries for thi
 - Mohamed Rejeb's [compose-rich-editor](https://github.com/MohamedRejeb/compose-rich-editor) (for our WordPadWindow)
 - Vincent Guillebaud's [FileKit](https://github.com/vinceglb/FileKit) (for uploading/downloading files from the site)
 
+(Also, a special thanks to Alex Meub for providing the [Windows 98 icons](https://win98icons.alexmeub.com/))
+
 ## Building & Running
 To build and run a development version, run the following through Gradle:
 ```wasmJsBrowserDevelopmentRun -t --quiet --stacktrace```
