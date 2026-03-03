@@ -218,7 +218,7 @@ class GlobeWindow() : FacsimileWindow(
             }
 
             // Debug
-            Text("$contentScale (${horizontalScrollState.value} x ${verticalScrollState.value} )", Modifier.align(Alignment.TopCenter))
+//            Text("$contentScale (${horizontalScrollState.value} x ${verticalScrollState.value} )", Modifier.align(Alignment.TopCenter))
 
             // Marker-Marker connector
             if (selectedLocation != null && markerGlobalCenter != null && detailsFlagGlobalCenter != null) {
