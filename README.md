@@ -1,4 +1,4 @@
-## Cyrus-Website
+## <img width="32" height="32" alt="favicon" src="https://github.com/user-attachments/assets/b20b3945-de59-49a5-81db-ca0420e4c39f" /> Cyrus-Website
 Hi, I'm Cyrus! Welcome to the source code for my personal (and professional?) website.
 
 <img width="959.5" height="539.5" alt="CyrusWebsiteScreenshot" src="https://github.com/user-attachments/assets/64ec1836-a746-4bac-b58f-f07563d5ac3a" />
