@@ -21,8 +21,8 @@ import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
 import uk.cyruscastle.www.ui.system.window.topbar.TopBarEntry
-import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarAddress
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenus
+import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarTextField
 import uk.cyruscastle.www.ui.system.window.windows.html.HtmlView
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -45,7 +45,7 @@ open class BrowserWindow(
         { WindowTopBarMenus() },
         {
             val trueUrl by view.trueUrl.collectAsState()
-            WindowTopBarAddress(trueUrl, view::setUrl)
+            WindowTopBarTextField(trueUrl, "Address:", view::setUrl)()
         }
     ),
     content = {

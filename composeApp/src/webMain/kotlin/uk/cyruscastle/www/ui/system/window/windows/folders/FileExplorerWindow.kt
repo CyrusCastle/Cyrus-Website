@@ -23,9 +23,9 @@ import org.jetbrains.compose.resources.painterResource
 import uk.cyruscastle.www.ui.system.desktop.DesktopGrid
 import uk.cyruscastle.www.ui.theme.ColorPalette
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
-import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarAddress
 import uk.cyruscastle.www.ui.system.window.topbar.TopBarEntry
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenus
+import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarTextField
 
 open class FileExplorerWindow(
     val title: String,
@@ -41,7 +41,7 @@ open class FileExplorerWindow(
     initiallyVisible = true,
     topBarContent = listOf(
         { WindowTopBarMenus() },
-        { WindowTopBarAddress("C:/Users/Cyrus/Desktop/$title/", {}, true) }
+        { WindowTopBarTextField("C:/Users/Cyrus/Desktop/$title/", "Address:", {}, null, true)() }
     ),
     content = {
         val orderedItems = items.mapIndexed { index, it -> Pair(it, IntOffset(index, 0)) }
