@@ -49,6 +49,7 @@ import uk.cyruscastle.www.controller.WindowController
 import uk.cyruscastle.www.ui.extensions.modifier.intrudeExtrudeBorder
 import uk.cyruscastle.www.ui.extensions.underlineFirst
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
+import uk.cyruscastle.www.ui.system.window.windows.email.EmailWindow
 import uk.cyruscastle.www.ui.system.window.windows.folders.XXCawlfytholFolder
 import uk.cyruscastle.www.ui.system.window.windows.folders.XXFriendSitesFolder
 import uk.cyruscastle.www.ui.system.window.windows.folders.XXGithubFolder
@@ -71,6 +72,9 @@ fun StartMenu(
     val entries = listOf(
         StartMenuEntry(
             "Programs", Res.drawable.smallProgram, listOf(
+                StartMenuSubentry(
+                    EmailWindow()
+                ),
                 StartMenuSubentry(
                     ZZImageWindow()
                 ),

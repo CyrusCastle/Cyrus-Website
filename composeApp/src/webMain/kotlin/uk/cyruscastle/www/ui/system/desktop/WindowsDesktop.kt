@@ -29,6 +29,7 @@ import androidx.compose.ui.zIndex
 import uk.cyruscastle.www.controller.TooltipController
 import uk.cyruscastle.www.controller.WindowController
 import uk.cyruscastle.www.ui.system.toolbar.ToolBar
+import uk.cyruscastle.www.ui.system.window.windows.email.EmailWindow
 import uk.cyruscastle.www.ui.system.window.windows.folders.XXCawlfytholFolder
 import uk.cyruscastle.www.ui.system.window.windows.folders.XXFriendSitesFolder
 import uk.cyruscastle.www.ui.system.window.windows.folders.XXGithubFolder
@@ -67,6 +68,7 @@ fun WindowsDesktop() {
                     Pair(NotepadWindow(), IntOffset(0, 1)),
                     Pair(WordpadWindow(), IntOffset(0, 2)),
                     Pair(PaintWindow(), IntOffset(0, 3)),
+                    Pair(EmailWindow(), IntOffset(0, 4)),
 
                     Pair(XXCawlfytholFolder(), IntOffset(1, 0)),
                     Pair(XXFriendSitesFolder(), IntOffset(1, 1)),
