@@ -23,9 +23,11 @@ import androidx.compose.ui.zIndex
 import cyruswebsite.composeapp.generated.resources.Res
 import cyruswebsite.composeapp.generated.resources.windows
 import kotlinx.coroutines.delay
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
 import kotlinx.datetime.format
-import kotlinx.datetime.format.DateTimeComponents
 import kotlinx.datetime.format.char
+import kotlinx.datetime.toLocalDateTime
 import uk.cyruscastle.www.controller.WindowController
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
 import uk.cyruscastle.www.ui.theme.ColorPalette
@@ -86,6 +88,7 @@ fun ToolBar(
 @Composable
 fun RowScope.ToolBarClock(){
     var time by remember { mutableStateOf(Clock.System.now()) }
+    val timezone = TimeZone.currentSystemDefault()
 
     LaunchedEffect(Unit){
         while (true){
@@ -93,7 +96,9 @@ fun RowScope.ToolBarClock(){
             delay(1000)
         }
     }
-    val timeAsText = time.format(DateTimeComponents.Format { hour(); char(':'); minute(); })
+
+    val localtime = time.toLocalDateTime(timezone)
+    val timeAsText = localtime.format(LocalDateTime.Format { hour(); char(':'); minute(); })
 
     ToolBarEntry(
         text = timeAsText,
