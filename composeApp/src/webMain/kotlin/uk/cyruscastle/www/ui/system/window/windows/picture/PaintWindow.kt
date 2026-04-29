@@ -56,14 +56,17 @@ import cyruswebsite.composeapp.generated.resources.paintStar
 import cyruswebsite.composeapp.generated.resources.paintText
 import cyruswebsite.composeapp.generated.resources.paintZoom
 import cyruswebsite.composeapp.generated.resources.picture
-import io.github.markyav.drawbox.box.DrawBox
-import io.github.markyav.drawbox.controller.DrawBoxBackground
-import io.github.markyav.drawbox.controller.DrawController
-import io.github.markyav.drawbox.model.CanvasTool
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.preloadImageBitmap
+import uk.codecymru.drawbox.box.DrawBox
+import uk.codecymru.drawbox.controller.BitmapDrawController
+import uk.codecymru.drawbox.controller.DrawBoxBackground
+import uk.codecymru.drawbox.controller.DrawController
+import uk.codecymru.drawbox.model.CanvasTool
 import uk.cyruscastle.www.ui.extensions.modifier.checkerboardBackground
 import uk.cyruscastle.www.ui.extensions.modifier.intrudeExtrudeBorder
 import uk.cyruscastle.www.ui.system.scroll.ScrollBarType
@@ -80,7 +83,8 @@ open class PaintWindow(
     startingBitmap: ImageBitmap? = null,
     pictureIcon: Boolean = false,
     resolution: Size = Size(150f, 150f),
-    private val _controller: DrawController = DrawController()
+    private val _fillScope: CoroutineScope = CoroutineScope(Dispatchers.Default),
+    private val _controller: DrawController = BitmapDrawController(_fillScope)
 ) : FacsimileWindow(
     programTitle = "Paint",
     fileTitle = title,
@@ -276,16 +280,16 @@ private fun PaintToolBar(controller: DrawController){
             PaintToolSelector(
                 Res.drawable.paintFill,
                 "Fill",
-                false
-            ) {}
+                canvasTool.value == CanvasTool.FILL
+            ) { controller.canvasTool.value = CanvasTool.FILL }
         }
 
         Row {
             PaintToolSelector(
                 Res.drawable.paintEyedrop,
                 "Eyedropper",
-                false
-            ) {}
+                canvasTool.value == CanvasTool.EYEDROPPER
+            ) { controller.canvasTool.value = CanvasTool.EYEDROPPER }
             PaintToolSelector(
                 Res.drawable.paintZoom,
                 "Zoom",
@@ -310,8 +314,8 @@ private fun PaintToolBar(controller: DrawController){
             PaintToolSelector(
                 Res.drawable.paintSpray,
                 "Spray Paint",
-                false
-            ) {}
+                canvasTool.value == CanvasTool.SPRAY_CAN
+            ) { controller.canvasTool.value = CanvasTool.SPRAY_CAN }
             PaintToolSelector(
                 Res.drawable.paintText,
                 "Text",
@@ -323,8 +327,8 @@ private fun PaintToolBar(controller: DrawController){
             PaintToolSelector(
                 Res.drawable.paintLine,
                 "Line",
-                false
-            ) {}
+                canvasTool.value == CanvasTool.SHAPE_LINE
+            ) { controller.canvasTool.value = CanvasTool.SHAPE_LINE }
             PaintToolSelector(
                 Res.drawable.paintCurve,
                 "Curved Line",
@@ -336,8 +340,8 @@ private fun PaintToolBar(controller: DrawController){
             PaintToolSelector(
                 Res.drawable.paintRectangle,
                 "Rectangle",
-                false
-            ) {}
+                canvasTool.value == CanvasTool.SHAPE_RECT
+            ) { controller.canvasTool.value = CanvasTool.SHAPE_RECT }
             PaintToolSelector(
                 Res.drawable.paintPolygon,
                 "Polygon",
@@ -349,8 +353,8 @@ private fun PaintToolBar(controller: DrawController){
             PaintToolSelector(
                 Res.drawable.paintOval,
                 "Oval",
-                false
-            ) {}
+                canvasTool.value == CanvasTool.SHAPE_CIRCLE
+            ) { controller.canvasTool.value = CanvasTool.SHAPE_CIRCLE }
             PaintToolSelector(
                 Res.drawable.paintRoundedRect,
                 "Rounded Rectangle",
