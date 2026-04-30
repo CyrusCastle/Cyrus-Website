@@ -9,7 +9,7 @@ import uk.cyruscastle.www.ui.system.window.windows.shortcuts.ShortcutWindow
 class XXGithubFolder : FileExplorerWindow(
     title = "GitHub Projects",
     folderIcon = Res.drawable.scriptFolder,
-    items = listOf(ZZCyrusWebsiteGithub(), ZZDrawBoxEnhancedGitHubShortcut())
+    items = listOf(ZZCyrusWebsiteGithub(), ZZDrawBoxEnhancedGitHubShortcut(), ZZFarsigraphyGitHubShortcut())
 )
 
 class ZZCyrusWebsiteGithub : ShortcutWindow(
@@ -22,4 +22,10 @@ class ZZDrawBoxEnhancedGitHubShortcut : ShortcutWindow(
     title = "DrawBox Enhanced",
     shortcutIcon = Res.drawable.scriptYellow,
     websiteURL = "https://github.com/CyrusCastle/DrawBox-Enhanced"
+)
+
+class ZZFarsigraphyGitHubShortcut : ShortcutWindow(
+    title = "Farsigraphy",
+    shortcutIcon = Res.drawable.scriptYellow,
+    websiteURL = "https://github.com/CyrusCastle/Farsigraphy"
 )
