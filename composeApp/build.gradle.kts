@@ -7,10 +7,10 @@ plugins {
 }
 
 kotlin {
-//    js { // TODO we should re-target this once I've sorted out the drawbox package
-//        browser()
-//        binaries.executable()
-//    }
+    js {
+        browser()
+        binaries.executable()
+    }
     
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
