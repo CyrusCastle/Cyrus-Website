@@ -1,0 +1,41 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: auto;
+}
+
+#pdf-container {
+  width: 100vw;
+  height: 100vh;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #B3B3B3;
+}
+
+#pdf-container.dragging {
+    cursor: grabbing !important;
+}
+
+#pdf-container::-webkit-scrollbar {
+  display: none;
+}
+
+#pdf-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.pdf-page {
+  margin: 0 auto 30px auto;
+  display: block;
+}
+
+.pdf-page-canvas {
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+  background: white;
+}
