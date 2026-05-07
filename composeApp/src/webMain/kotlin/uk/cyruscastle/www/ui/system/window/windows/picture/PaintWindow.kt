@@ -63,7 +63,6 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.preloadImageBitmap
 import uk.codecymru.drawbox.box.DrawBox
-import uk.codecymru.drawbox.controller.BitmapDrawController
 import uk.codecymru.drawbox.controller.DrawBoxBackground
 import uk.codecymru.drawbox.controller.DrawController
 import uk.codecymru.drawbox.model.CanvasTool
@@ -84,7 +83,7 @@ open class PaintWindow(
     pictureIcon: Boolean = false,
     resolution: Size = Size(150f, 150f),
     private val _fillScope: CoroutineScope = CoroutineScope(Dispatchers.Default),
-    private val _controller: DrawController = BitmapDrawController(_fillScope)
+    private val _controller: DrawController = DrawController(_fillScope)
 ) : FacsimileWindow(
     programTitle = "Paint",
     fileTitle = title,
