@@ -30,7 +30,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.7.1")
             implementation("com.mohamedrejeb.richeditor:richeditor-compose:1.0.0-rc13")
-            implementation("uk.codecymru.drawbox:DrawBox-Enhanced:2.1.0")
+            implementation("uk.codecymru.drawbox:DrawBox-Enhanced:2.1.2")
             implementation("io.github.vinceglb:filekit-core:0.12.0")
             implementation("io.github.vinceglb:filekit-dialogs:0.12.0")
             implementation("io.github.vinceglb:filekit-dialogs-compose:0.12.0")

@@ -82,8 +82,7 @@ open class PaintWindow(
     startingBitmap: ImageBitmap? = null,
     pictureIcon: Boolean = false,
     resolution: Size = Size(150f, 150f),
-    private val _fillScope: CoroutineScope = CoroutineScope(Dispatchers.Default),
-    private val _controller: DrawController = DrawController(_fillScope)
+    private val _controller: DrawController = DrawController()
 ) : FacsimileWindow(
     programTitle = "Paint",
     fileTitle = title,
