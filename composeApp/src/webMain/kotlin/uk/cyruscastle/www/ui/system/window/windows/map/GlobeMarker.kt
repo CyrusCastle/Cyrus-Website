@@ -424,7 +424,7 @@ fun getMarkers() = listOf(
         pictures = listOf(
             GlobeMarkerPicture(
                 "mallorca boat.jpg",
-                "I used my very impressive level 3 powerboating license to skipper a boat with some friends."
+                "I used my very impressive level 2 powerboating license to skipper a boat with some friends."
             ),
             GlobeMarkerPicture(
                 "alcúdia.jpg",
