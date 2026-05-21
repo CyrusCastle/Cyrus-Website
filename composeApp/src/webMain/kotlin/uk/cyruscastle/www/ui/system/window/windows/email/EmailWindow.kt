@@ -15,8 +15,10 @@ import uk.cyruscastle.www.ui.system.scroll.ScrollableContainer
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
 import uk.cyruscastle.www.ui.system.window.topbar.TopBarEntry
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarButtons
-import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenus
+import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarDefaultMenus
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarTextField
+import kotlin.js.ExperimentalWasmJsInterop
+import kotlin.js.js
 
 class EmailWindow(
     private val _addresseeBox: WindowTopBarTextField = WindowTopBarTextField("cyrusrobc@gmail.com", "To:", {}, Res.drawable.directory, false),
@@ -27,7 +29,7 @@ class EmailWindow(
     icon = Res.drawable.mailbox,
     initiallyVisible = true,
     topBarContent = listOf(
-        { WindowTopBarMenus() },
+        { WindowTopBarDefaultMenus() },
         { _addresseeBox() },
         { _subjectBox() },
         {

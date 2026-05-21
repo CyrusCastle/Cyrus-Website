@@ -13,7 +13,7 @@ import cyruswebsite.composeapp.generated.resources.txt
 import uk.cyruscastle.www.ui.system.scroll.ScrollBarType
 import uk.cyruscastle.www.ui.system.scroll.ScrollableContainer
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
-import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenus
+import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarDefaultMenus
 
 open class NotepadWindow(
     val title: String? = null,
@@ -24,7 +24,7 @@ open class NotepadWindow(
     fileTitle = title,
     icon = if (isFile) Res.drawable.txt else Res.drawable.notepad,
     initiallyVisible = true,
-    topBarContent = listOf({ WindowTopBarMenus() }),
+    topBarContent = listOf({ WindowTopBarDefaultMenus() }),
     content = {
         var text by remember { mutableStateOf(startingText ?: "") }
 

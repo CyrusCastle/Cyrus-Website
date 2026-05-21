@@ -63,6 +63,8 @@ import uk.cyruscastle.www.ui.system.window.windows.text.WordpadWindow
 import uk.cyruscastle.www.ui.system.window.windows.text.ZZHelpWordpad
 import uk.cyruscastle.www.ui.system.window.windows.theme.ThemeEditorWindow
 import uk.cyruscastle.www.ui.theme.ColorPalette
+import kotlin.js.ExperimentalWasmJsInterop
+import kotlin.js.js
 
 @Composable
 fun StartMenu(

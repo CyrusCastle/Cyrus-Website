@@ -24,7 +24,7 @@ import uk.cyruscastle.www.ui.system.desktop.DesktopGrid
 import uk.cyruscastle.www.ui.theme.ColorPalette
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
 import uk.cyruscastle.www.ui.system.window.topbar.TopBarEntry
-import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenus
+import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarDefaultMenus
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarTextField
 
 open class FileExplorerWindow(
@@ -40,7 +40,7 @@ open class FileExplorerWindow(
     icon = folderIcon,
     initiallyVisible = true,
     topBarContent = listOf(
-        { WindowTopBarMenus() },
+        { WindowTopBarDefaultMenus() },
         { WindowTopBarTextField("C:/Users/Cyrus/Desktop/$title/", "Address:", {}, null, true)() }
     ),
     content = {
