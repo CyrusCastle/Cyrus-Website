@@ -24,6 +24,7 @@ import androidx.compose.ui.input.pointer.PointerInputChange
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
+import androidx.compose.ui.zIndex
 import kotlinx.browser.window
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -240,9 +241,10 @@ open class FacsimileWindow(
             )
 
             // Top settings
-            topBarContent.forEachIndexed { index, it ->
+            topBarContent.forEachIndexed { index, it -> // TODO I really fucking hate how we created FacsimileWindow. Maybe we should gut it all and start again knowing what I know now
                 Box(
                     modifier = Modifier
+                        .zIndex(Float.MAX_VALUE)
                         .size(currentSize.width.dp, 35.dp)
                         .padding(vertical = 5.dp)
                         .background(ColorPalette.WINDOW_BODY_BACKGROUND)
