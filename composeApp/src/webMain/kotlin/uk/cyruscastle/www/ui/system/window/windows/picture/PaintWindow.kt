@@ -56,8 +56,6 @@ import cyruswebsite.composeapp.generated.resources.paintStar
 import cyruswebsite.composeapp.generated.resources.paintText
 import cyruswebsite.composeapp.generated.resources.paintZoom
 import cyruswebsite.composeapp.generated.resources.picture
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
@@ -72,6 +70,8 @@ import uk.cyruscastle.www.ui.system.scroll.ScrollBarType
 import uk.cyruscastle.www.ui.system.scroll.ScrollableContainer
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
 import uk.cyruscastle.www.ui.system.window.resize.getResizePointerIcons
+import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenuItem
+import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenuSubItemEntry
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenus
 import uk.cyruscastle.www.ui.theme.ColorPalette
 
@@ -88,7 +88,55 @@ open class PaintWindow(
     fileTitle = title,
     icon = if (pictureIcon) Res.drawable.picture else Res.drawable.paint,
     initiallyVisible = true,
-    topBarContent = listOf({ WindowTopBarMenus() }),
+    topBarContent = listOf({
+        val canUndo by _controller.canUndo.collectAsState(false)
+        val canRedo by _controller.canRedo.collectAsState(false)
+
+        WindowTopBarMenus(
+            listOf(
+                WindowTopBarMenuItem(
+                    "File",
+                    listOf(
+                        WindowTopBarMenuSubItemEntry("New", true, _controller::reset),
+                        WindowTopBarMenuSubItemEntry("Open", false, _controller::reset),
+                        WindowTopBarMenuSubItemEntry("Save", false, _controller::reset),
+                        WindowTopBarMenuSubItemEntry("Save As", false, _controller::reset),
+                        WindowTopBarMenuSubItemEntry("Print", false, _controller::reset)
+                    )
+                ),
+
+                WindowTopBarMenuItem(
+                    "Edit",
+                    listOf(
+                        WindowTopBarMenuSubItemEntry("Undo", canUndo, _controller::undo),
+                        WindowTopBarMenuSubItemEntry("Redo", canRedo, _controller::redo),
+                        WindowTopBarMenuSubItemEntry("Cut", false, { }),
+                        WindowTopBarMenuSubItemEntry("Copy", false, { }),
+                        WindowTopBarMenuSubItemEntry("Paste", false, { })
+                    )
+                ),
+
+                WindowTopBarMenuItem(
+                    "View",
+                    listOf(
+                        WindowTopBarMenuSubItemEntry("Tool box", false, { }),
+                        WindowTopBarMenuSubItemEntry("Colour box", false, { }),
+                        WindowTopBarMenuSubItemEntry("Status box", false, { }),
+                        WindowTopBarMenuSubItemEntry("Zoom", false, { }),
+                        WindowTopBarMenuSubItemEntry("Fullscreen", false, { })
+                    )
+                ),
+
+                WindowTopBarMenuItem(
+                    "Help",
+                    listOf(
+                        WindowTopBarMenuSubItemEntry("Help page", false, { }),
+                        WindowTopBarMenuSubItemEntry("About paint", false, { }),
+                    )
+                )
+            )
+        )
+    }),
     content = content@{
         if (startingResource != null){
             val background by preloadImageBitmap(startingResource)
