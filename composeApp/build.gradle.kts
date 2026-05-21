@@ -26,6 +26,7 @@ kotlin {
             implementation("org.jetbrains.compose.ui:ui:1.10.1")
             implementation("org.jetbrains.compose.components:components-resources:1.10.1")
             implementation("org.jetbrains.compose.ui:ui-tooling-preview:1.10.1")
+            implementation("org.jetbrains.kotlinx:kotlinx-browser:0.5.0")
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.7.1")
