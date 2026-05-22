@@ -20,23 +20,29 @@ kotlin {
     
     sourceSets {
         commonMain.dependencies {
-            implementation("org.jetbrains.compose.runtime:runtime:1.10.1")
-            implementation("org.jetbrains.compose.foundation:foundation:1.10.1")
-            implementation("org.jetbrains.compose.material3:material3:1.9.0")
-            implementation("org.jetbrains.compose.ui:ui:1.10.1")
-            implementation("org.jetbrains.compose.components:components-resources:1.10.1")
-            implementation("org.jetbrains.compose.ui:ui-tooling-preview:1.10.1")
-            implementation("org.jetbrains.kotlinx:kotlinx-browser:0.5.0")
+            implementation(libs.compose.runtime)
+            implementation(libs.compose.foundation)
+            implementation(libs.compose.material3)
+            implementation(libs.compose.ui)
+            implementation(libs.compose.components.resources)
+            implementation(libs.compose.ui.tooling.preview)
+
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
-            implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.7.1")
-            implementation("com.mohamedrejeb.richeditor:richeditor-compose:1.0.0-rc13")
-            implementation("uk.codecymru.drawbox:DrawBox-Enhanced:2.1.2")
-            implementation("io.github.vinceglb:filekit-core:0.12.0")
-            implementation("io.github.vinceglb:filekit-dialogs:0.12.0")
-            implementation("io.github.vinceglb:filekit-dialogs-compose:0.12.0")
-            implementation("io.coil-kt.coil3:coil-compose:3.4.0")
-            implementation("io.coil-kt.coil3:coil-network-ktor3:3.4.0")
+
+            implementation(libs.kotlinx.browser)
+            implementation(libs.kotlinx.datetime)
+
+            implementation(libs.filekit.core)
+            implementation(libs.filekit.dialogs)
+            implementation(libs.filekit.dialogs.compose)
+
+            implementation(libs.coil.compose)
+            implementation(libs.coil.network.ktor3)
+
+            implementation(libs.richeditor.compose)
+            implementation(libs.drawbox.enhanced)
+
 //            implementation("com.dshatz.pdfmp:pdfmp-compose:1.0.4")
 //            implementation("androidx.pdf:pdf-viewer-fragment:1.0.0-alpha12")
 //            implementation("androidx.compose.material:material-icons-extended")

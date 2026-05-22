@@ -25,9 +25,11 @@ import cyruswebsite.composeapp.generated.resources.picture
 import io.github.vinceglb.filekit.FileKit
 import io.github.vinceglb.filekit.PlatformFile
 import io.github.vinceglb.filekit.dialogs.FileKitType
+import io.github.vinceglb.filekit.dialogs.compose.util.toImageBitmap
 import io.github.vinceglb.filekit.dialogs.openFilePicker
 import io.github.vinceglb.filekit.download
 import io.github.vinceglb.filekit.name
+import io.github.vinceglb.filekit.path
 import io.github.vinceglb.filekit.readBytes
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -39,6 +41,8 @@ import uk.cyruscastle.www.ui.system.window.FacsimileWindow
 import uk.cyruscastle.www.ui.system.window.topbar.TopBarEntry
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarButtons
 import uk.cyruscastle.www.ui.system.window.windows.shortcuts.openShortcut
+import kotlin.js.ExperimentalWasmJsInterop
+import kotlin.js.js
 
 open class ImageWindow(
     title: String,
@@ -168,7 +172,9 @@ open class ImageWindow(
     }
 )
 
-fun PlatformFile.asURL() = URL.createObjectURL(file)
+// TODO at some point a problem developed in using the webMain, and the compiler gets confused when we use wasm/js specific stuff now. Either way, this method is now broken as we can't access the "file" attribute anymore. Will leave it like this for now.
+fun PlatformFile.asURL() = this.path
+//fun PlatformFile.asURL() = URL.createObjectURL(file)
 
 @OptIn(ExperimentalWasmJsInterop::class)
 fun printImage(url: String){
