@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.decodeToImageBitmap
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import com.mohamedrejeb.richeditor.utils.maxDecimals
 import cyruswebsite.composeapp.generated.resources.Res
 import cyruswebsite.composeapp.generated.resources.computer
 import cyruswebsite.composeapp.generated.resources.folder
@@ -41,13 +42,15 @@ import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenuItem
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenuSubItemEntry
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenus
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarTextField
+import kotlin.random.Random
 
 open class FileExplorerWindow(
     val title: String,
     val folderIcon: DrawableResource = Res.drawable.folder,
     val items: List<FacsimileWindow>,
 //    val fakeFolderAddress: String,
-    val fakeFolderSize: Float = 1.37f,
+//    val fakeFolderSize: Float = 1.37f,
+    val fakeFolderSize: Float = items.fold(0f) { value, window -> value + Random(window::class.hashCode()).nextFloat() }.maxDecimals(2),
     val fakeFolderLocation: String = "My Computer"
 ) : FacsimileWindow(
     programTitle = "File Explorer",
