@@ -48,7 +48,7 @@ fun DesktopShortcut( // TODO can this be fed into Facsimile Window?
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier.width(75.dp).height(if (selected) 150.dp else 75.dp)
     ){
-        Box(){
+        Box(contentAlignment = Alignment.Center){
             Image(
                 painter = painterResource(icon),
                 contentDescription = null,
@@ -86,6 +86,7 @@ fun DesktopShortcut( // TODO can this be fed into Facsimile Window?
                         displayText = text.take(max(0, endIndex - 1)).trimEnd() + "..."
                     }
                 },
+                maxLines = if (selected) Int.MAX_VALUE else 1,
                 modifier = Modifier
                     .background(if (selected) selectedColor else Color.Transparent)
                     .drawBehind {

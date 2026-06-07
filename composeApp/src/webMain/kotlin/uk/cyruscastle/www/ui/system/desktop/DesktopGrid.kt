@@ -145,6 +145,7 @@ fun DesktopGrid(
 
             val isInside = selectionBox.top != (-1).dp && (checkIsInside())
             var isDragging by remember { mutableStateOf(false) }
+            val isSelected = grid.selectedShortcut.value?.equals(item.first::class) ?: false
 
             item.first.desktopShortcut(
                 selectedShortcut = grid.selectedShortcut,
@@ -155,7 +156,7 @@ fun DesktopGrid(
                 selectedTextColor = selectedTextColor,
                 modifier = Modifier
                     .offset { IntOffset(dragOffset.x.toInt(), dragOffset.y.toInt()) }
-                    .zIndex(if (isDragging) 999f else 0f)
+                    .zIndex(if (isDragging || isSelected) 999f else 0f)
                     .pointerInput(Unit) {
                         detectDragGestures(
                             onDrag = { change, dragAmount ->
