@@ -30,6 +30,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.decodeToImageBitmap
 import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.input.pointer.pointerInput
@@ -56,6 +57,17 @@ import cyruswebsite.composeapp.generated.resources.paintStar
 import cyruswebsite.composeapp.generated.resources.paintText
 import cyruswebsite.composeapp.generated.resources.paintZoom
 import cyruswebsite.composeapp.generated.resources.picture
+import io.github.vinceglb.filekit.FileKit
+import io.github.vinceglb.filekit.ImageFormat
+import io.github.vinceglb.filekit.dialogs.FileKitType
+import io.github.vinceglb.filekit.dialogs.compose.util.encodeToByteArray
+import io.github.vinceglb.filekit.dialogs.openFilePicker
+import io.github.vinceglb.filekit.download
+import io.github.vinceglb.filekit.name
+import io.github.vinceglb.filekit.readBytes
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
@@ -98,9 +110,22 @@ open class PaintWindow(
                     "File",
                     listOf(
                         WindowTopBarMenuSubItemEntry("New", true, _controller::reset),
-                        WindowTopBarMenuSubItemEntry("Open", false, _controller::reset),
-                        WindowTopBarMenuSubItemEntry("Save", false, _controller::reset),
-                        WindowTopBarMenuSubItemEntry("Save As", false, _controller::reset),
+                        WindowTopBarMenuSubItemEntry("Open", true) {
+                            CoroutineScope(Dispatchers.Default).launch {
+                                val bitmap = FileKit.openFilePicker(FileKitType.Image)?.readBytes()?.decodeToImageBitmap()
+                                bitmap?.let { _controller.open(it) }
+                            }
+                        },
+                        WindowTopBarMenuSubItemEntry("Save", true) {
+                            CoroutineScope(Dispatchers.Default).launch {
+                                FileKit.download(bytes = _controller.internalBitmap.encodeToByteArray(ImageFormat.PNG), fileName = title ?: "untitled.png")
+                            }
+                        },
+                        WindowTopBarMenuSubItemEntry("Save As", true) {
+                            CoroutineScope(Dispatchers.Default).launch {
+                                FileKit.download(bytes = _controller.internalBitmap.encodeToByteArray(ImageFormat.PNG), fileName = title ?: "untitled.png")
+                            }
+                        },
                         WindowTopBarMenuSubItemEntry("Print", false, _controller::reset)
                     )
                 ),
