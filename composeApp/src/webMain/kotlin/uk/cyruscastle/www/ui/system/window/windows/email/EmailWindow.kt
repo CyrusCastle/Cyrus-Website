@@ -16,6 +16,9 @@ import uk.cyruscastle.www.ui.system.window.FacsimileWindow
 import uk.cyruscastle.www.ui.system.window.topbar.TopBarEntry
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarButtons
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarDefaultMenus
+import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenuItem
+import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenuSubItemEntry
+import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenus
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarTextField
 import kotlin.js.ExperimentalWasmJsInterop
 import kotlin.js.js
@@ -29,7 +32,6 @@ class EmailWindow(
     icon = Res.drawable.mailbox,
     initiallyVisible = true,
     topBarContent = listOf(
-        { WindowTopBarDefaultMenus() },
         { _addresseeBox() },
         { _subjectBox() },
         {

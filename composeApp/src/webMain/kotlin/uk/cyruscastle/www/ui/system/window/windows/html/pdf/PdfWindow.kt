@@ -15,6 +15,9 @@ import uk.cyruscastle.www.ui.system.window.FacsimileWindow
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarButtons
 import uk.cyruscastle.www.ui.system.window.topbar.TopBarEntry
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarDefaultMenus
+import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenuItem
+import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenuSubItemEntry
+import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenus
 import uk.cyruscastle.www.ui.system.window.windows.html.HtmlView
 import kotlin.js.ExperimentalWasmJsInterop
 
@@ -32,7 +35,6 @@ open class PdfWindow(
     icon = Res.drawable.pdf,
     initiallyVisible = true,
     topBarContent = listOf(
-        { WindowTopBarDefaultMenus() },
         {
             val controller = view.controller.collectAsState()
             var draggable by remember(controller.value) { mutableStateOf(controller.value?.getCursorHandler()?.getDraggable() ?: true) }

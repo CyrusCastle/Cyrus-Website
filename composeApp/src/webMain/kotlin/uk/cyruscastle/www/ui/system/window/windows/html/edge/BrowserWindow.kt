@@ -22,6 +22,9 @@ import org.jetbrains.compose.resources.painterResource
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
 import uk.cyruscastle.www.ui.system.window.topbar.TopBarEntry
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarDefaultMenus
+import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenuItem
+import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenuSubItemEntry
+import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenus
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarTextField
 import uk.cyruscastle.www.ui.system.window.windows.html.HtmlView
 
@@ -42,7 +45,6 @@ open class BrowserWindow(
     initiallyVisible = true,
     defaultSize = Size(750f, 650f),
     topBarContent = listOf(
-        { WindowTopBarDefaultMenus() },
         {
             val trueUrl by view.trueUrl.collectAsState()
             WindowTopBarTextField(trueUrl, "Address:", view::setUrl)()

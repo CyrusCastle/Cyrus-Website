@@ -14,6 +14,9 @@ import uk.cyruscastle.www.ui.system.scroll.ScrollBarType
 import uk.cyruscastle.www.ui.system.scroll.ScrollableContainer
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarDefaultMenus
+import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenuItem
+import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenuSubItemEntry
+import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenus
 
 open class NotepadWindow(
     val title: String? = null,
@@ -24,7 +27,49 @@ open class NotepadWindow(
     fileTitle = title,
     icon = if (isFile) Res.drawable.txt else Res.drawable.notepad,
     initiallyVisible = true,
-    topBarContent = listOf({ WindowTopBarDefaultMenus() }),
+    topBarContent = listOf({
+        WindowTopBarMenus(
+            listOf(
+                WindowTopBarMenuItem(
+                    "File",
+                    listOf(
+                        WindowTopBarMenuSubItemEntry("New", false) {},
+                        WindowTopBarMenuSubItemEntry("Open", false) {},
+                        WindowTopBarMenuSubItemEntry("Save", false) {},
+                        WindowTopBarMenuSubItemEntry("Save As", false) {},
+                        WindowTopBarMenuSubItemEntry("Print", false) {},
+                    )
+                ),
+
+                WindowTopBarMenuItem(
+                    "Edit",
+                    listOf(
+                        WindowTopBarMenuSubItemEntry("Undo", false) {},
+                        WindowTopBarMenuSubItemEntry("Redo", false) {},
+                        WindowTopBarMenuSubItemEntry("Cut", false) {},
+                        WindowTopBarMenuSubItemEntry("Copy", false) {},
+                        WindowTopBarMenuSubItemEntry("Paste", false) {},
+                    )
+                ),
+
+                WindowTopBarMenuItem(
+                    "Search",
+                    listOf(
+                        WindowTopBarMenuSubItemEntry("Find...", false) {},
+                        WindowTopBarMenuSubItemEntry("Find Next", false) {},
+                    )
+                ),
+
+                WindowTopBarMenuItem(
+                    "Help",
+                    listOf(
+                        WindowTopBarMenuSubItemEntry("Help Page", false) {},
+                        WindowTopBarMenuSubItemEntry("About Notepad", false) {},
+                    )
+                )
+            )
+        )
+    }),
     content = {
         var text by remember { mutableStateOf(startingText ?: "") }
 

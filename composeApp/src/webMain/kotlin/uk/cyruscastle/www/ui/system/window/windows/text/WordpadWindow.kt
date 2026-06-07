@@ -68,6 +68,9 @@ import uk.cyruscastle.www.ui.system.window.FacsimileWindow
 import uk.cyruscastle.www.ui.system.window.topbar.TopBarEntry
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarButtons
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarDefaultMenus
+import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenuItem
+import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenuSubItemEntry
+import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenus
 import uk.cyruscastle.www.ui.theme.ColorPalette
 import kotlin.js.ExperimentalWasmJsInterop
 import kotlin.js.js
@@ -83,7 +86,6 @@ open class WordpadWindow (
     icon = Res.drawable.wordpad,
     initiallyVisible = true,
     topBarContent = listOf(
-        { WindowTopBarDefaultMenus() },
         { WindowTopBarButtons (
             { TopBarEntry(Res.drawable.buttonNew, false) {
                 _textState.value.setMarkdown("")

@@ -144,9 +144,9 @@ open class PaintWindow(
                 WindowTopBarMenuItem(
                     "View",
                     listOf(
-                        WindowTopBarMenuSubItemEntry("Tool box", false, { }),
-                        WindowTopBarMenuSubItemEntry("Colour box", false, { }),
-                        WindowTopBarMenuSubItemEntry("Status box", false, { }),
+                        WindowTopBarMenuSubItemEntry("Tool Box", false, { }),
+                        WindowTopBarMenuSubItemEntry("Colour Box", false, { }),
+                        WindowTopBarMenuSubItemEntry("Status Box", false, { }),
                         WindowTopBarMenuSubItemEntry("Zoom", false, { }),
                         WindowTopBarMenuSubItemEntry("Fullscreen", false, { })
                     )
@@ -155,8 +155,8 @@ open class PaintWindow(
                 WindowTopBarMenuItem(
                     "Help",
                     listOf(
-                        WindowTopBarMenuSubItemEntry("Help page", false, { }),
-                        WindowTopBarMenuSubItemEntry("About paint", false, { }),
+                        WindowTopBarMenuSubItemEntry("Help Page", false, { }),
+                        WindowTopBarMenuSubItemEntry("About Paint", false, { }),
                     )
                 )
             )

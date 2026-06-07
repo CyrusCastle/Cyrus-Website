@@ -13,18 +13,33 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.decodeToImageBitmap
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import cyruswebsite.composeapp.generated.resources.Res
 import cyruswebsite.composeapp.generated.resources.computer
 import cyruswebsite.composeapp.generated.resources.folder
+import io.github.vinceglb.filekit.FileKit
+import io.github.vinceglb.filekit.ImageFormat
+import io.github.vinceglb.filekit.dialogs.FileKitType
+import io.github.vinceglb.filekit.dialogs.compose.util.encodeToByteArray
+import io.github.vinceglb.filekit.dialogs.openFilePicker
+import io.github.vinceglb.filekit.download
+import io.github.vinceglb.filekit.readBytes
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
+import uk.cyruscastle.www.controller.WindowController
 import uk.cyruscastle.www.ui.system.desktop.DesktopGrid
 import uk.cyruscastle.www.ui.theme.ColorPalette
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
 import uk.cyruscastle.www.ui.system.window.topbar.TopBarEntry
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarDefaultMenus
+import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenuItem
+import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenuSubItemEntry
+import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenus
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarTextField
 
 open class FileExplorerWindow(
@@ -40,7 +55,49 @@ open class FileExplorerWindow(
     icon = folderIcon,
     initiallyVisible = true,
     topBarContent = listOf(
-        { WindowTopBarDefaultMenus() },
+        {
+            WindowTopBarMenus(
+                listOf(
+                    WindowTopBarMenuItem(
+                        "File",
+                        listOf(
+                            WindowTopBarMenuSubItemEntry("New", false) {},
+                            WindowTopBarMenuSubItemEntry("Rename", false) {},
+                            WindowTopBarMenuSubItemEntry("Delete", false) {},
+                            WindowTopBarMenuSubItemEntry("Close", false) {},
+                        )
+                    ),
+
+                    WindowTopBarMenuItem(
+                        "Edit",
+                        listOf(
+                            WindowTopBarMenuSubItemEntry("Undo", false) {},
+                            WindowTopBarMenuSubItemEntry("Redo", false) {},
+                            WindowTopBarMenuSubItemEntry("Cut", false) {},
+                            WindowTopBarMenuSubItemEntry("Copy", false) {},
+                            WindowTopBarMenuSubItemEntry("Paste", false) {},
+                        )
+                    ),
+
+                    WindowTopBarMenuItem(
+                        "View",
+                        listOf(
+                            WindowTopBarMenuSubItemEntry("Toolbars", false) {},
+                            WindowTopBarMenuSubItemEntry("Status Bar", false) {},
+                            WindowTopBarMenuSubItemEntry("Explorer Bar", false) {},
+                        )
+                    ),
+
+                    WindowTopBarMenuItem(
+                        "Help",
+                        listOf(
+                            WindowTopBarMenuSubItemEntry("Help Page", false, { }),
+                            WindowTopBarMenuSubItemEntry("About Explorer", false, { }),
+                        )
+                    )
+                )
+            )
+        },
         { WindowTopBarTextField("C:/Users/Cyrus/Desktop/$title/", "Address:", {}, null, true)() }
     ),
     content = {
