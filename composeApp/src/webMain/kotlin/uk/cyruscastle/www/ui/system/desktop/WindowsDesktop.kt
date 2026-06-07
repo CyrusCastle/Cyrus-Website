@@ -66,9 +66,9 @@ fun WindowsDesktop() {
                 items = listOf(
                     Pair(ZZInternetExplorer(), IntOffset(0, 0)),
                     Pair(NotepadWindow(), IntOffset(0, 1)),
-                    Pair(WordpadWindow(), IntOffset(0, 2)),
-                    Pair(PaintWindow(), IntOffset(0, 3)),
-                    Pair(EmailWindow(), IntOffset(0, 4)),
+//                    Pair(WordpadWindow(), IntOffset(0, 2)),
+                    Pair(PaintWindow(), IntOffset(0, 2)),
+                    Pair(EmailWindow(), IntOffset(0, 3)),
 
                     Pair(XXCawlfytholFolder(), IntOffset(1, 0)),
                     Pair(XXFriendSitesFolder(), IntOffset(1, 1)),
