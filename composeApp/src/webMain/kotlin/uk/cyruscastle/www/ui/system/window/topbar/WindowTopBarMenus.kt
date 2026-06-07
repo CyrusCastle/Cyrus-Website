@@ -95,7 +95,7 @@ fun WindowTopBarMenuItem(text: String, selectEntry: (String) -> Unit, isSelected
                         .intrudeExtrudeBorder(RectangleShape, isIntruding = false)
                 ) {
                     items.forEach {
-                        WindowTopBarMenuSubItem(it.first, it.second, it.third)
+                        WindowTopBarMenuSubItem(it.first, it.second) { it.third(); selectEntry(text) }
                     }
                 }
             }
