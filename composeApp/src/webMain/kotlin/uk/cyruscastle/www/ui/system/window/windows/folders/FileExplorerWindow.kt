@@ -50,6 +50,7 @@ open class FileExplorerWindow(
             DesktopGrid(
                 items = orderedItems,
                 innerPadding = PaddingValues(20.dp),
+                itemSize = 90.dp,
                 textColor = ColorPalette.STROKE,
                 backgroundColor = Color.White,
                 canMoveIcons = false
