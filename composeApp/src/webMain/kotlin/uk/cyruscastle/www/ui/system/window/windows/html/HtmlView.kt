@@ -133,3 +133,13 @@ class HtmlView(val url: String, val elementID: String){
     """
 )
 private external fun getCurrentURL(iframe: HTMLIFrameElement): String?
+
+@OptIn(ExperimentalWasmJsInterop::class)
+@JsFun(
+    """
+    function() {
+        return window.location.origin;
+    }
+    """
+)
+external fun getHost(): String

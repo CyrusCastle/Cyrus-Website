@@ -7,26 +7,28 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import cyruswebsite.composeapp.generated.resources.Res
+import cyruswebsite.composeapp.generated.resources.buttonPrint
+import cyruswebsite.composeapp.generated.resources.buttonSave
+import cyruswebsite.composeapp.generated.resources.externalViewer
 import cyruswebsite.composeapp.generated.resources.grabbing
 import cyruswebsite.composeapp.generated.resources.pdf
 import cyruswebsite.composeapp.generated.resources.zoomIn
 import cyruswebsite.composeapp.generated.resources.zoomOut
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
-import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarButtons
 import uk.cyruscastle.www.ui.system.window.topbar.TopBarEntry
-import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarDefaultMenus
-import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenuItem
-import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenuSubItemEntry
-import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenus
+import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarButtons
 import uk.cyruscastle.www.ui.system.window.windows.html.HtmlView
+import uk.cyruscastle.www.ui.system.window.windows.html.getHost
+import uk.cyruscastle.www.ui.system.window.windows.shortcuts.openShortcut
 import kotlin.js.ExperimentalWasmJsInterop
+import kotlin.js.js
 
 @OptIn(ExperimentalWasmJsInterop::class, ExperimentalComposeUiApi::class)
 open class PdfWindow(
     pdfTitle: String,
     pdfFilePath: String,
     val view: HtmlView = HtmlView(
-        "http://localhost:8080/composeResources/cyruswebsite.composeapp.generated.resources/files/pdf/pdf.html?file=$pdfFilePath",
+        "${getHost()}/composeResources/cyruswebsite.composeapp.generated.resources/files/pdf/pdf.html?file=$pdfFilePath",
         "pdfWindowContent${pdfFilePath}"
     )
 ) : FacsimileWindow(
@@ -44,8 +46,17 @@ open class PdfWindow(
                     controller.value?.getCursorHandler()?.toggleDraggable()
                     draggable = controller.value?.getCursorHandler()?.getDraggable() ?: draggable
                 } },
+
+                { TopBarEntry(null, false) { } },
+
                 { TopBarEntry(Res.drawable.zoomIn, false) { controller.value?.getZoomer()?.zoomIn() } },
-                { TopBarEntry(Res.drawable.zoomOut, false) { controller.value?.getZoomer()?.zoomOut() } }
+                { TopBarEntry(Res.drawable.zoomOut, false) { controller.value?.getZoomer()?.zoomOut() } },
+
+                { TopBarEntry(null, false) { } },
+
+                { TopBarEntry(Res.drawable.externalViewer, false) { openShortcut("${getHost()}/composeResources/cyruswebsite.composeapp.generated.resources/files/pdf/pdfs/$pdfFilePath") } },
+                { TopBarEntry(Res.drawable.buttonSave, false) { downloadPdf("${getHost()}/composeResources/cyruswebsite.composeapp.generated.resources/files/pdf/pdfs/$pdfFilePath") } },
+                { TopBarEntry(Res.drawable.buttonPrint, false) { printPdf("${getHost()}/composeResources/cyruswebsite.composeapp.generated.resources/files/pdf/pdfs/$pdfFilePath") } },
             )
     }),
     content = {
@@ -71,4 +82,42 @@ open class PdfWindow(
         super.demoteFromTop()
         view.setTopPriority(false)
     }
+}
+
+@OptIn(ExperimentalWasmJsInterop::class)
+@JsFun("""
+(url) => {
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = '';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
+""")
+external fun downloadPdf(url: String)
+
+@OptIn(ExperimentalWasmJsInterop::class)
+fun printPdf(url: String) {
+    js("""
+        const iframe = document.createElement('iframe');
+        iframe.style.position = 'fixed';
+        iframe.style.right = '0';
+        iframe.style.bottom = '0';
+        iframe.style.width = '0';
+        iframe.style.height = '0';
+        iframe.style.border = '0';
+
+        iframe.onload = () => {
+            try {
+                iframe.contentWindow.focus();
+                iframe.contentWindow.print();
+            } finally {
+                setTimeout(() => iframe.remove(), 1000);
+            }
+        };
+
+        iframe.src = url;
+        document.body.appendChild(iframe);
+    """)
 }
