@@ -33,6 +33,7 @@ import uk.cyruscastle.www.ui.system.window.windows.email.EmailWindow
 import uk.cyruscastle.www.ui.system.window.windows.folders.XXCawlfytholFolder
 import uk.cyruscastle.www.ui.system.window.windows.folders.XXFriendSitesFolder
 import uk.cyruscastle.www.ui.system.window.windows.folders.XXGithubFolder
+import uk.cyruscastle.www.ui.system.window.windows.folders.XXPapersFolder
 import uk.cyruscastle.www.ui.system.window.windows.html.edge.ZZInternetExplorer
 import uk.cyruscastle.www.ui.system.window.windows.html.pdf.ZZCVPdfWindow
 import uk.cyruscastle.www.ui.system.window.windows.html.pdf.ZZWelshForSoldiersWindow
@@ -40,7 +41,6 @@ import uk.cyruscastle.www.ui.system.window.windows.map.GlobeWindow
 import uk.cyruscastle.www.ui.system.window.windows.picture.PaintWindow
 import uk.cyruscastle.www.ui.system.window.windows.start.StartMenu
 import uk.cyruscastle.www.ui.system.window.windows.text.NotepadWindow
-import uk.cyruscastle.www.ui.system.window.windows.text.WordpadWindow
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -73,6 +73,7 @@ fun WindowsDesktop() {
                     Pair(XXCawlfytholFolder(), IntOffset(1, 0)),
                     Pair(XXFriendSitesFolder(), IntOffset(1, 1)),
                     Pair(XXGithubFolder(), IntOffset(1, 2)),
+                    Pair(XXPapersFolder(), IntOffset(1, 3)),
 
                     Pair(GlobeWindow(), IntOffset(2, 0)),
 

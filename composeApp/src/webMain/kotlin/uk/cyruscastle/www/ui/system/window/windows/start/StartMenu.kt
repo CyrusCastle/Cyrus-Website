@@ -53,6 +53,7 @@ import uk.cyruscastle.www.ui.system.window.windows.email.EmailWindow
 import uk.cyruscastle.www.ui.system.window.windows.folders.XXCawlfytholFolder
 import uk.cyruscastle.www.ui.system.window.windows.folders.XXFriendSitesFolder
 import uk.cyruscastle.www.ui.system.window.windows.folders.XXGithubFolder
+import uk.cyruscastle.www.ui.system.window.windows.folders.XXPapersFolder
 import uk.cyruscastle.www.ui.system.window.windows.html.edge.ZZInternetExplorer
 import uk.cyruscastle.www.ui.system.window.windows.html.pdf.ZZSamplePdf
 import uk.cyruscastle.www.ui.system.window.windows.map.GlobeWindow
@@ -134,6 +135,10 @@ fun StartMenu(
                     XXGithubFolder(),
                     "GitHub Projects"
                 ),
+                StartMenuSubentry(
+                    XXPapersFolder(),
+                    "Publications"
+                )
             )
         ),
         StartMenuEntry(
