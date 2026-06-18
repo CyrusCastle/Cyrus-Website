@@ -2,7 +2,7 @@ package uk.cyruscastle.www.ui.system.window.windows.folders
 
 import uk.cyruscastle.www.model.CitationType
 import uk.cyruscastle.www.model.PdfCitation
-import uk.cyruscastle.www.ui.system.window.pdf.PdfWindow
+import uk.cyruscastle.www.ui.system.window.windows.pdf.PdfWindow
 
 class XXPapersFolder : FileExplorerWindow(
     title = "Publications",
