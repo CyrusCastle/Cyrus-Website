@@ -43,6 +43,9 @@ kotlin {
             implementation(libs.richeditor.compose)
             implementation(libs.drawbox.enhanced)
 
+            implementation("dev.nucleusframework:pdfium:local")
+//            implementation("org.jetbrains.kotlin:kotlin-reflect")
+
 //            implementation("com.dshatz.pdfmp:pdfmp-compose:1.0.4")
 //            implementation("androidx.pdf:pdf-viewer-fragment:1.0.0-alpha12")
 //            implementation("androidx.compose.material:material-icons-extended")

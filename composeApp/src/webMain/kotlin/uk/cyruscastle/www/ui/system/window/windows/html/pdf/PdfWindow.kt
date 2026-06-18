@@ -2,12 +2,24 @@ package uk.cyruscastle.www.ui.system.window.windows.html.pdf
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -15,6 +27,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import cyruswebsite.composeapp.generated.resources.Res
@@ -24,17 +37,21 @@ import cyruswebsite.composeapp.generated.resources.computer
 import cyruswebsite.composeapp.generated.resources.copyIcon
 import cyruswebsite.composeapp.generated.resources.externalViewer
 import cyruswebsite.composeapp.generated.resources.grabbing
-import cyruswebsite.composeapp.generated.resources.internet
-import cyruswebsite.composeapp.generated.resources.internetExplorerHTML
 import cyruswebsite.composeapp.generated.resources.pdf
+import cyruswebsite.composeapp.generated.resources.selectText
 import cyruswebsite.composeapp.generated.resources.zoomIn
 import cyruswebsite.composeapp.generated.resources.zoomOut
+import dev.nucleusframework.pdfium.PdfPage
+import dev.nucleusframework.pdfium.PdfReaderState
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import org.jetbrains.compose.resources.painterResource
 import uk.cyruscastle.www.model.PdfCitation
+import uk.cyruscastle.www.ui.system.scroll.ScrollBarType
+import uk.cyruscastle.www.ui.system.scroll.ScrollableLazyColumn
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
 import uk.cyruscastle.www.ui.system.window.topbar.TopBarEntry
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarButtons
-import uk.cyruscastle.www.ui.system.window.windows.html.HtmlView
 import uk.cyruscastle.www.ui.system.window.windows.html.getHost
 import uk.cyruscastle.www.ui.system.window.windows.shortcuts.openShortcut
 import kotlin.js.ExperimentalWasmJsInterop
@@ -45,10 +62,10 @@ open class PdfWindow(
     pdfTitle: String,
     pdfFilePath: String,
     pdfCitation: PdfCitation,
-    val view: HtmlView = HtmlView(
-        "${getHost()}/composeResources/cyruswebsite.composeapp.generated.resources/files/pdf/pdf.html?file=$pdfFilePath",
-        "pdfWindowContent${pdfFilePath}"
-    )
+    val state: PdfReaderState = PdfReaderState(PdfReaderState.DEFAULT_CACHE_BYTES, PdfReaderState.DEFAULT_THUMBNAIL_CACHE_BYTES),
+    val listState: LazyListState = LazyListState(),
+    val pdfScope: CoroutineScope = CoroutineScope(Dispatchers.Default),
+    val screenState: ReaderScreenState = ReaderScreenState(state, listState, pdfScope)
 ) : FacsimileWindow(
     programTitle = "Pdf Viewer",
     fileTitle = pdfTitle,
@@ -56,19 +73,19 @@ open class PdfWindow(
     initiallyVisible = true,
     topBarContent = listOf(
         {
-            val controller = view.controller.collectAsState()
-            var draggable by remember(controller.value) { mutableStateOf(controller.value?.getCursorHandler()?.getDraggable() ?: true) }
-
             WindowTopBarButtons (
-                { TopBarEntry(Res.drawable.grabbing, draggable) {
-                    controller.value?.getCursorHandler()?.toggleDraggable()
-                    draggable = controller.value?.getCursorHandler()?.getDraggable() ?: draggable
+                { TopBarEntry(Res.drawable.selectText, screenState.mouseOption == MouseOption.SELECT_TEXT) {
+                    screenState.setMouseOption(MouseOption.SELECT_TEXT)
+                } },
+
+                { TopBarEntry(Res.drawable.grabbing, screenState.mouseOption == MouseOption.GRAB_TO_MOVE) {
+                    screenState.setMouseOption(MouseOption.GRAB_TO_MOVE)
                 } },
 
                 { TopBarEntry(null, false) { } },
 
-                { TopBarEntry(Res.drawable.zoomIn, false) { controller.value?.getZoomer()?.zoomIn() } },
-                { TopBarEntry(Res.drawable.zoomOut, false) { controller.value?.getZoomer()?.zoomOut() } },
+                { TopBarEntry(Res.drawable.zoomIn, false) { state.renderScale = (state.renderScale + 0.25f).coerceAtMost(4f) } },
+                { TopBarEntry(Res.drawable.zoomOut, false) { state.renderScale = (state.renderScale - 0.25f).coerceAtLeast(0.1f) } },
 
                 { TopBarEntry(null, false) { } },
 
@@ -78,17 +95,15 @@ open class PdfWindow(
             )
     }),
     content = {
-        view.getContent()
-        // TODO is it possible for us to repeat a mouse click that happens when a HtmlView is not priority i.e. not in focus?
+        var bytes by remember { mutableStateOf<ByteArray?>(null) }
 
+        LaunchedEffect(Unit){
+            bytes = Res.readBytes("files/pdf/pdfs/$pdfFilePath")
+        }
 
-//                    // TODO Second, when we're resizing, our pointer events get captured by the IFRAME. We can fix this by running:
-//                        // TODO document.body.shadowRoot.getElementById('pdfWindowContent').parentNode.style.pointerEvents = "none"
-//                        // ^ while resizing
-//                        // TODO document.body.shadowRoot.getElementById('pdfWindowContent').parentNode.style.pointerEvents = "auto"
-//                        // ^ after resizing
-//                    // TODO but then the question becomes, can we do this to ALL iframes while ANY window is being resized?
-//                    // TODO I guess just iterate through all iframes and find they parent...
+        LaunchedEffect(bytes) { bytes?.let { state.open(it) } }
+
+        PdfReader(screenState) // TODO current surface text selection is one line off
     },
     bottomBarContent = {
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -104,7 +119,7 @@ open class PdfWindow(
 
             Text(
                 text = pdfCitation.renderWithItalics(),
-                overflow = TextOverflow.Ellipsis,
+                overflow = TextOverflow.Ellipsis, // TODO sometimes this works sometimes it doesn't
                 modifier = Modifier.width(300.dp),
             )
 
@@ -124,19 +139,68 @@ open class PdfWindow(
                 text = "My Computer",
                 modifier = Modifier.width(120.dp),
             )
+
+            Spacer(Modifier.width(5.dp))
+            TopBarEntry(null, false) { }
+            Spacer(Modifier.width(5.dp))
+
+            Spacer(Modifier.width(5.dp))
+
+            Text(text = "${screenState.currentPage + 1} / ${state.pageCount}")
         }
     }
-){
-    override fun setTopWindow(){
-        super.setTopWindow()
-        view.setTopPriority(true)
-    }
+)
 
-    override fun demoteFromTop() {
-        super.demoteFromTop()
-        view.setTopPriority(false)
+////////////////
+// PDF Viewer //
+////////////////
+
+@Composable
+fun PdfReader(
+    state: ReaderScreenState,
+) {
+    ScrollableLazyColumn(
+        types = ScrollBarType.all(),
+        verticalListState = state.mainListState,
+        draggable = state.mouseOption == MouseOption.GRAB_TO_MOVE
+    ) { modifier ->
+        BoxWithConstraints(Modifier.weight(1f)) {
+            val contentSlot = (maxWidth - 24.dp * 2).coerceAtLeast(120.dp)
+            val pageWidth = ((contentSlot * state.reader.renderScale) - 24.dp).coerceAtLeast(80.dp)
+
+            LazyColumn(
+                state = state.mainListState,
+                modifier = modifier.width(pageWidth).align(Alignment.Center),
+                contentPadding = PaddingValues(vertical = 20.dp, horizontal = 24.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+            ) {
+                items(
+                    items = state.spreadEntries,
+                    key = { it.first },
+                ) { entry ->
+                    Column(Modifier.wrapContentWidth(Alignment.CenterHorizontally)) {
+                        Text("Page ${entry.first + 1}", style = MaterialTheme.typography.labelMedium)
+
+                        Box(Modifier.width(pageWidth)) {
+                            PdfPage(
+                                state = state.reader,
+                                pageIndex = entry.first,
+                                modifier = Modifier.fillMaxWidth(),
+                                background = Color.White,
+                                selectableText = state.mouseOption == MouseOption.SELECT_TEXT,
+                            )
+                        }
+                    }
+                }
+            }
+        }
     }
 }
+
+
+//
+//
+//
 
 @OptIn(ExperimentalWasmJsInterop::class)
 @JsFun("""

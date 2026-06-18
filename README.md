@@ -10,7 +10,7 @@ The site has been designed to reflect the aesthetics of older Windows operating 
 Each part of the app is broken down into a "program", with the following programs available:
 - FileExplorerWindow and StartMenu (containers to access other programs)
 - BrowserWindow (utilise the new WebElementView to show iframes, designed to view simple HTML web pages that will describe some project or other I've worked on)
-- PdfWindow (built on the same work as BrowserWindow, but with different controls (i.e. zoom, rather than address bar) to reflect the differing context)
+- PdfWindow (for reading documents of mine)
 - GlobeWindow (a simple map of the world with markers around showing places I've travelled to (or wish to), with some added context/images if the user clicks them)
 - ImageWindow (image viewer which will show any images I put on the site, made primarily so that users can see closer the images on GlobeWindow)
 - PaintWindow (a prototype MS Paint, was originally used instead of ImageWindow but is quite incomplete)
@@ -28,6 +28,7 @@ To avoid trying to re-invent the wheel, I am using a couple of libraries for thi
 - Mark Yavorskyi's [DrawBox](https://github.com/MarkYav/DrawBox) (for our current version of PaintWindow)
 - Mohamed Rejeb's [compose-rich-editor](https://github.com/MohamedRejeb/compose-rich-editor) (for our WordPadWindow)
 - Vincent Guillebaud's [FileKit](https://github.com/vinceglb/FileKit) (for uploading/downloading files from the site)
+- NucleusFramework's [CompsePdfReader](https://github.com/NucleusFramework/ComposePdfReader) (PDF renderer)
 
 (Also, a special thanks to Alex Meub for providing the [Windows 98 icons](https://win98icons.alexmeub.com/))
 
