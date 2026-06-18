@@ -1,4 +1,4 @@
-package uk.cyruscastle.www.ui.system.window.windows.html.pdf
+package uk.cyruscastle.www.ui.system.window.pdf
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable

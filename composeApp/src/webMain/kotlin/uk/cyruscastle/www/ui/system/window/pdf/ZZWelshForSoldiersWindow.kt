@@ -1,4 +1,4 @@
-package uk.cyruscastle.www.ui.system.window.windows.html.pdf
+package uk.cyruscastle.www.ui.system.window.pdf
 
 import uk.cyruscastle.www.model.CitationType
 import uk.cyruscastle.www.model.PdfCitation

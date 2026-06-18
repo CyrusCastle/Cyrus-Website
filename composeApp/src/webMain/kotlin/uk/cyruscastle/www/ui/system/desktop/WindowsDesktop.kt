@@ -35,8 +35,8 @@ import uk.cyruscastle.www.ui.system.window.windows.folders.XXFriendSitesFolder
 import uk.cyruscastle.www.ui.system.window.windows.folders.XXGithubFolder
 import uk.cyruscastle.www.ui.system.window.windows.folders.XXPapersFolder
 import uk.cyruscastle.www.ui.system.window.windows.html.edge.ZZInternetExplorer
-import uk.cyruscastle.www.ui.system.window.windows.html.pdf.ZZCVPdfWindow
-import uk.cyruscastle.www.ui.system.window.windows.html.pdf.ZZWelshForSoldiersWindow
+import uk.cyruscastle.www.ui.system.window.pdf.ZZCVPdfWindow
+import uk.cyruscastle.www.ui.system.window.pdf.ZZWelshForSoldiersWindow
 import uk.cyruscastle.www.ui.system.window.windows.map.GlobeWindow
 import uk.cyruscastle.www.ui.system.window.windows.picture.PaintWindow
 import uk.cyruscastle.www.ui.system.window.windows.start.StartMenu
