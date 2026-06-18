@@ -123,10 +123,10 @@ fun StartMenu(
         ),
         StartMenuEntry(
             "Documents", Res.drawable.smallFolder, listOf(
-                StartMenuSubentry(
-                    XXCawlfytholFolder(),
-                    "Cawlfythol Projects"
-                ),
+//                StartMenuSubentry(
+//                    XXCawlfytholFolder(),
+//                    "Cawlfythol Projects"
+//                ),
                 StartMenuSubentry(
                     XXFriendSitesFolder(),
                     "Friends' Sites"

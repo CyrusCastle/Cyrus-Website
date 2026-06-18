@@ -70,10 +70,10 @@ fun WindowsDesktop() {
                     Pair(PaintWindow(), IntOffset(0, 2)),
                     Pair(EmailWindow(), IntOffset(0, 3)),
 
-                    Pair(XXCawlfytholFolder(), IntOffset(1, 0)),
-                    Pair(XXFriendSitesFolder(), IntOffset(1, 1)),
-                    Pair(XXGithubFolder(), IntOffset(1, 2)),
-                    Pair(XXPapersFolder(), IntOffset(1, 3)),
+//                    Pair(XXCawlfytholFolder(), IntOffset(1, 0)), // Gone while PnC is under development
+                    Pair(XXFriendSitesFolder(), IntOffset(1, 0)),
+                    Pair(XXGithubFolder(), IntOffset(1, 1)),
+                    Pair(XXPapersFolder(), IntOffset(1, 2)),
 
                     Pair(GlobeWindow(), IntOffset(2, 0)),
 
