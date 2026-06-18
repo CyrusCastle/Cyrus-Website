@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -39,6 +40,7 @@ import uk.cyruscastle.www.ui.extensions.ContainerScope
 import uk.cyruscastle.www.ui.extensions.modifier.checkerboardBackground
 import uk.cyruscastle.www.ui.extensions.modifier.intrudeExtrudeBorder
 import uk.cyruscastle.www.ui.theme.ColorPalette
+import kotlin.math.roundToInt
 
 
 enum class ScrollBarType { VERTICAL, HORIZONTAL; companion object { fun all() = listOf(VERTICAL, HORIZONTAL) } }
@@ -48,44 +50,34 @@ fun ContainerScope?.ScrollBar(scrollState: ScrollState, modifier: Modifier = Mod
     this.ScrollBar(scrollState.maxValue, scrollState.value, scrollState::scrollBy, modifier, type, size)
 }
 
-//@Composable // WORKS but isn't nice
-//fun ContainerScope?.ScrollBar(
-//    listState: LazyListState,
-//    modifier: Modifier = Modifier,
-//    type: ScrollBarType = ScrollBarType.HORIZONTAL,
-//    size: Dp
-//){
-//    val lazyListScope = rememberCoroutineScope()
-//
-//    val layoutInfo = listState.layoutInfo
-//    val visibleItems = layoutInfo.visibleItemsInfo
-//
-//    val totalItems = layoutInfo.totalItemsCount
-//
-//    if (totalItems == 0 || visibleItems.isEmpty()){
-//        return
-//    }
-//
-//    val totalSize = visibleItems.first().size * totalItems
-//
-//    val currentScroll = (visibleItems.first().index * visibleItems.first().size) +
-//            visibleItems.first().offset.absoluteValue
-//
-//    val maxScroll = totalSize - layoutInfo.viewportSize.width
-//
-//    this.ScrollBar(
-//        maxScroll = maxScroll,
-//        scroll = currentScroll,
-//        scrollBy = { delta ->
-//            lazyListScope.launch {
-//                listState.scrollBy(delta)
-//            }
-//        },
-//        modifier = modifier,
-//        type = type,
-//        size = size
-//    )
-//}
+@Composable
+fun ContainerScope?.ScrollBar(
+    lazyListState: LazyListState,
+    modifier: Modifier = Modifier,
+    type: ScrollBarType = ScrollBarType.VERTICAL,
+    size: Dp
+) {
+    val layoutInfo = lazyListState.layoutInfo
+    val isVertical = type == ScrollBarType.VERTICAL
+
+    val averageItemSize = layoutInfo.visibleItemsInfo
+        .takeIf { it.isNotEmpty() }
+        ?.let { items -> items.sumOf { it.size } / items.size.toFloat() }
+        ?: 0f
+
+    val viewportSize = if (isVertical) layoutInfo.viewportSize.height else layoutInfo.viewportSize.width
+
+    val maxScroll = if (averageItemSize == 0f) 0 else
+        ((layoutInfo.totalItemsCount * averageItemSize) - viewportSize)
+            .coerceAtLeast(0f)
+            .roundToInt()
+
+    val scroll = layoutInfo.visibleItemsInfo.firstOrNull()?.let { first ->
+        (first.index * averageItemSize - first.offset).roundToInt()
+    } ?: 0
+
+    this.ScrollBar(maxScroll, scroll, lazyListState::scrollBy, modifier, type, size)
+}
 
 @Composable
 fun ContainerScope?.ScrollBar(maxScroll: Int, scroll: Int, scrollBy: suspend (Float) -> Unit, modifier: Modifier = Modifier, type: ScrollBarType = ScrollBarType.VERTICAL, size: Dp) {
