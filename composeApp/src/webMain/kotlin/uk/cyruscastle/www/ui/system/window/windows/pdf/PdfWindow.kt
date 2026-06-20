@@ -28,6 +28,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.fromKeyword
+import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import cyruswebsite.composeapp.generated.resources.Res
@@ -155,6 +158,7 @@ open class PdfWindow(
 // PDF Viewer //
 ////////////////
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun PdfReader(
     state: ReaderScreenState,
@@ -185,7 +189,7 @@ fun PdfReader(
                             PdfPage(
                                 state = state.reader,
                                 pageIndex = entry.first,
-                                modifier = Modifier.fillMaxWidth(),
+                                modifier = Modifier.fillMaxWidth().then(if (state.mouseOption == MouseOption.SELECT_TEXT) Modifier.pointerHoverIcon(PointerIcon.fromKeyword("text")) else Modifier),
                                 background = Color.White,
                                 selectableText = state.mouseOption == MouseOption.SELECT_TEXT,
                             )
