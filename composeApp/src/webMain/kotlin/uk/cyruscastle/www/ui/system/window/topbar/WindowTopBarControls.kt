@@ -44,6 +44,7 @@ fun WindowTopBarControls(
     setHighestPriority: suspend () -> Unit,
     isMaximized: Boolean,
     setMaximized: (Boolean) -> Unit,
+    maximisable: Boolean,
     closeWindow: () -> Unit,
     makeInvisible: () -> Unit,
 ){
@@ -76,35 +77,39 @@ fun WindowTopBarControls(
 
         Spacer(Modifier.weight(1f))
 
-        WindowTopBarButton(Res.drawable.controlboxMinimise, "Minimise window", makeInvisible)
+        WindowTopBarButton(Res.drawable.controlboxMinimise, "Minimise window", true, makeInvisible)
         Spacer(Modifier.width(15.dp))
 
-        WindowTopBarButton(
-            if (!isMaximized) Res.drawable.controlboxMaximise else Res.drawable.controlboxUnmaximise,
-            if (!isMaximized) "Maximise window"  else "Restore window size"
-        ) {
-            CoroutineScope(Dispatchers.Default).launch {
-                setHighestPriority()
+        if (maximisable){
+            WindowTopBarButton(
+                if (!isMaximized) Res.drawable.controlboxMaximise else Res.drawable.controlboxUnmaximise,
+                if (!isMaximized) "Maximise window"  else "Restore window size",
+                maximisable
+            ) {
+                CoroutineScope(Dispatchers.Default).launch {
+                    setHighestPriority()
+                }
+
+                setMaximized(!isMaximized)
             }
 
-            setMaximized(!isMaximized)
+            Spacer(Modifier.width(15.dp))
         }
-        Spacer(Modifier.width(15.dp))
 
-        WindowTopBarButton(Res.drawable.controlboxClose, "Close window", closeWindow)
+        WindowTopBarButton(Res.drawable.controlboxClose, "Close window", true, closeWindow)
         Spacer(Modifier.width(15.dp))
     }
 }
 
 @Composable
-fun WindowTopBarButton(icon: DrawableResource, contentDescription: String, onClick: () -> Unit){
+fun WindowTopBarButton(icon: DrawableResource, contentDescription: String, enabled: Boolean, onClick: () -> Unit){
     Box(
         Modifier
             .size(20.dp)
             .background(ColorPalette.WINDOW_CONTAINER_BACKGROUND)
             .intrudeExtrudeBorder(RectangleShape, isIntruding = false)
             .pointerHoverIcon(PointerIcon.Hand)
-            .clickable(onClick = onClick)
+            .clickable(enabled = enabled, onClick = onClick)
     ){
         Image(
             painter = painterResource(icon),

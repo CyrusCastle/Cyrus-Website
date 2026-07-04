@@ -59,6 +59,7 @@ open class FacsimileWindow(
         window.innerHeight.toFloat() - TOOL_BAR_HEIGHT.dp.value
     ),
     private val minSize: Size = Size(530f, 450f),
+    private val maximisable: Boolean = true,
     private val content: @Composable (FacsimileWindow.() -> Unit)
 ){
     //////////////////
@@ -236,6 +237,7 @@ open class FacsimileWindow(
                 { setTopWindow() },
                 isMaximized,
                 ::setMaximized,
+                maximisable,
                 { WindowController.removeWindow(this@FacsimileWindow) },
                 ::makeInvisible
             )
