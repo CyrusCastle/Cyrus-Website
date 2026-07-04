@@ -36,6 +36,9 @@ object WindowController {
 
         // If it's minimised, un-minimise it!
         topWindow.makeVisible()
+
+        // We should dismiss the start menu if it's open
+        StartMenuController.setOpen(false)
     }
 
     fun getHighestPriority(): Int{

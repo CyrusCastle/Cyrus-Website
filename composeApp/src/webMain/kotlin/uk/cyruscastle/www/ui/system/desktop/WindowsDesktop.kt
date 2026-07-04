@@ -26,6 +26,7 @@ import androidx.compose.ui.input.pointer.onPointerEvent
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import uk.cyruscastle.www.controller.StartMenuController
 import uk.cyruscastle.www.controller.TooltipController
 import uk.cyruscastle.www.controller.WindowController
 import uk.cyruscastle.www.ui.system.toolbar.ToolBar
@@ -38,6 +39,7 @@ import uk.cyruscastle.www.ui.system.window.windows.html.edge.ZZInternetExplorer
 import uk.cyruscastle.www.ui.system.window.windows.pdf.ZZCVPdfWindow
 import uk.cyruscastle.www.ui.system.window.windows.pdf.ZZWelshForSoldiersWindow
 import uk.cyruscastle.www.ui.system.window.windows.map.GlobeWindow
+import uk.cyruscastle.www.ui.system.window.windows.misc.Minesweeper
 import uk.cyruscastle.www.ui.system.window.windows.picture.PaintWindow
 import uk.cyruscastle.www.ui.system.window.windows.start.StartMenu
 import uk.cyruscastle.www.ui.system.window.windows.text.NotepadWindow
@@ -46,7 +48,7 @@ import uk.cyruscastle.www.ui.system.window.windows.text.NotepadWindow
 @Composable
 fun WindowsDesktop() {
     val windows by WindowController.windows.collectAsState()
-    var showStartMenu by remember { mutableStateOf(false) }
+    val showStartMenu by StartMenuController.open.collectAsState()
     var mousePosition by remember { mutableStateOf(Offset.Zero) }
 
     Box(
@@ -59,7 +61,7 @@ fun WindowsDesktop() {
         Scaffold(
             Modifier.fillMaxWidth().fillMaxHeight(),
             bottomBar = {
-                ToolBar(windows, showStartMenu) { showStartMenu = !showStartMenu }
+                ToolBar(windows, showStartMenu) { StartMenuController.setOpen(!showStartMenu) }
             }
         ){ innerPadding ->
             DesktopGrid(
@@ -69,6 +71,7 @@ fun WindowsDesktop() {
 //                    Pair(WordpadWindow(), IntOffset(0, 2)),
                     Pair(PaintWindow(), IntOffset(0, 2)),
                     Pair(EmailWindow(), IntOffset(0, 3)),
+                    //Pair(Minesweeper(), IntOffset(0, 4)),
 
 //                    Pair(XXCawlfytholFolder(), IntOffset(1, 0)), // Gone while PnC is under development
                     Pair(XXFriendSitesFolder(), IntOffset(1, 0)),
@@ -84,7 +87,7 @@ fun WindowsDesktop() {
                 canMoveIcons = true,
                 modifier = Modifier
                     .onPointerEvent(PointerEventType.Press){
-                        showStartMenu = false
+                        StartMenuController.setOpen(false)
                     }
             )
 
@@ -116,7 +119,7 @@ fun WindowsDesktop() {
 
         if (showStartMenu){
             StartMenu({
-                showStartMenu = false
+                StartMenuController.setOpen(false)
             }, Modifier.offset(y = (-45).dp).align(Alignment.BottomStart))
         }
 
