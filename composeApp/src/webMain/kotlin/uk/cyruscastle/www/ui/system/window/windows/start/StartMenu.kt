@@ -49,6 +49,7 @@ import uk.cyruscastle.www.controller.WindowController
 import uk.cyruscastle.www.ui.extensions.modifier.intrudeExtrudeBorder
 import uk.cyruscastle.www.ui.extensions.underlineFirst
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
+import uk.cyruscastle.www.ui.system.window.topbar.TopBarSeparator
 import uk.cyruscastle.www.ui.system.window.windows.email.EmailWindow
 import uk.cyruscastle.www.ui.system.window.windows.folders.XXCawlfytholFolder
 import uk.cyruscastle.www.ui.system.window.windows.folders.XXFriendSitesFolder
@@ -57,6 +58,7 @@ import uk.cyruscastle.www.ui.system.window.windows.folders.XXPapersFolder
 import uk.cyruscastle.www.ui.system.window.windows.html.edge.ZZInternetExplorer
 import uk.cyruscastle.www.ui.system.window.windows.pdf.ZZSamplePdf
 import uk.cyruscastle.www.ui.system.window.windows.map.GlobeWindow
+import uk.cyruscastle.www.ui.system.window.windows.misc.Minesweeper
 import uk.cyruscastle.www.ui.system.window.windows.picture.PaintWindow
 import uk.cyruscastle.www.ui.system.window.windows.picture.ZZImageWindow
 import uk.cyruscastle.www.ui.system.window.windows.text.NotepadWindow
@@ -84,6 +86,9 @@ fun StartMenu(
                 StartMenuSubentry(
                     ZZInternetExplorer()
                 ),
+//                StartMenuSubentry(
+//                    Minesweeper()
+//                ),
                 StartMenuSubentry(
                     NotepadWindow()
                 ),
@@ -219,8 +224,7 @@ fun MainStartMenu(
             entries.forEach { it.invoke(setHovered) }
 
             Spacer(Modifier.weight(1f))
-            Spacer(Modifier.fillMaxWidth().height(1.dp).border(1.dp, ColorPalette.WINDOW_CONTAINER_BACKGROUND))
-            Spacer(Modifier.fillMaxWidth().height(1.dp).border(1.dp, ColorPalette.TOOL_BAR_ENTRY_INDENT_BOTTOM))
+            TopBarSeparator()
 
             Spacer(Modifier.height(5.dp))
 

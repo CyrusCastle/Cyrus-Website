@@ -54,6 +54,7 @@ import uk.cyruscastle.www.ui.system.scroll.ScrollBarType
 import uk.cyruscastle.www.ui.system.scroll.ScrollableLazyColumn
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
 import uk.cyruscastle.www.ui.system.window.topbar.TopBarEntry
+import uk.cyruscastle.www.ui.system.window.topbar.TopBarSeparator
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarButtons
 import uk.cyruscastle.www.ui.system.window.windows.html.getHost
 import uk.cyruscastle.www.ui.system.window.windows.shortcuts.openShortcut
@@ -85,12 +86,12 @@ open class PdfWindow(
                     screenState.setMouseOption(MouseOption.GRAB_TO_MOVE)
                 } },
 
-                { TopBarEntry(null, false) { } },
+                { TopBarSeparator() },
 
                 { TopBarEntry(Res.drawable.zoomIn, false) { state.renderScale = (state.renderScale + 0.25f).coerceAtMost(4f) } },
                 { TopBarEntry(Res.drawable.zoomOut, false) { state.renderScale = (state.renderScale - 0.25f).coerceAtLeast(0.1f) } },
 
-                { TopBarEntry(null, false) { } },
+                { TopBarSeparator() },
 
                 { TopBarEntry(Res.drawable.externalViewer, false) { openShortcut("${getHost()}/composeResources/cyruswebsite.composeapp.generated.resources/files/pdf/pdfs/$pdfFilePath") } },
                 { TopBarEntry(Res.drawable.buttonSave, false) { downloadPdf("${getHost()}/composeResources/cyruswebsite.composeapp.generated.resources/files/pdf/pdfs/$pdfFilePath") } },
@@ -127,7 +128,7 @@ open class PdfWindow(
             )
 
             Spacer(Modifier.width(5.dp))
-            TopBarEntry(null, false) { }
+            TopBarSeparator()
             Spacer(Modifier.width(5.dp))
 
             Image(
@@ -144,7 +145,7 @@ open class PdfWindow(
             )
 
             Spacer(Modifier.width(5.dp))
-            TopBarEntry(null, false) { }
+            TopBarSeparator()
             Spacer(Modifier.width(5.dp))
 
             Spacer(Modifier.width(5.dp))

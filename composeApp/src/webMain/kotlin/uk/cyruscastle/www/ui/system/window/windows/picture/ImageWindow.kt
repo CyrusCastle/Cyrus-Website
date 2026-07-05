@@ -25,7 +25,6 @@ import cyruswebsite.composeapp.generated.resources.picture
 import io.github.vinceglb.filekit.FileKit
 import io.github.vinceglb.filekit.PlatformFile
 import io.github.vinceglb.filekit.dialogs.FileKitType
-import io.github.vinceglb.filekit.dialogs.compose.util.toImageBitmap
 import io.github.vinceglb.filekit.dialogs.openFilePicker
 import io.github.vinceglb.filekit.download
 import io.github.vinceglb.filekit.name
@@ -35,10 +34,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-import org.w3c.dom.url.URL
 import uk.cyruscastle.www.controller.WindowController
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
 import uk.cyruscastle.www.ui.system.window.topbar.TopBarEntry
+import uk.cyruscastle.www.ui.system.window.topbar.TopBarSeparator
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarButtons
 import uk.cyruscastle.www.ui.system.window.windows.shortcuts.openShortcut
 import kotlin.js.ExperimentalWasmJsInterop
@@ -82,7 +81,7 @@ open class ImageWindow(
                 }
             } },
 
-            { TopBarEntry(null, false) { } },
+            { TopBarSeparator() },
 
             { TopBarEntry(Res.drawable.buttonPrint, false) {
                 if (_imageURI.value != null){
@@ -94,7 +93,7 @@ open class ImageWindow(
                 }
             } },
 
-            { TopBarEntry(null, false) { } },
+            { TopBarSeparator() },
 
             { TopBarEntry(Res.drawable.paint, false) {
                 CoroutineScope(Dispatchers.Default).launch {
@@ -128,7 +127,7 @@ open class ImageWindow(
             } },
 
             // If I wanted to waste the time, i could add zoom in/out and scrolling to this image window... see https://saket.github.io/telephoto/zoomableimage/#sharing-hoisted-state
-//            { TopBarEntry(null) { } },
+//            { TopBarSeparator() },
 //
 //            { TopBarEntry(Res.drawable.zoomIn, false) {
 //

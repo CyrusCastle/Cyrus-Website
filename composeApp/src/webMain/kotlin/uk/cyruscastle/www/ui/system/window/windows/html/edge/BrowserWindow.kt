@@ -20,11 +20,7 @@ import cyruswebsite.composeapp.generated.resources.internetExplorerHTML
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
-import uk.cyruscastle.www.ui.system.window.topbar.TopBarEntry
-import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarDefaultMenus
-import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenuItem
-import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenuSubItemEntry
-import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenus
+import uk.cyruscastle.www.ui.system.window.topbar.TopBarSeparator
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarTextField
 import uk.cyruscastle.www.ui.system.window.windows.html.HtmlView
 
@@ -71,7 +67,7 @@ open class BrowserWindow(
             )
 
             Spacer(Modifier.width(5.dp))
-            TopBarEntry(null, false) { } // TODO improve this to use intrude/extrude
+            TopBarSeparator()
             Spacer(Modifier.width(5.dp))
 
             Text(
@@ -80,7 +76,7 @@ open class BrowserWindow(
             )
 
             Spacer(Modifier.width(5.dp))
-            TopBarEntry(null, false) { }
+            TopBarSeparator()
             Spacer(Modifier.width(5.dp))
 
             Text(
@@ -89,7 +85,7 @@ open class BrowserWindow(
             )
 
             Spacer(Modifier.width(5.dp))
-            TopBarEntry(null, false) { }
+            TopBarSeparator()
             Spacer(Modifier.width(5.dp))
 
             Text(
@@ -98,7 +94,7 @@ open class BrowserWindow(
             )
 
             Spacer(Modifier.width(5.dp))
-            TopBarEntry(null, false) { }
+            TopBarSeparator()
             Spacer(Modifier.width(5.dp))
 
             Image(

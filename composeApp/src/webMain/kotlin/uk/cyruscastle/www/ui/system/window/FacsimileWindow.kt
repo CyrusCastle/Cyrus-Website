@@ -37,7 +37,7 @@ import uk.cyruscastle.www.ui.extensions.modifier.intrudeExtrudeBorder
 import uk.cyruscastle.www.ui.system.desktop.DesktopShortcut
 import uk.cyruscastle.www.ui.system.toolbar.TOOL_BAR_HEIGHT
 import uk.cyruscastle.www.ui.system.window.resize.WindowResizeControls
-import uk.cyruscastle.www.ui.system.window.topbar.TopBarSpacer
+import uk.cyruscastle.www.ui.system.window.topbar.TopBarSeparator
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarControls
 import uk.cyruscastle.www.ui.theme.ColorPalette
 import kotlin.reflect.KClass
@@ -255,7 +255,7 @@ open class FacsimileWindow(
                 }
 
                 if (index != topBarContent.size - 1) {
-                    TopBarSpacer()
+                    TopBarSeparator()
                 }
             }
 

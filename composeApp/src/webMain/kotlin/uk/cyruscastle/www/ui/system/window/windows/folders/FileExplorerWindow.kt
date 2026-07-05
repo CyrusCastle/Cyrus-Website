@@ -13,31 +13,18 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.decodeToImageBitmap
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.mohamedrejeb.richeditor.utils.maxDecimals
 import cyruswebsite.composeapp.generated.resources.Res
 import cyruswebsite.composeapp.generated.resources.computer
 import cyruswebsite.composeapp.generated.resources.folder
-import io.github.vinceglb.filekit.FileKit
-import io.github.vinceglb.filekit.ImageFormat
-import io.github.vinceglb.filekit.dialogs.FileKitType
-import io.github.vinceglb.filekit.dialogs.compose.util.encodeToByteArray
-import io.github.vinceglb.filekit.dialogs.openFilePicker
-import io.github.vinceglb.filekit.download
-import io.github.vinceglb.filekit.readBytes
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
-import uk.cyruscastle.www.controller.WindowController
 import uk.cyruscastle.www.ui.system.desktop.DesktopGrid
 import uk.cyruscastle.www.ui.theme.ColorPalette
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
-import uk.cyruscastle.www.ui.system.window.topbar.TopBarEntry
-import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarDefaultMenus
+import uk.cyruscastle.www.ui.system.window.topbar.TopBarSeparator
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenuItem
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenuSubItemEntry
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenus
@@ -125,7 +112,7 @@ open class FileExplorerWindow(
             )
 
             Spacer(Modifier.width(5.dp))
-            TopBarEntry(null, false) { }
+            TopBarSeparator()
             Spacer(Modifier.width(5.dp))
 
             Text(
@@ -134,7 +121,7 @@ open class FileExplorerWindow(
             )
 
             Spacer(Modifier.width(5.dp))
-            TopBarEntry(null, false) { }
+            TopBarSeparator()
             Spacer(Modifier.width(5.dp))
 
             Image(

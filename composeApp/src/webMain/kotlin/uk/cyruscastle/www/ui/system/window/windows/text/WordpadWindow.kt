@@ -66,11 +66,8 @@ import uk.cyruscastle.www.ui.system.scroll.ScrollBarType
 import uk.cyruscastle.www.ui.system.scroll.ScrollableContainer
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
 import uk.cyruscastle.www.ui.system.window.topbar.TopBarEntry
+import uk.cyruscastle.www.ui.system.window.topbar.TopBarSeparator
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarButtons
-import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarDefaultMenus
-import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenuItem
-import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenuSubItemEntry
-import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenus
 import uk.cyruscastle.www.ui.theme.ColorPalette
 import kotlin.js.ExperimentalWasmJsInterop
 import kotlin.js.js
@@ -102,7 +99,7 @@ open class WordpadWindow (
                 }
             } },
 
-            { TopBarEntry(null, false) { } },
+            { TopBarSeparator() },
 
             { TopBarEntry(Res.drawable.buttonPrint, false) {
                 printPage(_textState.value.toHtml())
@@ -110,11 +107,11 @@ open class WordpadWindow (
             { TopBarEntry(Res.drawable.buttonFind, false) { } },
             { TopBarEntry(Res.drawable.buttonSpellcheck, false) { } },
 
-            { TopBarEntry(null) { } },
+            { TopBarSeparator() },
 
             // cut, copy, paste
 
-//            { TopBarEntry(null) { } },
+//            { TopBarSeparator() },
 
             // Bold, Emph, Underline
             {
@@ -151,7 +148,7 @@ open class WordpadWindow (
                 }
             },
 
-            { TopBarEntry(null) { } },
+            { TopBarSeparator() },
 
             // Aligning text
             {
@@ -187,7 +184,7 @@ open class WordpadWindow (
                 }
             },
 
-//            { TopBarEntry(null) { } },
+//            { TopBarSeparator() },
 
 //            { TopBarEntry(Res.drawable.undo, false) { } },
 //            { TopBarEntry(Res.drawable.redo, false) { } },
@@ -335,7 +332,7 @@ open class WordpadWindow (
             )
 
             Spacer(Modifier.width(5.dp))
-            TopBarEntry(null, false) { }
+            TopBarSeparator()
             Spacer(Modifier.width(5.dp))
 
             Text(
