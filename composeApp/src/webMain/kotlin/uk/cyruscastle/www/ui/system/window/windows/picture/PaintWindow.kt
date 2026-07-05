@@ -96,7 +96,7 @@ open class PaintWindow(
     startingBitmap: ImageBitmap? = null,
     pictureIcon: Boolean = false,
     resolution: Size = Size(150f, 150f),
-    private val _controller: DrawController = DrawController(startingColor = Color.Black)
+    private val _controller: DrawController = DrawController(startingColor = Color.Black, startingBackground = DrawBoxBackground.TransparentBackground)
 ) : FacsimileWindow(
     programTitle = "Paint",
     fileTitle = title,
@@ -270,7 +270,6 @@ open class PaintWindow(
                             modifier = Modifier
                                 .padding(15.dp)
 //                                .offset(rect.left.dp, rect.top.dp)
-                                .background(Color.White)
                                 .size(rect.right.dp, rect.bottom.dp)
                         )
                     }
