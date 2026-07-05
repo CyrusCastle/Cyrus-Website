@@ -265,6 +265,7 @@ open class PaintWindow(
                             updateSize
                         )
 
+                        // TODO changing size deletes the opened image!!!
                         DrawBox(
                             controller = _controller,
                             modifier = Modifier
