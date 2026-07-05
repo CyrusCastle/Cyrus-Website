@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -39,6 +40,7 @@ import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import cyruswebsite.composeapp.generated.resources.Res
+import cyruswebsite.composeapp.generated.resources.blankWhiteCanvas
 import cyruswebsite.composeapp.generated.resources.paint
 import cyruswebsite.composeapp.generated.resources.paintBrush
 import cyruswebsite.composeapp.generated.resources.paintCurve
@@ -94,7 +96,7 @@ open class PaintWindow(
     startingBitmap: ImageBitmap? = null,
     pictureIcon: Boolean = false,
     resolution: Size = Size(150f, 150f),
-    private val _controller: DrawController = DrawController()
+    private val _controller: DrawController = DrawController(startingColor = Color.Black)
 ) : FacsimileWindow(
     programTitle = "Paint",
     fileTitle = title,
@@ -170,9 +172,23 @@ open class PaintWindow(
                 return@content
             }
 
-            _controller.background.value = DrawBoxBackground.ImageBackground(background!!, 1f)
+            LaunchedEffect(Unit){
+                _controller.open(background!!)
+            }
         }else if (startingBitmap != null){
-            _controller.background.value = DrawBoxBackground.ImageBackground(startingBitmap, 1f)
+            LaunchedEffect(Unit){
+                _controller.open(startingBitmap)
+            }
+        }else {
+            val background by preloadImageBitmap(Res.drawable.blankWhiteCanvas)
+
+            while (background == null){
+                return@content
+            }
+
+            LaunchedEffect(Unit){
+                _controller.open(background!!)
+            }
         }
 
         Column {
