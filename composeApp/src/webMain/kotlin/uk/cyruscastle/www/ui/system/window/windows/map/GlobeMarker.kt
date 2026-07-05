@@ -12,6 +12,7 @@ import cyruswebsite.composeapp.generated.resources.mapFlagKosovo
 import cyruswebsite.composeapp.generated.resources.mapFlagOrange
 import cyruswebsite.composeapp.generated.resources.mapFlagRed
 import cyruswebsite.composeapp.generated.resources.mapFlagScotland
+import cyruswebsite.composeapp.generated.resources.mapFlagYorkshire
 import cyruswebsite.composeapp.generated.resources.mapFlagad
 import cyruswebsite.composeapp.generated.resources.mapFlagam
 import cyruswebsite.composeapp.generated.resources.mapFlagar
@@ -153,6 +154,16 @@ fun getMarkers() = listOf(
                 "A picture of me somewhere in the town centre."
             )
         )
+    ),
+
+    // Yr Hen Ogledd
+//
+    GlobeMarker(
+        name = "Beverley",
+        description = "I currently live in Beverley, Yorkshire, where I am training to become a Computer Science teacher",
+        location = DpOffset(5296.6665.dp, 2246.6665.dp),
+        type = GlobeMarkerType.LIVED_AT,
+        country = Res.drawable.mapFlagYorkshire,
     ),
 
     //////////

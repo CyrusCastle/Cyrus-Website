@@ -72,6 +72,7 @@ import uk.cyruscastle.www.controller.TooltipController
 import uk.cyruscastle.www.ui.system.scroll.ScrollBarType
 import uk.cyruscastle.www.ui.system.scroll.ScrollableContainer
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
+import kotlin.js.ExperimentalWasmJsInterop
 
 @OptIn(ExperimentalComposeUiApi::class)
 class GlobeWindow() : FacsimileWindow(
@@ -133,10 +134,10 @@ class GlobeWindow() : FacsimileWindow(
                         contentScale = ContentScale.Fit,
                         modifier = Modifier.fillMaxSize().align(Alignment.Center).pointerInput(contentScale) {
                             detectTapGestures { tapOffset ->
-//                                val baseX = tapOffset.x / contentScale
-//                                val baseY = tapOffset.y / contentScale
+                                val baseX = tapOffset.x / contentScale
+                                val baseY = tapOffset.y / contentScale
 
-//                                consoleLogJs("DpOffset($baseX.dp, $baseY.dp)")
+                                consoleLogJs("DpOffset($baseX.dp, $baseY.dp)")
                             }
                         }
                     )
@@ -481,3 +482,7 @@ private fun MapControllerZoomButton(icon: DrawableResource, contentDescription: 
 private fun Modifier.setMapControllerButton() = this.then(
     Modifier.size(16.dp).background(Color.White).border(1.dp, Color.Black)
 )
+
+@OptIn(ExperimentalWasmJsInterop::class)
+@JsFun("(message) => console.log(message)")
+external fun consoleLogJs(message: String)
