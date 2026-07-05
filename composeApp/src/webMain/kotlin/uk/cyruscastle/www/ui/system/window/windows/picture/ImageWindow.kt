@@ -1,7 +1,12 @@
 package uk.cyruscastle.www.ui.system.window.windows.picture
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -12,7 +17,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.decodeToImageBitmap
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import cyruswebsite.composeapp.generated.resources.Res
 import cyruswebsite.composeapp.generated.resources.buttonNew
@@ -34,6 +42,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.painterResource
 import uk.cyruscastle.www.controller.WindowController
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
 import uk.cyruscastle.www.ui.system.window.topbar.TopBarEntry
@@ -50,7 +59,7 @@ open class ImageWindow(
     private var _imageURI: MutableStateFlow<String?> = MutableStateFlow(Res.getUri(path)),
     private var _imageFile: MutableStateFlow<PlatformFile?> = MutableStateFlow(null)
 ) : FacsimileWindow(
-    programTitle = "Imaging",
+    programTitle = "Image Viewer",
     icon = Res.drawable.picture,
     initiallyVisible = true,
     topBarContent = listOf(
@@ -142,6 +151,36 @@ open class ImageWindow(
         val uri by _imageURI.collectAsState()
         val file by _imageFile.collectAsState()
 
+        if (path == EMPTY_IMAGE_PATH && file == null){
+            Box(Modifier.fillMaxSize()){
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .clickable {
+                            CoroutineScope(Dispatchers.Default).launch {
+                                val file = FileKit.openFilePicker(FileKitType.Image)
+
+                                _imageURI.value = null
+                                _imageFile.value = file
+                                _imageTitle.value = file?.name ?: ""
+                            }
+                        }
+                ) {
+                    Image(
+                        painter = painterResource(Res.drawable.picture),
+                        contentDescription = null,
+                        contentScale = ContentScale.Fit,
+                        modifier = Modifier.size(64.dp)
+                    )
+                    Text("Open an image to begin...")
+                }
+            }
+
+            return@content
+        }
+
+        // Actually show the image if we have one
         if (uri != null){
             AsyncImage(
                 model = uri,
@@ -166,7 +205,7 @@ open class ImageWindow(
         Row(verticalAlignment = Alignment.CenterVertically) {
             val imageTitle by _imageTitle.collectAsState()
 
-            Text(text = imageTitle)
+            Text(text = imageTitle.ifBlank { "No image loaded..." })
         }
     }
 )
