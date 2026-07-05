@@ -68,6 +68,7 @@ open class ImageWindow(
             { TopBarEntry(Res.drawable.buttonNew, false) {
                 _imageURI.value = null
                 _imageFile.value = null
+                _imageTitle.value = ""
             } },
             { TopBarEntry(Res.drawable.buttonOpen, false) {
                 CoroutineScope(Dispatchers.Default).launch {
