@@ -343,7 +343,7 @@ open class WordpadWindow (
     }
 )
 
-private fun RichTextState.toggleFormatting(spanStyle: SpanStyle) {
+fun RichTextState.toggleFormatting(spanStyle: SpanStyle) {
     if (this.selection.collapsed){
         this.toggleSpanStyle(spanStyle)
     }else {
@@ -370,7 +370,7 @@ private fun SpanStyle.matches(other: SpanStyle): Boolean {
 }
 
 @OptIn(ExperimentalWasmJsInterop::class)
-private fun printPage(html: String){
+fun printPage(html: String){
     js("""
     const iframe = document.createElement('iframe');
     iframe.style.position = 'fixed';
