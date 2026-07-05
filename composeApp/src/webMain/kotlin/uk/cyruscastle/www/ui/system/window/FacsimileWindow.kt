@@ -255,7 +255,7 @@ open class FacsimileWindow(
                 }
 
                 if (index != topBarContent.size - 1) {
-                    TopBarSeparator()
+                    TopBarSeparator(0.98f)
                 }
             }
 

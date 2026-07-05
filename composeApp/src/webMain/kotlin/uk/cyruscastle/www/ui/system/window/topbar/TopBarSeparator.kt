@@ -14,13 +14,13 @@ import androidx.compose.ui.unit.dp
 import uk.cyruscastle.www.ui.theme.ColorPalette
 
 @Composable
-fun ColumnScope.TopBarSeparator() {
-    Spacer(Modifier.fillMaxWidth().height(1.dp).border(1.dp, ColorPalette.WINDOW_CONTAINER_BACKGROUND))
-    Spacer(Modifier.fillMaxWidth().height(1.dp).border(1.dp, ColorPalette.TOOL_BAR_ENTRY_INDENT_BOTTOM))
+fun ColumnScope.TopBarSeparator(widthFraction: Float = 1f) {
+    Spacer(Modifier.fillMaxWidth(widthFraction).height(1.dp).border(1.dp, ColorPalette.WINDOW_CONTAINER_BACKGROUND))
+    Spacer(Modifier.fillMaxWidth(widthFraction).height(1.dp).border(1.dp, ColorPalette.TOOL_BAR_ENTRY_INDENT_BOTTOM))
 }
 
 @Composable
-fun RowScope.TopBarSeparator() {
-    Spacer(Modifier.fillMaxHeight().width(1.dp).border(1.dp, ColorPalette.WINDOW_CONTAINER_BACKGROUND))
-    Spacer(Modifier.fillMaxHeight().width(1.dp).border(1.dp, ColorPalette.TOOL_BAR_ENTRY_INDENT_BOTTOM))
+fun RowScope.TopBarSeparator(heightFraction: Float = 1f) {
+    Spacer(Modifier.fillMaxHeight(heightFraction).width(1.dp).border(1.dp, ColorPalette.WINDOW_CONTAINER_BACKGROUND))
+    Spacer(Modifier.fillMaxHeight(heightFraction).width(1.dp).border(1.dp, ColorPalette.TOOL_BAR_ENTRY_INDENT_BOTTOM))
 }
