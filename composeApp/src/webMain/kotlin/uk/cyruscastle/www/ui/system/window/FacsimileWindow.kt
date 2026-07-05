@@ -60,6 +60,7 @@ open class FacsimileWindow(
     ),
     private val minSize: Size = Size(530f, 450f),
     private val maximisable: Boolean = true,
+    private val resizable: Boolean = true,
     private val content: @Composable (FacsimileWindow.() -> Unit)
 ){
     //////////////////
@@ -117,6 +118,10 @@ open class FacsimileWindow(
         _size.value = Size(newWidth, newHeight)
 
         return !(deltaX != 0f && newWidth == minSize.width)
+    }
+
+    fun updateSizeAbsolute(width: Float, height: Float){
+        _size.value = Size(width, height)
     }
 
     ////////////////////////
@@ -271,13 +276,15 @@ open class FacsimileWindow(
                     .background(ColorPalette.WINDOW_BODY_BACKGROUND)
             ) {
                 // CONTROLS
-                WindowResizeControls(
-                    this,
-                    currentSize,
-                    ::updateSize,
-                    ::updateOffset,
-                    disableBottom = bottomBarContent != null
-                )
+                if (resizable){
+                    WindowResizeControls(
+                        this,
+                        currentSize,
+                        ::updateSize,
+                        ::updateOffset,
+                        disableBottom = bottomBarContent != null
+                    )
+                }
 
                 // CONTENT
                 content.invoke(this@FacsimileWindow)
