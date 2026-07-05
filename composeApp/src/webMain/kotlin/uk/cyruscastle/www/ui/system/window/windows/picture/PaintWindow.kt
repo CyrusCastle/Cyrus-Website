@@ -24,6 +24,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
@@ -33,6 +34,7 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.decodeToImageBitmap
 import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.fromKeyword
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
@@ -270,6 +272,7 @@ open class PaintWindow(
                             controller = _controller,
                             modifier = Modifier
                                 .padding(15.dp)
+                                .pointerHoverIcon(PointerIcon.Crosshair)
 //                                .offset(rect.left.dp, rect.top.dp)
                                 .size(rect.right.dp, rect.bottom.dp)
                         )
@@ -349,11 +352,13 @@ private fun PaintToolBar(controller: DrawController){
             PaintToolSelector(
                 Res.drawable.paintStar,
                 "Polygon Select",
+                false,
                 false
             ) {}
             PaintToolSelector(
                 Res.drawable.paintSelect,
                 "Rectangle Select",
+                false,
                 false
             ) {}
         }
@@ -362,12 +367,14 @@ private fun PaintToolBar(controller: DrawController){
             PaintToolSelector(
                 Res.drawable.paintErase,
                 "Eraser",
-                canvasTool.value == CanvasTool.ERASER
+                canvasTool.value == CanvasTool.ERASER,
+                true
             ) { controller.canvasTool.value = CanvasTool.ERASER }
             PaintToolSelector(
                 Res.drawable.paintFill,
                 "Fill",
-                canvasTool.value == CanvasTool.FILL
+                canvasTool.value == CanvasTool.FILL,
+                true
             ) { controller.canvasTool.value = CanvasTool.FILL }
         }
 
@@ -375,11 +382,13 @@ private fun PaintToolBar(controller: DrawController){
             PaintToolSelector(
                 Res.drawable.paintEyedrop,
                 "Eyedropper",
-                canvasTool.value == CanvasTool.EYEDROPPER
+                canvasTool.value == CanvasTool.EYEDROPPER,
+                true
             ) { controller.canvasTool.value = CanvasTool.EYEDROPPER }
             PaintToolSelector(
                 Res.drawable.paintZoom,
                 "Zoom",
+                false,
                 false
             ) {}
         }
@@ -388,11 +397,13 @@ private fun PaintToolBar(controller: DrawController){
             PaintToolSelector(
                 Res.drawable.paintPencil,
                 "Pencil",
-                canvasTool.value == CanvasTool.BRUSH
+                canvasTool.value == CanvasTool.BRUSH,
+                true
             ) { controller.canvasTool.value = CanvasTool.BRUSH }
             PaintToolSelector(
                 Res.drawable.paintBrush,
                 "Brush",
+                false,
                 false
             ) {}
         }
@@ -401,11 +412,13 @@ private fun PaintToolBar(controller: DrawController){
             PaintToolSelector(
                 Res.drawable.paintSpray,
                 "Spray Paint",
-                canvasTool.value == CanvasTool.SPRAY_CAN
+                canvasTool.value == CanvasTool.SPRAY_CAN,
+                true
             ) { controller.canvasTool.value = CanvasTool.SPRAY_CAN }
             PaintToolSelector(
                 Res.drawable.paintText,
                 "Text",
+                false,
                 false
             ) {}
         }
@@ -414,11 +427,13 @@ private fun PaintToolBar(controller: DrawController){
             PaintToolSelector(
                 Res.drawable.paintLine,
                 "Line",
-                canvasTool.value == CanvasTool.SHAPE_LINE
+                canvasTool.value == CanvasTool.SHAPE_LINE,
+                true
             ) { controller.canvasTool.value = CanvasTool.SHAPE_LINE }
             PaintToolSelector(
                 Res.drawable.paintCurve,
                 "Curved Line",
+                false,
                 false
             ) {}
         }
@@ -427,11 +442,13 @@ private fun PaintToolBar(controller: DrawController){
             PaintToolSelector(
                 Res.drawable.paintRectangle,
                 "Rectangle",
-                canvasTool.value == CanvasTool.SHAPE_RECT
+                canvasTool.value == CanvasTool.SHAPE_RECT,
+                true
             ) { controller.canvasTool.value = CanvasTool.SHAPE_RECT }
             PaintToolSelector(
                 Res.drawable.paintPolygon,
                 "Polygon",
+                false,
                 false
             ) {}
         }
@@ -440,25 +457,29 @@ private fun PaintToolBar(controller: DrawController){
             PaintToolSelector(
                 Res.drawable.paintOval,
                 "Oval",
-                canvasTool.value == CanvasTool.SHAPE_CIRCLE
+                canvasTool.value == CanvasTool.SHAPE_CIRCLE,
+                true
             ) { controller.canvasTool.value = CanvasTool.SHAPE_CIRCLE }
             PaintToolSelector(
                 Res.drawable.paintRoundedRect,
                 "Rounded Rectangle",
+                false,
                 false
             ) {}
         }
     }
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
-private fun PaintToolSelector(icon: DrawableResource, contentDescription: String, isSelected: Boolean, onClick: () -> Unit){
+private fun PaintToolSelector(icon: DrawableResource, contentDescription: String, isSelected: Boolean, implemented: Boolean, onClick: () -> Unit){
     Box(
         Modifier
             .size(32.dp)
-            .intrudeExtrudeBorder(RectangleShape, isIntruding = isSelected)
-            .pointerHoverIcon(PointerIcon.Hand)
-            .clickable(onClick = onClick)
+            .intrudeExtrudeBorder(RectangleShape, isIntruding = isSelected || !implemented)
+            .background(if (implemented) Color.Transparent else ColorPalette.WINDOW_CONTAINER_BACKGROUND)
+            .pointerHoverIcon(if (implemented) PointerIcon.Hand else PointerIcon.fromKeyword("not-allowed"))
+            .clickable(onClick = onClick, enabled = implemented)
     ){
         Image(
             painter = painterResource(icon),
