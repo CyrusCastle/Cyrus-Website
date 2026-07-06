@@ -71,7 +71,7 @@ fun WindowsDesktop() {
 //                    Pair(WordpadWindow(), IntOffset(0, 2)),
                     Pair(PaintWindow(), IntOffset(0, 2)),
                     Pair(EmailWindow(), IntOffset(0, 3)),
-                    //Pair(Minesweeper(), IntOffset(0, 4)),
+                    Pair(Minesweeper(), IntOffset(0, 4)),
 
 //                    Pair(XXCawlfytholFolder(), IntOffset(1, 0)), // Gone while PnC is under development
                     Pair(XXFriendSitesFolder(), IntOffset(1, 0)),

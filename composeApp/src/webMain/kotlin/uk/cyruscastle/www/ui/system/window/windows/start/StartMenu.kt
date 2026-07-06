@@ -86,9 +86,9 @@ fun StartMenu(
                 StartMenuSubentry(
                     ZZInternetExplorer()
                 ),
-//                StartMenuSubentry(
-//                    Minesweeper()
-//                ),
+                StartMenuSubentry(
+                    Minesweeper()
+                ),
                 StartMenuSubentry(
                     NotepadWindow()
                 ),
