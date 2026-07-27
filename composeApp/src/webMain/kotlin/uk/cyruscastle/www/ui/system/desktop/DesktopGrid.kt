@@ -115,7 +115,7 @@ fun DesktopGrid(
             )
         }
 
-        val offsetMap = remember { mutableStateMapOf<KClass<out FacsimileWindow>, Offset>() }
+        val offsetMap = remember { mutableStateMapOf<KClass<out FacsimileWindow>, DpOffset>() }
 
         items.forEach { item ->
             var dragOffset by remember { mutableStateOf(grid.getInitialOffset(item.second)) }
@@ -123,14 +123,14 @@ fun DesktopGrid(
             offsetMap[item.first::class] = dragOffset
 
             val checkIsInside: () -> Boolean = {
-                if (selectionBox.top == 1.dp) {
+                if (selectionBox.top == (-1).dp) {
                     false
                 } else {
                     val bounds = Rect(
-                        dragOffset.x,
-                        dragOffset.y,
-                        dragOffset.x + 50.dp.value,
-                        dragOffset.y + 50.dp.value
+                        dragOffset.x.value,
+                        dragOffset.y.value,
+                        dragOffset.x.value + itemSize.value,
+                        dragOffset.y.value + itemSize.value
                     )
                     val selectionBounds = Rect(
                         selectionBoxOffset.x.value,
@@ -155,7 +155,9 @@ fun DesktopGrid(
                 selectedColor = selectedColor,
                 selectedTextColor = selectedTextColor,
                 modifier = Modifier
-                    .offset { IntOffset(dragOffset.x.toInt(), dragOffset.y.toInt()) }
+                    .offset { IntOffset(dragOffset.x.roundToPx(), dragOffset.y.roundToPx()) }
+//                    .offset(dragOffset.x, dragOffset.y)
+//                    .offset { IntOffset(dragOffset.x.toInt(), dragOffset.y.toInt()) }
                     .zIndex(if (isDragging || isSelected) 999f else 0f)
                     .pointerInput(Unit) {
                         detectDragGestures(
@@ -164,13 +166,13 @@ fun DesktopGrid(
                                 isDragging = true
 
                                 if (canMoveIcons){
-                                    dragOffset += dragAmount
+                                    dragOffset += DpOffset(dragAmount.x.toDp(), dragAmount.y.toDp())
                                 }
                             },
                             onDragEnd = {
                                 isDragging = false
 
-                                val newPosition = grid.clampOffset(dragOffset, Size(maxWidth.value - 50.dp.value, maxHeight.value - 50.dp.value))
+                                val newPosition = grid.clampOffset(dragOffset, DpSize(maxWidth - itemSize, maxHeight - itemSize))
 
                                 if (!offsetMap.entries.any { entry -> entry.key != item.first::class && entry.value == newPosition }){
                                     dragOffset = newPosition
