@@ -71,7 +71,11 @@ fun ToolBar(
                     window.icon,
                     priority == WindowController.getHighestPriority() && visible
                 ){
-                    WindowController.setTopWindow(window)
+                    if (priority == WindowController.getHighestPriority() && visible){
+                        window.makeInvisible()
+                    }else {
+                        WindowController.setTopWindow(window)
+                    }
                 }
             }
         }
