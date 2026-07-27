@@ -3,8 +3,14 @@ package uk.cyruscastle.www.ui.system.window.windows.text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.LayoutCoordinates
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.text.input.TextFieldValue
 import cyruswebsite.composeapp.generated.resources.Res
 import cyruswebsite.composeapp.generated.resources.notepad
 import cyruswebsite.composeapp.generated.resources.txt
@@ -15,6 +21,7 @@ import io.github.vinceglb.filekit.readString
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import uk.cyruscastle.www.ui.system.context.ContextMenuWrapper
 import uk.cyruscastle.www.ui.system.scroll.ScrollBarType
 import uk.cyruscastle.www.ui.system.scroll.ScrollableContainer
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
@@ -28,7 +35,7 @@ open class NotepadWindow(
     val title: String? = null,
     val startingText: String? = null,
     val isFile: Boolean = false,
-    var state: MutableState<String?> = mutableStateOf(startingText)
+    var state: MutableState<TextFieldValue> = mutableStateOf(TextFieldValue(startingText ?: ""))
 ) : FacsimileWindow(
     programTitle = "Notepad",
     fileTitle = title,
@@ -40,25 +47,25 @@ open class NotepadWindow(
                 WindowTopBarMenuItem(
                     "File",
                     listOf(
-                        WindowTopBarMenuSubItemEntry("New", true) { state.value = "" },
+                        WindowTopBarMenuSubItemEntry("New", true) { state.value = TextFieldValue("") },
                         WindowTopBarMenuSubItemEntry("Open", true) {
                             CoroutineScope(Dispatchers.Default).launch {
                                 val file = FileKit.openFilePicker()
-                                state.value = (file?.readString() ?: "Sorry, I can't load that! Try a text file.")
+                                state.value = TextFieldValue(file?.readString() ?: "Sorry, I can't load that! Try a text file.")
                             }
                         },
                         WindowTopBarMenuSubItemEntry("Save", true) {
                             CoroutineScope(Dispatchers.Default).launch {
-                                state.value?.encodeToByteArray()?.let { FileKit.download(bytes = it, fileName = "Untitled.txt") }
+                                state.value.text.encodeToByteArray().let { FileKit.download(bytes = it, fileName = "Untitled.txt") }
                             }
                         },
                         WindowTopBarMenuSubItemEntry("Save As", true) {
                             CoroutineScope(Dispatchers.Default).launch {
-                                state.value?.encodeToByteArray()?.let { FileKit.download(bytes = it, fileName = "Untitled.txt") }
+                                state.value.text.encodeToByteArray().let { FileKit.download(bytes = it, fileName = "Untitled.txt") }
                             }
                         },
                         WindowTopBarMenuSubItemEntry("Print", true) {
-                            printText(state.value ?: "")
+                            printText(state.value.text)
                         },
                     )
                 ),
@@ -94,44 +101,28 @@ open class NotepadWindow(
     }),
     content = {
         ScrollableContainer(ScrollBarType.all(), behindContentColor = Color.White) { modifier ->
-            TextField(
-                state.value ?: "",
-                { state.value = it },
-                modifier = modifier,
+            var wrapperCoordinates by remember { mutableStateOf<LayoutCoordinates?>(null) }
 
-                singleLine = false,
-                maxLines = Int.MAX_VALUE,
+            ContextMenuWrapper(state, wrapperCoordinates) {
+                TextField(
+                    value = state.value,
+                    onValueChange = { state.value = it },
+                    modifier = modifier.onGloballyPositioned { wrapperCoordinates = it },
 
-                colors = TextFieldDefaults.colors().copy(
-                    focusedContainerColor = Color.White,
-                    unfocusedContainerColor = Color.White,
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent,
-                    disabledIndicatorColor = Color.Transparent,
-                    cursorColor = Color.Unspecified
+                    singleLine = false,
+                    maxLines = Int.MAX_VALUE,
+
+                    colors = TextFieldDefaults.colors().copy(
+                        focusedContainerColor = Color.White,
+                        unfocusedContainerColor = Color.White,
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent,
+                        disabledIndicatorColor = Color.Transparent,
+                        cursorColor = Color.Unspecified
+                    )
                 )
-            )
+            }
         }
-
-//        TextField(
-//            text,
-//            { text = it },
-//            modifier = Modifier
-//                .fillMaxHeight()
-//                .verticalScroll(scrollState),
-//
-//            singleLine = false,
-//            maxLines = Int.MAX_VALUE,
-//
-//            colors = TextFieldDefaults.colors().copy(
-//                focusedContainerColor = Color.White,
-//                unfocusedContainerColor = Color.White,
-//                focusedIndicatorColor = Color.Transparent,
-//                unfocusedIndicatorColor = Color.Transparent,
-//                disabledIndicatorColor = Color.Transparent,
-//                cursorColor = Color.Unspecified
-//            )
-//        )
     }
 )
 
