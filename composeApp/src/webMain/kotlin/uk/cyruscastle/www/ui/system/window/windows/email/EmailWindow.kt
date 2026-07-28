@@ -8,6 +8,9 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.focus.focusProperties
@@ -19,6 +22,8 @@ import androidx.compose.ui.input.key.isCtrlPressed
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onPreviewKeyEvent
 import androidx.compose.ui.input.key.type
+import androidx.compose.ui.layout.LayoutCoordinates
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.font.FontStyle
@@ -41,6 +46,8 @@ import cyruswebsite.composeapp.generated.resources.textBold
 import cyruswebsite.composeapp.generated.resources.textEmph
 import cyruswebsite.composeapp.generated.resources.textUnderline
 import kotlinx.coroutines.flow.MutableStateFlow
+import uk.cyruscastle.www.ui.system.context.ContextMenuWrapper
+import uk.cyruscastle.www.ui.system.context.RichTextTarget
 import uk.cyruscastle.www.ui.system.scroll.ScrollBarType
 import uk.cyruscastle.www.ui.system.scroll.ScrollableContainer
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
@@ -157,59 +164,60 @@ class EmailWindow(
         val state by _textState.collectAsState()
 
         ScrollableContainer(ScrollBarType.all(), behindContentColor = Color.White) { modifier ->
-            RichTextEditor(
-                state = state,
-                modifier = modifier
+            var wrapperCoordinates by remember { mutableStateOf<LayoutCoordinates?>(null) }
+
+            ContextMenuWrapper(RichTextTarget(state), wrapperCoordinates) {
+                RichTextEditor(
+                    state = state,
+                    modifier = modifier
 //                    .width(450.dp)
 //                    .height((pageHeight * pageCount.toFloat()).dp)
-                    .background(Color.White)
-                    .onPreviewKeyEvent { event ->
-                        if (event.type != KeyEventType.KeyDown){
-                            return@onPreviewKeyEvent false
-                        }
+                        .onGloballyPositioned { wrapperCoordinates = it }
+                        .background(Color.White)
+                        .onPreviewKeyEvent { event ->
+                            if (event.type != KeyEventType.KeyDown) {
+                                return@onPreviewKeyEvent false
+                            }
 
-                        if (!event.isCtrlPressed){
-                            return@onPreviewKeyEvent false
-                        }
+                            if (!event.isCtrlPressed) {
+                                return@onPreviewKeyEvent false
+                            }
 
-                        when (event.key){
-                            Key.B -> { _textState.value.toggleFormatting(SpanStyle(fontWeight = FontWeight.Bold)) }
-                            Key.I -> { _textState.value.toggleFormatting(SpanStyle(fontStyle = FontStyle.Italic)) }
-                            Key.U -> { _textState.value.toggleFormatting(SpanStyle(textDecoration = TextDecoration.Underline)) }
-                            Key.P -> { printPage(_textState.value.toHtml()) } // Won't work because of browser's default print behaviour methinks
-                            Key.Z -> {  } // TODO undo
-                            Key.Y -> {  } // TODO redo
-                            else -> { return@onPreviewKeyEvent false }
-                        }
+                            when (event.key) {
+                                Key.B -> {
+                                    _textState.value.toggleFormatting(SpanStyle(fontWeight = FontWeight.Bold))
+                                }
 
-                        return@onPreviewKeyEvent true
-                    },
+                                Key.I -> {
+                                    _textState.value.toggleFormatting(SpanStyle(fontStyle = FontStyle.Italic))
+                                }
 
-                colors = RichTextEditorDefaults.richTextEditorColors(
-                    containerColor = Color.Transparent,//Color.White, // We use transparent here, and a .background above, so that we don't interfere with the drawBehind of the "pagination"
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent,
-                    disabledIndicatorColor = Color.Transparent,
-                    cursorColor = Color.Black
+                                Key.U -> {
+                                    _textState.value.toggleFormatting(SpanStyle(textDecoration = TextDecoration.Underline))
+                                }
+
+                                Key.P -> {
+                                    printPage(_textState.value.toHtml())
+                                } // Won't work because of browser's default print behaviour methinks
+                                Key.Z -> {} // TODO undo
+                                Key.Y -> {} // TODO redo
+                                else -> {
+                                    return@onPreviewKeyEvent false
+                                }
+                            }
+
+                            return@onPreviewKeyEvent true
+                        },
+
+                    colors = RichTextEditorDefaults.richTextEditorColors(
+                        containerColor = Color.Transparent,//Color.White, // We use transparent here, and a .background above, so that we don't interfere with the drawBehind of the "pagination"
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent,
+                        disabledIndicatorColor = Color.Transparent,
+                        cursorColor = Color.Black
+                    )
                 )
-            )
-//            TextField(
-//                text,
-//                { _textState.value = it },
-//                modifier = modifier,
-//
-//                singleLine = false,
-//                maxLines = Int.MAX_VALUE,
-//
-//                colors = TextFieldDefaults.colors().copy(
-//                    focusedContainerColor = Color.White,
-//                    unfocusedContainerColor = Color.White,
-//                    focusedIndicatorColor = Color.Transparent,
-//                    unfocusedIndicatorColor = Color.Transparent,
-//                    disabledIndicatorColor = Color.Transparent,
-//                    cursorColor = Color.Unspecified
-//                )
-//            )
+            }
         }
     }
 )

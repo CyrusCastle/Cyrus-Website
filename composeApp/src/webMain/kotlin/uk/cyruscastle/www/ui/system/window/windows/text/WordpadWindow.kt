@@ -195,24 +195,22 @@ open class WordpadWindow (
         )}
     ),
     content = {
-        val state = _textState.collectAsState()
+        val state by _textState.collectAsState()
         var layoutResult by remember { mutableStateOf<TextLayoutResult?>(null) }
         var pageCount by remember { mutableIntStateOf(1) }
         var pageHeight by remember { mutableFloatStateOf(800.dp.value) }
 
         LaunchedEffect(Unit){
-            state.value.setMarkdown(startingText ?: "")
+            state.setMarkdown(startingText ?: "")
         }
 
         ScrollableContainer(listOf(ScrollBarType.VERTICAL), behindContentColor = ColorPalette.WINDOW_CONTAINER_BACKGROUND){ modifier ->
             var wrapperCoordinates by remember { mutableStateOf<LayoutCoordinates?>(null) }
 
-
-
             Row(horizontalArrangement = Arrangement.Center, modifier = modifier.fillMaxSize()) {
-                ContextMenuWrapper(RichTextTarget(state.value), wrapperCoordinates) {
+                ContextMenuWrapper(RichTextTarget(state), wrapperCoordinates) {
                     RichTextEditor(
-                        state = state.value,
+                        state = state,
                         modifier = Modifier
                             .onGloballyPositioned { wrapperCoordinates = it }
                             .width(450.dp)
