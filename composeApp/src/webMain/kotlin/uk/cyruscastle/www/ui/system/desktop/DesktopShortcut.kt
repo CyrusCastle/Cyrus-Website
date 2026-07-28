@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
@@ -71,6 +72,8 @@ fun DesktopShortcut( // TODO can this be fed into Facsimile Window?
                 )
             }
         }
+
+        Spacer(Modifier.height(5.dp))
 
         Box(Modifier.weight(1f)) {
             var displayText by remember(selected) { mutableStateOf(text) }
