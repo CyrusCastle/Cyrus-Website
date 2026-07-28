@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -53,6 +54,7 @@ fun DesktopShortcut( // TODO can this be fed into Facsimile Window?
                 painter = painterResource(icon),
                 contentDescription = null,
                 colorFilter = if (selected) ColorFilter.tint(selectedColor, BlendMode.Hue) else null, // TODO a better colour filter
+                contentScale = ContentScale.FillHeight,
                 modifier = Modifier.height(37.5.dp).pointerInput(Unit) {
                     detectTapGestures(onTap = {
                         onClick() // TODO split this into onTap and onDoubleTap??
