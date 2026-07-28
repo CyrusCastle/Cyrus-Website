@@ -44,6 +44,25 @@ import uk.cyruscastle.www.ui.system.window.windows.picture.PaintWindow
 import uk.cyruscastle.www.ui.system.window.windows.start.StartMenu
 import uk.cyruscastle.www.ui.system.window.windows.text.NotepadWindow
 
+val desktopItems = listOf(
+    Pair(ZZInternetExplorer(), IntOffset(0, 0)),
+    Pair(NotepadWindow(), IntOffset(0, 1)),
+//                    Pair(WordpadWindow(), IntOffset(0, 2)),
+    Pair(PaintWindow(), IntOffset(0, 2)),
+    Pair(EmailWindow(), IntOffset(0, 3)),
+//                    Pair(Minesweeper(), IntOffset(0, 4)),
+
+//                    Pair(XXCawlfytholFolder(), IntOffset(1, 0)), // Gone while PnC is under development
+    Pair(XXFriendSitesFolder(), IntOffset(1, 0)),
+    Pair(XXGithubFolder(), IntOffset(1, 1)),
+    Pair(XXPapersFolder(), IntOffset(1, 2)),
+
+    Pair(GlobeWindow(), IntOffset(2, 0)),
+
+    Pair(ZZCVPdfWindow(), IntOffset(3, 0)),
+    Pair(ZZWelshForSoldiersWindow(), IntOffset(3, 1)),
+)
+
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun WindowsDesktop() {
@@ -65,24 +84,7 @@ fun WindowsDesktop() {
             }
         ){ innerPadding ->
             DesktopGrid(
-                items = listOf(
-                    Pair(ZZInternetExplorer(), IntOffset(0, 0)),
-                    Pair(NotepadWindow(), IntOffset(0, 1)),
-//                    Pair(WordpadWindow(), IntOffset(0, 2)),
-                    Pair(PaintWindow(), IntOffset(0, 2)),
-                    Pair(EmailWindow(), IntOffset(0, 3)),
-//                    Pair(Minesweeper(), IntOffset(0, 4)),
-
-//                    Pair(XXCawlfytholFolder(), IntOffset(1, 0)), // Gone while PnC is under development
-                    Pair(XXFriendSitesFolder(), IntOffset(1, 0)),
-                    Pair(XXGithubFolder(), IntOffset(1, 1)),
-                    Pair(XXPapersFolder(), IntOffset(1, 2)),
-
-                    Pair(GlobeWindow(), IntOffset(2, 0)),
-
-                    Pair(ZZCVPdfWindow(), IntOffset(3, 0)),
-                    Pair(ZZWelshForSoldiersWindow(), IntOffset(3, 1)),
-                ),
+                items = desktopItems,
                 innerPadding = innerPadding,
                 canMoveIcons = true,
                 modifier = Modifier
