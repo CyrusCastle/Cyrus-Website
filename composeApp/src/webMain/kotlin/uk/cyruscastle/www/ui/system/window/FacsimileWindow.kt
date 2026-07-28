@@ -161,8 +161,6 @@ open class FacsimileWindow(
         setSelectedShortcut: (KClass<out FacsimileWindow>?) -> Unit,
         pseudoSelected: Boolean = false,
         textColor: Color,
-        selectedColor: Color,
-        selectedTextColor: Color,
         modifier: Modifier = Modifier
     ){
         val selectedShortcutAsState by selectedShortcut.collectAsState()
@@ -174,8 +172,6 @@ open class FacsimileWindow(
             isShortcut,
             isSelected || pseudoSelected,
             textColor,
-            selectedColor,
-            selectedTextColor,
             modifier
         ) {
             if (selectedShortcut.value == null || !selectedShortcut.value?.equals(this::class)!!) {

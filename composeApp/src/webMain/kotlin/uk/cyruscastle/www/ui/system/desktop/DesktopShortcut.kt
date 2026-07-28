@@ -31,6 +31,7 @@ import cyruswebsite.composeapp.generated.resources.Res
 import cyruswebsite.composeapp.generated.resources.shortcutOverlay
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
+import uk.cyruscastle.www.ui.theme.ColorPalette
 import uk.cyruscastle.www.ui.theme.ColorPalette.selectedTint
 import kotlin.math.max
 
@@ -41,8 +42,6 @@ fun DesktopShortcut( // TODO can this be fed into Facsimile Window?
     isShortcut: Boolean,
     selected: Boolean,
     textColor: Color,
-    selectedColor: Color,
-    selectedTextColor: Color,
     modifier: Modifier = Modifier,
     onClick: () -> Unit
 ){
@@ -54,7 +53,7 @@ fun DesktopShortcut( // TODO can this be fed into Facsimile Window?
             Image(
                 painter = painterResource(icon),
                 contentDescription = null,
-                colorFilter = if (selected) selectedTint(selectedColor) else null, // TODO a better colour filter
+                colorFilter = selectedTint(selected),
                 contentScale = ContentScale.FillHeight,
                 modifier = Modifier.height(37.5.dp).pointerInput(Unit) {
                     detectTapGestures(onTap = {
@@ -67,7 +66,7 @@ fun DesktopShortcut( // TODO can this be fed into Facsimile Window?
                 Image(
                     painter = painterResource(Res.drawable.shortcutOverlay),
                     contentDescription = null,
-                    colorFilter = if (selected) selectedTint(selectedColor) else null, // TODO a better colour filter
+                    colorFilter = selectedTint(selected),
                     modifier = Modifier.height(37.5.dp)
                 )
             }
@@ -78,7 +77,7 @@ fun DesktopShortcut( // TODO can this be fed into Facsimile Window?
 
             Text(
                 displayText,
-                color = if (selected) selectedTextColor else textColor,
+                color = if (selected) ColorPalette.ON_SELECTED_COLOR else textColor,
                 style = MaterialTheme.typography.bodySmall,
                 textAlign = TextAlign.Center,
                 overflow = TextOverflow.Ellipsis,
@@ -91,7 +90,7 @@ fun DesktopShortcut( // TODO can this be fed into Facsimile Window?
                 },
                 maxLines = if (selected) Int.MAX_VALUE else 1,
                 modifier = Modifier
-                    .background(if (selected) selectedColor else Color.Transparent)
+                    .background(if (selected) ColorPalette.SELECTED_COLOR else Color.Transparent)
                     .drawBehind {
                         if (!selected) return@drawBehind
 
@@ -99,7 +98,7 @@ fun DesktopShortcut( // TODO can this be fed into Facsimile Window?
                             width = 1f,
                             pathEffect = PathEffect.dashPathEffect(floatArrayOf(1f, 1f), 0f)
                         )
-                        drawRect(color = selectedTextColor, style = stroke)
+                        drawRect(color = ColorPalette.ON_SELECTED_COLOR, style = stroke)
                     }.pointerInput(Unit) {
                         detectTapGestures(onTap = {
                             onClick()

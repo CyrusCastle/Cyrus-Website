@@ -40,6 +40,7 @@ import uk.cyruscastle.www.ui.extensions.ContainerScope
 import uk.cyruscastle.www.ui.extensions.modifier.checkerboardBackground
 import uk.cyruscastle.www.ui.extensions.modifier.intrudeExtrudeBorder
 import uk.cyruscastle.www.ui.theme.ColorPalette
+import uk.cyruscastle.www.ui.theme.ColorPalette.disabledTint
 import kotlin.math.roundToInt
 
 
@@ -183,7 +184,7 @@ private fun ScrollButton(direction: ScrollDirection, size: Dp, isDisabled: Boole
     Box(Modifier.size(size).background(ColorPalette.WINDOW_BODY_BACKGROUND).intrudeExtrudeBorder(RectangleShape, isIntruding = false)){
         Image(
             painter = painterResource(direction.resource),
-            colorFilter = if (isDisabled) ColorFilter.tint(ColorPalette.WINDOW_CONTAINER_BEZEL, BlendMode.SrcIn) else null,
+            colorFilter = disabledTint(isDisabled),
             contentDescription = direction.description,
             modifier = Modifier.size(size * 0.75f).align(Alignment.Center).clickable {
                 if (isDisabled) return@clickable

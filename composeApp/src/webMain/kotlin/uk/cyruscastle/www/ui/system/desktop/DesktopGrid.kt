@@ -42,8 +42,6 @@ fun DesktopGrid(
     innerPadding: PaddingValues,
     itemSize: Dp = 75.dp,
     textColor: Color = ColorPalette.DESKTOP_ON_BACKGROUND,
-    selectedColor: Color = ColorPalette.DESKTOP_ACCENT,
-    selectedTextColor: Color = ColorPalette.DESKTOP_ON_BACKGROUND,
     backgroundColor: Color = ColorPalette.DESKTOP_BACKGROUND,
     canMoveIcons: Boolean = false,
     modifier: Modifier = Modifier
@@ -152,12 +150,8 @@ fun DesktopGrid(
                 setSelectedShortcut = grid::setSelectedShortcut,
                 pseudoSelected = isInside,
                 textColor = textColor,
-                selectedColor = selectedColor,
-                selectedTextColor = selectedTextColor,
                 modifier = Modifier
                     .offset { IntOffset(dragOffset.x.roundToPx(), dragOffset.y.roundToPx()) }
-//                    .offset(dragOffset.x, dragOffset.y)
-//                    .offset { IntOffset(dragOffset.x.toInt(), dragOffset.y.toInt()) }
                     .zIndex(if (isDragging || isSelected) 999f else 0f)
                     .pointerInput(Unit) {
                         detectDragGestures(

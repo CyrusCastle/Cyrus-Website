@@ -46,7 +46,14 @@ object ColorPalette {
 
     // ...
 
-    fun selectedTint(selectedColor: Color): ColorFilter {
-        return ColorFilter.tint(selectedColor.copy(alpha = 0.6f), BlendMode.SrcAtop)
+    val SELECTED_COLOR = DESKTOP_ACCENT
+    val ON_SELECTED_COLOR = DESKTOP_ON_BACKGROUND
+
+    fun selectedTint(isSelected: Boolean): ColorFilter? {
+        return if (isSelected) ColorFilter.tint(SELECTED_COLOR.copy(alpha = 0.6f), BlendMode.SrcAtop) else null
+    }
+
+    fun disabledTint(isDisabled: Boolean): ColorFilter? {
+        return if (isDisabled) ColorFilter.tint(WINDOW_CONTAINER_BEZEL, BlendMode.SrcIn) else null
     }
 }
