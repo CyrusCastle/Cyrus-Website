@@ -31,6 +31,7 @@ import cyruswebsite.composeapp.generated.resources.Res
 import cyruswebsite.composeapp.generated.resources.shortcutOverlay
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
+import uk.cyruscastle.www.ui.theme.ColorPalette.selectedTint
 import kotlin.math.max
 
 @Composable
@@ -53,7 +54,7 @@ fun DesktopShortcut( // TODO can this be fed into Facsimile Window?
             Image(
                 painter = painterResource(icon),
                 contentDescription = null,
-                colorFilter = if (selected) ColorFilter.tint(selectedColor, BlendMode.Hue) else null, // TODO a better colour filter
+                colorFilter = if (selected) selectedTint(selectedColor) else null, // TODO a better colour filter
                 contentScale = ContentScale.FillHeight,
                 modifier = Modifier.height(37.5.dp).pointerInput(Unit) {
                     detectTapGestures(onTap = {
@@ -66,7 +67,7 @@ fun DesktopShortcut( // TODO can this be fed into Facsimile Window?
                 Image(
                     painter = painterResource(Res.drawable.shortcutOverlay),
                     contentDescription = null,
-                    colorFilter = if (selected) ColorFilter.tint(selectedColor, BlendMode.Hue) else null, // TODO a better colour filter
+                    colorFilter = if (selected) selectedTint(selectedColor) else null, // TODO a better colour filter
                     modifier = Modifier.height(37.5.dp)
                 )
             }

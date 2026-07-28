@@ -1,6 +1,8 @@
 package uk.cyruscastle.www.ui.theme
 
+import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 
 object ColorPalette {
 
@@ -43,4 +45,8 @@ object ColorPalette {
     val WINDOW_ON_ACCENT = Color(0xFFFFFFFF)
 
     // ...
+
+    fun selectedTint(selectedColor: Color): ColorFilter {
+        return ColorFilter.tint(selectedColor.copy(alpha = 0.6f), BlendMode.SrcAtop)
+    }
 }
