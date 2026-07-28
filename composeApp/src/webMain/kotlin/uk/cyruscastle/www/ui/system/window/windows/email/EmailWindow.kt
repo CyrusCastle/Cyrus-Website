@@ -166,7 +166,7 @@ class EmailWindow(
         ScrollableContainer(ScrollBarType.all(), behindContentColor = Color.White) { modifier ->
             var wrapperCoordinates by remember { mutableStateOf<LayoutCoordinates?>(null) }
 
-            ContextMenuWrapper(RichTextTarget(state), wrapperCoordinates) {
+            ContextMenuWrapper(RichTextTarget(state), wrapperCoordinates, false) {
                 RichTextEditor(
                     state = state,
                     modifier = modifier

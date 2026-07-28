@@ -208,7 +208,7 @@ open class WordpadWindow (
             var wrapperCoordinates by remember { mutableStateOf<LayoutCoordinates?>(null) }
 
             Row(horizontalArrangement = Arrangement.Center, modifier = modifier.fillMaxSize()) {
-                ContextMenuWrapper(RichTextTarget(state), wrapperCoordinates) {
+                ContextMenuWrapper(RichTextTarget(state), wrapperCoordinates, false) {
                     RichTextEditor(
                         state = state,
                         modifier = Modifier

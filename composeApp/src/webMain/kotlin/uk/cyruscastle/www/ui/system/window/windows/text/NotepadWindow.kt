@@ -104,7 +104,7 @@ open class NotepadWindow(
         ScrollableContainer(ScrollBarType.all(), behindContentColor = Color.White) { modifier ->
             var wrapperCoordinates by remember { mutableStateOf<LayoutCoordinates?>(null) }
 
-            ContextMenuWrapper(TextFieldValueTarget(state), wrapperCoordinates) {
+            ContextMenuWrapper(TextFieldValueTarget(state), wrapperCoordinates, false) {
                 TextField(
                     value = state.value,
                     onValueChange = { state.value = it },

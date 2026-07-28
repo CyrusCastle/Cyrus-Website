@@ -74,7 +74,7 @@ class WindowTopBarTextField(
             Spacer(Modifier.width(10.dp))
 
             var wrapperCoordinates by remember { mutableStateOf<LayoutCoordinates?>(null) }
-            ContextMenuWrapper(TextFieldValueTarget(textState), wrapperCoordinates) {
+            ContextMenuWrapper(TextFieldValueTarget(textState), wrapperCoordinates, readOnly) {
                 BasicTextField(
                     value = textState.value,
                     onValueChange = { textState.value = it },

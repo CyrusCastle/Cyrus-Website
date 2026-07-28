@@ -51,6 +51,7 @@ import kotlin.js.js
 fun ContextMenuWrapper(
     target: EditableTextTarget,
     wrapperCoordinates: LayoutCoordinates?,
+    readOnly: Boolean,
     content: @Composable () -> Unit
 ) {
     val scope = rememberCoroutineScope()
@@ -108,9 +109,9 @@ fun ContextMenuWrapper(
                 }
 
                 Spacer(Modifier.height(5.dp))
-                WindowTopBarMenuSubItem("Cut", target.hasSelection) { doCut(); session.close() }
+                WindowTopBarMenuSubItem("Cut", target.hasSelection && !readOnly) { doCut(); session.close() }
                 WindowTopBarMenuSubItem("Copy", target.hasSelection) { doCopy(); session.close() }
-                WindowTopBarMenuSubItem("Paste", canPaste) { doPaste(); session.close() }
+                WindowTopBarMenuSubItem("Paste", canPaste && !readOnly) { doPaste(); session.close() }
                 WindowTopBarMenuSubItem("Select All", true) { doSelectAll(); session.close() }
                 Spacer(Modifier.height(5.dp))
             }
