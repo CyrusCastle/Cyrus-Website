@@ -49,43 +49,17 @@ import kotlin.js.js
 
 @Composable
 fun ContextMenuWrapper(
-    state: MutableState<TextFieldValue>,
+    target: EditableTextTarget,
     wrapperCoordinates: LayoutCoordinates?,
     content: @Composable () -> Unit
 ) {
     val scope = rememberCoroutineScope()
     var menuRequest by remember { mutableStateOf<Pair<Offset, TextContextMenuSession>?>(null) }
 
-    fun selectedRange() = state.value.selection
-    fun selectedText() = state.value.text.substring(selectedRange().min, selectedRange().max)
-
-    fun doCut() {
-        val range = selectedRange()
-        if (range.collapsed) return
-        val cutText = selectedText()
-        val newText = state.value.text.removeRange(range.min, range.max)
-        state.value = TextFieldValue(newText, TextRange(range.min))
-        scope.launch { writeClipboardText(cutText) }
-    }
-
-    fun doCopy() {
-        val range = selectedRange()
-        if (range.collapsed) return
-        scope.launch { writeClipboardText(selectedText()) }
-    }
-
-    fun doPaste() {
-        scope.launch {
-            val pasted = readClipboardText() ?: return@launch
-            val range = selectedRange()
-            val newText = state.value.text.replaceRange(range.min, range.max, pasted)
-            state.value = TextFieldValue(newText, TextRange(range.min + pasted.length))
-        }
-    }
-
-    fun doSelectAll() {
-        state.value = state.value.copy(selection = TextRange(0, state.value.text.length))
-    }
+    fun doCut() { target.cut()?.let { scope.launch { writeClipboardText(it) } } }
+    fun doCopy() { target.copy()?.let { scope.launch { writeClipboardText(it) } } }
+    fun doPaste() { scope.launch { readClipboardText()?.let { target.paste(it) } } }
+    fun doSelectAll() { target.selectAll() }
 
     val provider = remember(wrapperCoordinates) {
         object : TextContextMenuProvider {
@@ -134,8 +108,8 @@ fun ContextMenuWrapper(
                 }
 
                 Spacer(Modifier.height(5.dp))
-                WindowTopBarMenuSubItem("Cut", !selectedRange().collapsed) { doCut(); session.close() }
-                WindowTopBarMenuSubItem("Copy", !selectedRange().collapsed) { doCopy(); session.close() }
+                WindowTopBarMenuSubItem("Cut", target.hasSelection) { doCut(); session.close() }
+                WindowTopBarMenuSubItem("Copy", target.hasSelection) { doCopy(); session.close() }
                 WindowTopBarMenuSubItem("Paste", canPaste) { doPaste(); session.close() }
                 WindowTopBarMenuSubItem("Select All", true) { doSelectAll(); session.close() }
                 Spacer(Modifier.height(5.dp))

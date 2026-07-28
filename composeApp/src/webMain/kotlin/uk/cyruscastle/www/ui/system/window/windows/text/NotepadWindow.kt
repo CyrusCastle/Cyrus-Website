@@ -22,6 +22,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import uk.cyruscastle.www.ui.system.context.ContextMenuWrapper
+import uk.cyruscastle.www.ui.system.context.TextFieldValueTarget
 import uk.cyruscastle.www.ui.system.scroll.ScrollBarType
 import uk.cyruscastle.www.ui.system.scroll.ScrollableContainer
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
@@ -103,7 +104,7 @@ open class NotepadWindow(
         ScrollableContainer(ScrollBarType.all(), behindContentColor = Color.White) { modifier ->
             var wrapperCoordinates by remember { mutableStateOf<LayoutCoordinates?>(null) }
 
-            ContextMenuWrapper(state, wrapperCoordinates) {
+            ContextMenuWrapper(TextFieldValueTarget(state), wrapperCoordinates) {
                 TextField(
                     value = state.value,
                     onValueChange = { state.value = it },

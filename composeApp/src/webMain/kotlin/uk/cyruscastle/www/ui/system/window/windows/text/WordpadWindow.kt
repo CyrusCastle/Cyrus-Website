@@ -28,6 +28,8 @@ import androidx.compose.ui.input.key.isCtrlPressed
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onPreviewKeyEvent
 import androidx.compose.ui.input.key.type
+import androidx.compose.ui.layout.LayoutCoordinates
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLayoutResult
@@ -62,6 +64,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import uk.cyruscastle.www.ui.system.context.ContextMenuWrapper
+import uk.cyruscastle.www.ui.system.context.RichTextTarget
 import uk.cyruscastle.www.ui.system.scroll.ScrollBarType
 import uk.cyruscastle.www.ui.system.scroll.ScrollableContainer
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
@@ -201,74 +205,94 @@ open class WordpadWindow (
         }
 
         ScrollableContainer(listOf(ScrollBarType.VERTICAL), behindContentColor = ColorPalette.WINDOW_CONTAINER_BACKGROUND){ modifier ->
+            var wrapperCoordinates by remember { mutableStateOf<LayoutCoordinates?>(null) }
+
+
+
             Row(horizontalArrangement = Arrangement.Center, modifier = modifier.fillMaxSize()) {
-                RichTextEditor(
-                    state = state.value,
-                    modifier = Modifier
-                        .width(450.dp)
-                        .height((pageHeight * pageCount.toFloat()).dp)
-                        .background(Color.White)
-                        .onPreviewKeyEvent { event ->
-                            if (event.type != KeyEventType.KeyDown){
-                                return@onPreviewKeyEvent false
+                ContextMenuWrapper(RichTextTarget(state.value), wrapperCoordinates) {
+                    RichTextEditor(
+                        state = state.value,
+                        modifier = Modifier
+                            .onGloballyPositioned { wrapperCoordinates = it }
+                            .width(450.dp)
+                            .height((pageHeight * pageCount.toFloat()).dp)
+                            .background(Color.White)
+                            .onPreviewKeyEvent { event ->
+                                if (event.type != KeyEventType.KeyDown) {
+                                    return@onPreviewKeyEvent false
+                                }
+
+                                if (!event.isCtrlPressed) {
+                                    return@onPreviewKeyEvent false
+                                }
+
+                                when (event.key) {
+                                    Key.B -> {
+                                        _textState.value.toggleFormatting(SpanStyle(fontWeight = FontWeight.Bold))
+                                    }
+
+                                    Key.I -> {
+                                        _textState.value.toggleFormatting(SpanStyle(fontStyle = FontStyle.Italic))
+                                    }
+
+                                    Key.U -> {
+                                        _textState.value.toggleFormatting(SpanStyle(textDecoration = TextDecoration.Underline))
+                                    }
+
+                                    Key.P -> {
+                                        printPage(_textState.value.toHtml())
+                                    } // Won't work because of browser's default print behaviour methinks
+                                    Key.Z -> {} // TODO undo
+                                    Key.Y -> {} // TODO redo
+                                    else -> {
+                                        return@onPreviewKeyEvent false
+                                    }
+                                }
+
+                                return@onPreviewKeyEvent true
                             }
+                            .drawWithContent {
+                                drawContent()
 
-                            if (!event.isCtrlPressed){
-                                return@onPreviewKeyEvent false
-                            }
+                                val layout = layoutResult ?: return@drawWithContent
 
-                            when (event.key){
-                                Key.B -> { _textState.value.toggleFormatting(SpanStyle(fontWeight = FontWeight.Bold)) }
-                                Key.I -> { _textState.value.toggleFormatting(SpanStyle(fontStyle = FontStyle.Italic)) }
-                                Key.U -> { _textState.value.toggleFormatting(SpanStyle(textDecoration = TextDecoration.Underline)) }
-                                Key.P -> { printPage(_textState.value.toHtml()) } // Won't work because of browser's default print behaviour methinks
-                                Key.Z -> {  } // TODO undo
-                                Key.Y -> {  } // TODO redo
-                                else -> { return@onPreviewKeyEvent false }
-                            }
+                                val lineCount = layout.lineCount
+                                val linesPerPage = 20
+                                var newPageCount = 1
 
-                            return@onPreviewKeyEvent true
-                        }
-                        .drawWithContent {
-                            drawContent()
+                                // Remind us of page height
+                                val lineHeight = layout.getLineBottom(0) - layout.getLineTop(0)
+                                pageHeight = lineHeight * linesPerPage
 
-                            val layout = layoutResult ?: return@drawWithContent
+                                for (i in linesPerPage until lineCount step linesPerPage) {
+                                    val y = layout.getLineBottom(i - 1)
 
-                            val lineCount = layout.lineCount
-                            val linesPerPage = 20
-                            var newPageCount = 1
+                                    drawLine(
+                                        ColorPalette.WINDOW_CONTAINER_BACKGROUND,
+                                        start = Offset(0f, y - 7.dp.value),
+                                        end = Offset(size.width, y - 7.dp.value),
+                                        strokeWidth = 5f
+                                    )
+                                    newPageCount++
+                                }
 
-                            // Remind us of page height
-                            val lineHeight = layout.getLineBottom(0) - layout.getLineTop(0)
-                            pageHeight = lineHeight * linesPerPage
+                                pageCount = newPageCount
+                            },
 
-                            for (i in linesPerPage until lineCount step linesPerPage) {
-                                val y = layout.getLineBottom(i - 1)
-
-                                drawLine(
-                                    ColorPalette.WINDOW_CONTAINER_BACKGROUND,
-                                    start = Offset(0f, y - 7.dp.value),
-                                    end = Offset(size.width, y - 7.dp.value),
-                                    strokeWidth = 5f
-                                )
-                                newPageCount++
-                            }
-
-                            pageCount = newPageCount
+                        onTextLayout = { result ->
+                            layoutResult = result
                         },
 
-                    onTextLayout = { result ->
-                        layoutResult = result
-                    },
-
-                    colors = RichTextEditorDefaults.richTextEditorColors(
-                        containerColor = Color.Transparent,//Color.White, // We use transparent here, and a .background above, so that we don't interfere with the drawBehind of the "pagination"
-                        focusedIndicatorColor = Color.Transparent,
-                        unfocusedIndicatorColor = Color.Transparent,
-                        disabledIndicatorColor = Color.Transparent,
-                        cursorColor = Color.Black
+                        colors = RichTextEditorDefaults.richTextEditorColors(
+                            containerColor = Color.Transparent,//Color.White, // We use transparent here, and a .background above, so that we don't interfere with the drawBehind of the "pagination"
+                            focusedIndicatorColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent,
+                            disabledIndicatorColor = Color.Transparent,
+                            cursorColor = Color.Black
+                        )
                     )
-                )
+                }
             }
         }
 
