@@ -6,9 +6,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import kotlin.js.ExperimentalWasmJsInterop
+import kotlin.js.JsAny
 
 @OptIn(ExperimentalWasmJsInterop::class)
-external interface NewHtmlScroller : JsAny {
+external interface HtmlScroller : JsAny {
     fun getCurrentScroll(): Double
     fun getMaxScroll(): Double
     fun scrollBy(amount: Double)
@@ -17,7 +19,7 @@ external interface NewHtmlScroller : JsAny {
     fun removeScrollListener(callback: () -> Unit)
 }
 
-class HtmlScrollerState(private val scroller: NewHtmlScroller?) {
+class HtmlScrollerState(private val scroller: HtmlScroller?) {
     var currentScroll by mutableStateOf(0)
         private set
 
@@ -44,7 +46,7 @@ class HtmlScrollerState(private val scroller: NewHtmlScroller?) {
 }
 
 @Composable
-fun rememberHtmlScrollState(scroller: NewHtmlScroller?): HtmlScrollerState {
+fun rememberHtmlScrollState(scroller: HtmlScroller?): HtmlScrollerState {
     val state = remember(scroller) {
         HtmlScrollerState(
             scroller
