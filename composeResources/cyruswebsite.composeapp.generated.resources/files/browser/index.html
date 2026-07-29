@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Ask Engine</title>
+        <style>
+            html, body {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                font-family: Verdana, Arial, sans-serif;
+                background: #ffffff;
+            }
+
+            #page-container {
+                width: 100vw;
+                height: 100vh;
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+
+            #page-container::-webkit-scrollbar { display: none; }
+            #page-container { -ms-overflow-style: none; scrollbar-width: none; }
+
+            .topbar {
+                background: #0a5c36;
+                color: #eafff2;
+                font-size: 11px;
+                padding: 4px 12px;
+                display: flex;
+                gap: 14px;
+            }
+            .topbar a { color: #eafff2; text-decoration: none; }
+            .topbar a:hover { text-decoration: underline; }
+
+            .hero {
+                text-align: center;
+                padding: 48px 16px 24px;
+            }
+            .hero .wordmark {
+                font-family: Georgia, "Times New Roman", serif;
+                font-style: italic;
+                font-size: 42px;
+                color: #0a5c36;
+                text-shadow: 1px 1px 0 #cfe9d9;
+                margin: 0;
+            }
+            .hero .tagline {
+                color: #666;
+                font-size: 13px;
+                margin-top: 4px;
+            }
+
+            .search-form {
+                display: flex;
+                justify-content: center;
+                gap: 6px;
+                margin-top: 22px;
+            }
+            .search-form input[type="text"] {
+                width: 360px;
+                padding: 7px 8px;
+                font-size: 14px;
+                border: 2px inset #999;
+            }
+            .search-form button {
+                padding: 7px 16px;
+                font-size: 13px;
+                font-weight: bold;
+                color: #fff;
+                background: #0a5c36;
+                border: 2px outset #17945a;
+                cursor: pointer;
+            }
+            .search-form button:active { border-style: inset; }
+
+            .try-asking {
+                text-align: center;
+                margin-top: 14px;
+                font-size: 11px;
+                color: #555;
+            }
+            .try-asking button {
+                background: none;
+                border: none;
+                color: #1a4fba;
+                text-decoration: underline;
+                cursor: pointer;
+                font-size: 11px;
+                padding: 0 4px;
+            }
+
+            .stats {
+                text-align: center;
+                margin-top: 40px;
+                font-size: 11px;
+                color: #888;
+                font-style: italic;
+            }
+
+            .footer {
+                text-align: center;
+                margin-top: 60px;
+                padding: 12px;
+                font-size: 10px;
+                color: #999;
+                border-top: 1px solid #eee;
+            }
+
+            #results-view { padding: 24px 40px 60px; }
+            #results-view h2 {
+                font-size: 15px;
+                color: #333;
+                font-weight: normal;
+                border-bottom: 1px solid #ddd;
+                padding-bottom: 8px;
+            }
+            #results-view h2 span { font-weight: bold; }
+
+            .result {
+                margin-top: 18px;
+                max-width: 560px;
+            }
+            .result a.title {
+                color: #1a4fba;
+                font-size: 14px;
+                text-decoration: none;
+            }
+            .result a.title:hover { text-decoration: underline; }
+            .result .url { color: #0a5c36; font-size: 11px; }
+            .result .snippet { color: #444; font-size: 12px; margin-top: 2px; }
+
+            .back-link {
+                display: inline-block;
+                margin-top: 30px;
+                font-size: 12px;
+                color: #1a4fba;
+                cursor: pointer;
+                text-decoration: underline;
+            }
+
+            [hidden] { display: none !important; }
+        </style>
+    </head>
+    <body>
+        <div id="page-container">
+
+            <div class="topbar">
+                <a href="#" onclick="return false;">Home</a>
+                <a href="#" onclick="return false;">News</a>
+                <a href="#" onclick="return false;">Shopping</a>
+                <a href="#" onclick="return false;">Games</a>
+            </div>
+
+            <div id="home-view">
+                <div class="hero">
+                    <p class="wordmark">Ask Engine</p>
+                    <p class="tagline">Ask a question. Get an answer. Simple as that.</p>
+                </div>
+
+                <form id="search-form" class="search-form">
+                    <input id="search-input" type="text" placeholder="Ask a question..." autocomplete="off">
+                    <button type="submit">Ask!</button>
+                </form>
+
+                <div class="try-asking">
+                    Try asking:
+                    <button type="button" class="try-btn">How can I learn to write Persian?</button>·
+                    <button type="button" class="try-btn">What is a voiceless alveolar lateral fricative?</button>·
+                    <button type="button" class="try-btn">Who is Vygotsky?</button>
+                </div>
+
+                <div class="stats" id="stats-line">Engine has answered 2,412,987 questions today.</div>
+
+                <div class="footer">&copy; 1996&ndash;2000 Ask Engine, Inc.</div>
+            </div>
+
+            <div id="results-view" hidden>
+                <h2>Engine found some answers for: <span id="asked-question"></span></h2>
+
+                <div class="result">
+                    <a class="title" href="#" onclick="return false;">The Answer to Your Question</a>
+                    <div class="url">engine.internal/answer</div>
+                    <div class="snippet">Don't bother clicking this URL, it's not real.</div>
+                </div>
+
+                <div class="result">
+                    <a class="title" href="#" onclick="return false;">This Search Engine Is Not Real</a>
+                    <div class="url">engine.internal/about</div>
+                    <div class="snippet">This is a fake browser, nothing here is real.</div>
+                </div>
+
+                <div class="result">
+                    <a class="title" href="#" onclick="return false;">Ask a Better Question</a>
+                    <div class="url">engine.internal/tryagain</div>
+                    <div class="snippet">Statistically speaking, most questions have better answers elsewhere. Engine recommends trying again anyway.</div>
+                </div>
+
+                <span class="back-link" id="back-link">&larr; New Search</span>
+            </div>
+        </div>
+
+        <script type="module" src="HtmlController.js"></script>
+        <script src="browser.js"></script>
+    </body>
+</html>
