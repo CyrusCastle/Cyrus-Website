@@ -11,6 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -38,6 +40,7 @@ import uk.cyruscastle.www.ui.system.window.topbar.TopBarSeparator
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarTextField
 import uk.cyruscastle.www.ui.system.window.windows.html.helpers.HtmlController
 import uk.cyruscastle.www.ui.system.window.windows.html.helpers.URLChecker
+import uk.cyruscastle.www.ui.system.window.windows.html.helpers.URLDisguiser
 import uk.cyruscastle.www.ui.system.window.windows.html.helpers.subscribeToHtmlController
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -59,7 +62,9 @@ open class BrowserWindow(
     topBarContent = listOf(
         {
             val trueUrl by view.trueUrl.collectAsState()
-            WindowTopBarTextField(trueUrl, "Address:", view::setUrl)()
+            val shownUrl by remember(trueUrl) { mutableStateOf(URLDisguiser.disguiseURL(trueUrl)) }
+
+            WindowTopBarTextField(shownUrl, "Address:", view::setUrl)()
         }
     ),
     content = {
@@ -162,7 +167,7 @@ class HtmlView(val url: String, val elementID: String) {
 
     fun setUrl(newUrl: String) {
         pendingZoom = _controller.value?.getZoomer()?.getZoom()
-        _url.value = URLChecker.validateURL(newUrl)
+        _url.value = URLChecker.validateURL(URLDisguiser.undisguiseURL(newUrl))
     }
 
     private val _controller = MutableStateFlow<HtmlController?>(null)
