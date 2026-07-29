@@ -56,7 +56,7 @@ import uk.cyruscastle.www.ui.system.window.FacsimileWindow
 import uk.cyruscastle.www.ui.system.window.topbar.TopBarEntry
 import uk.cyruscastle.www.ui.system.window.topbar.TopBarSeparator
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarButtons
-import uk.cyruscastle.www.ui.system.window.windows.html.getHost
+import uk.cyruscastle.www.ui.system.window.windows.html.edge.getHost
 import uk.cyruscastle.www.ui.system.window.windows.shortcuts.openShortcut
 import kotlin.js.ExperimentalWasmJsInterop
 import kotlin.js.js
