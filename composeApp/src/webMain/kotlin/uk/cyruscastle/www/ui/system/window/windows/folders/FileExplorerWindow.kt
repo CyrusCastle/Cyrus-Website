@@ -24,6 +24,7 @@ import org.jetbrains.compose.resources.painterResource
 import uk.cyruscastle.www.ui.system.desktop.DesktopGrid
 import uk.cyruscastle.www.ui.theme.ColorPalette
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
+import uk.cyruscastle.www.ui.system.window.UniqueWindow
 import uk.cyruscastle.www.ui.system.window.topbar.TopBarSeparator
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenuItem
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenuSubItemEntry
@@ -39,7 +40,7 @@ open class FileExplorerWindow(
 //    val fakeFolderSize: Float = 1.37f,
     val fakeFolderSize: Float = items.fold(0f) { value, window -> value + Random(window::class.hashCode()).nextFloat() }.maxDecimals(2),
     val fakeFolderLocation: String = "My Computer"
-) : FacsimileWindow(
+) : UniqueWindow, FacsimileWindow(
     programTitle = "File Explorer",
     fileTitle = title,
     icon = folderIcon,

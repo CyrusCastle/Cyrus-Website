@@ -51,6 +51,7 @@ import uk.cyruscastle.www.ui.system.context.RichTextTarget
 import uk.cyruscastle.www.ui.system.scroll.ScrollBarType
 import uk.cyruscastle.www.ui.system.scroll.ScrollableContainer
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
+import uk.cyruscastle.www.ui.system.window.UniqueWindow
 import uk.cyruscastle.www.ui.system.window.topbar.TopBarEntry
 import uk.cyruscastle.www.ui.system.window.topbar.TopBarSeparator
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarButtons
@@ -70,7 +71,7 @@ class EmailWindow(
     private val _addresseeBox: WindowTopBarTextField = WindowTopBarTextField("cyrusrobc@gmail.com", "To:", {}, Res.drawable.directory, false),
     private val _subjectBox: WindowTopBarTextField = WindowTopBarTextField("", "Subject", {}, null, false),
     private val _textState: MutableStateFlow<RichTextState> = MutableStateFlow(RichTextState())
-) : FacsimileWindow(
+) : UniqueWindow,  FacsimileWindow(
     programTitle = "E-Mail",
     icon = Res.drawable.mailbox,
     initiallyVisible = true,

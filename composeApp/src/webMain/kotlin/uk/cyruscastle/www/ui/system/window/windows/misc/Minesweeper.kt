@@ -76,6 +76,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.preloadImageBitmap
 import uk.cyruscastle.www.ui.extensions.modifier.intrudeExtrudeBorder
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
+import uk.cyruscastle.www.ui.system.window.UniqueWindow
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenuItem
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenuSubItemEntry
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenus
@@ -84,7 +85,7 @@ import kotlin.time.Clock
 import kotlin.time.Instant
 
 @OptIn(ExperimentalResourceApi::class, ExperimentalFoundationApi::class)
-open class Minesweeper(state: MinesweeperState = MinesweeperState()) : FacsimileWindow(
+open class Minesweeper(state: MinesweeperState = MinesweeperState()) : UniqueWindow, FacsimileWindow(
     programTitle = "Minesweeper",
     icon = Res.drawable.minesweeper,
     initiallyVisible = true,

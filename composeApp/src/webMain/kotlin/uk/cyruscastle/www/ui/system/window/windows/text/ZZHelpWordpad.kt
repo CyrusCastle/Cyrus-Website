@@ -1,6 +1,8 @@
 package uk.cyruscastle.www.ui.system.window.windows.text
 
-object ZZHelpWordpad : WordpadWindow("help.md", startingText =
+import uk.cyruscastle.www.ui.system.window.UniqueWindow
+
+object ZZHelpWordpad : UniqueWindow, WordpadWindow("help.md", startingText =
 """
 Hi, I’m Cyrus! Welcome to my personal (and professional) website!
 <br>

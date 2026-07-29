@@ -39,6 +39,7 @@ import uk.cyruscastle.www.ui.system.toolbar.TOOL_BAR_HEIGHT
 import uk.cyruscastle.www.ui.system.window.resize.WindowResizeControls
 import uk.cyruscastle.www.ui.system.window.topbar.TopBarSeparator
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarControls
+import uk.cyruscastle.www.ui.system.window.windows.folders.FileExplorerWindow
 import uk.cyruscastle.www.ui.theme.ColorPalette
 import kotlin.reflect.KClass
 
@@ -186,6 +187,11 @@ open class FacsimileWindow(
                 return@DesktopShortcut
             }
 
+//            if (this is UniqueWindow && WindowController.hasWindowOpen(this::class)){
+//                setTopWindow()
+//                return@DesktopShortcut
+//            }
+
             WindowController.addWindow(this)
             setTopWindow()
         }
@@ -304,3 +310,5 @@ open class FacsimileWindow(
         }
     }
 }
+
+interface UniqueWindow

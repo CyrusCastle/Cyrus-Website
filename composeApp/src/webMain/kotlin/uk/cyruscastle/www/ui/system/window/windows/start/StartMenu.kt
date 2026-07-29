@@ -49,6 +49,7 @@ import uk.cyruscastle.www.controller.WindowController
 import uk.cyruscastle.www.ui.extensions.modifier.intrudeExtrudeBorder
 import uk.cyruscastle.www.ui.extensions.underlineFirst
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
+import uk.cyruscastle.www.ui.system.window.UniqueWindow
 import uk.cyruscastle.www.ui.system.window.topbar.TopBarSeparator
 import uk.cyruscastle.www.ui.system.window.windows.email.EmailWindow
 import uk.cyruscastle.www.ui.system.window.windows.folders.XXCawlfytholFolder
@@ -295,8 +296,7 @@ class StartMenuSubentry(
                 .clickable {
                     closeStartMenu()
 
-                    // Don't allow for multiple of the same folder open
-                    if (window is uk.cyruscastle.www.ui.system.window.windows.folders.FileExplorerWindow && WindowController.hasWindowOpen(window::class)){
+                    if (window is UniqueWindow && WindowController.hasWindowOpen(window::class)){
                         return@clickable
                     }
 

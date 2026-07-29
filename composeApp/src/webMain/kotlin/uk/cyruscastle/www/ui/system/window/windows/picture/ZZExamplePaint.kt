@@ -3,8 +3,9 @@ package uk.cyruscastle.www.ui.system.window.windows.picture
 import androidx.compose.ui.geometry.Size
 import cyruswebsite.composeapp.generated.resources.Res
 import cyruswebsite.composeapp.generated.resources.paint
+import uk.cyruscastle.www.ui.system.window.UniqueWindow
 
-class ZZExamplePaint : PaintWindow(
+class ZZExamplePaint : UniqueWindow, PaintWindow(
     title = "example.png",
     startingResource = Res.drawable.paint,
     pictureIcon = true,

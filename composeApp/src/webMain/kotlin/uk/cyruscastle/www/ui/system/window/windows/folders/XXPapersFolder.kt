@@ -2,6 +2,7 @@ package uk.cyruscastle.www.ui.system.window.windows.folders
 
 import uk.cyruscastle.www.model.CitationType
 import uk.cyruscastle.www.model.PdfCitation
+import uk.cyruscastle.www.ui.system.window.UniqueWindow
 import uk.cyruscastle.www.ui.system.window.windows.pdf.PdfWindow
 
 class XXPapersFolder : FileExplorerWindow(
@@ -9,7 +10,7 @@ class XXPapersFolder : FileExplorerWindow(
     items = listOf(ZZwje766())
 )
 
-class ZZwje766 : PdfWindow(
+class ZZwje766 : UniqueWindow, PdfWindow(
     pdfTitle = "Policy for GenAI in Wales.pdf",
     pdfFilePath = "wje766.pdf",
     pdfCitation = PdfCitation(

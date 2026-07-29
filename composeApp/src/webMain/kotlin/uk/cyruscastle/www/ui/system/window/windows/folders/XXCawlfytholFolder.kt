@@ -4,6 +4,7 @@ import cyruswebsite.composeapp.generated.resources.Res
 import cyruswebsite.composeapp.generated.resources.cawlfythol
 import cyruswebsite.composeapp.generated.resources.cawlfytholFolder
 import cyruswebsite.composeapp.generated.resources.internetExplorerHTML
+import uk.cyruscastle.www.ui.system.window.UniqueWindow
 import uk.cyruscastle.www.ui.system.window.windows.html.edge.BrowserWindow
 import uk.cyruscastle.www.ui.system.window.windows.html.edge.getHost
 import uk.cyruscastle.www.ui.system.window.windows.shortcuts.ShortcutWindow
@@ -17,13 +18,13 @@ class XXCawlfytholFolder : FileExplorerWindow(
     )
 )
 
-class ZZPuckNCoverSite : BrowserWindow(
+class ZZPuckNCoverSite : UniqueWindow, BrowserWindow(
     websiteName = "PuckNCover",
     shortcutIcon = Res.drawable.cawlfythol,
     websiteURL = "${getHost()}/composeResources/cyruswebsite.composeapp.generated.resources/files/samplepage.html"
 )
 
-class ZZPuckNCoverGitupShortcut : ShortcutWindow(
+class ZZPuckNCoverGitupShortcut : UniqueWindow, ShortcutWindow(
     title = "PuckNCover Github",
     shortcutIcon = Res.drawable.internetExplorerHTML,
     websiteURL = "https://github.com/CyrusCastle/Puck-n-Cover/"
