@@ -9,5 +9,9 @@ object StartMenuController {
 
     fun setOpen(shouldBeOpen: Boolean){
         _open.value = shouldBeOpen
+
+        if (shouldBeOpen) {
+            WindowController.windows.value.maxBy { it.priority.value }.demoteFromTop()
+        }
     }
 }
