@@ -108,7 +108,7 @@ fun DesktopGrid(
                             width = 1f,
                             pathEffect = PathEffect.dashPathEffect(floatArrayOf(1f, 1f), 0f)
                         )
-                        drawRect(color = ColorPalette.DESKTOP_ON_BACKGROUND, style = stroke)
+                        drawRect(color = textColor, style = stroke)
                     }
             )
         }
