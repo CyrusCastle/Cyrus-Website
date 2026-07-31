@@ -4,6 +4,7 @@ import cyruswebsite.composeapp.generated.resources.Res
 import cyruswebsite.composeapp.generated.resources.cyrusIconShortcut
 import cyruswebsite.composeapp.generated.resources.farsigraphy
 import cyruswebsite.composeapp.generated.resources.internetExplorerHTML
+import cyruswebsite.composeapp.generated.resources.phonotype
 import cyruswebsite.composeapp.generated.resources.scriptFolder
 import cyruswebsite.composeapp.generated.resources.scriptYellow
 import uk.cyruscastle.www.ui.system.window.windows.shortcuts.ShortcutWindow
@@ -11,7 +12,7 @@ import uk.cyruscastle.www.ui.system.window.windows.shortcuts.ShortcutWindow
 class XXGithubFolder : FileExplorerWindow(
     title = "GitHub Projects",
     folderIcon = Res.drawable.scriptFolder,
-    items = listOf(ZZCyrusWebsiteGithub(), ZZFarsigraphyGitHubShortcut(), ZZDrawBoxEnhancedGitHubShortcut())
+    items = listOf(ZZCyrusWebsiteGithub(), ZZFarsigraphyGitHubShortcut(), /*ZZPhonotypeGithubShortcut(),*/ ZZDrawBoxEnhancedGitHubShortcut())
 )
 
 class ZZCyrusWebsiteGithub : ShortcutWindow(
@@ -30,4 +31,10 @@ class ZZFarsigraphyGitHubShortcut : ShortcutWindow(
     title = "Farsigraphy",
     shortcutIcon = Res.drawable.farsigraphy,
     websiteURL = "https://github.com/CyrusCastle/Farsigraphy"
+)
+
+class ZZPhonotypeGithubShortcut : ShortcutWindow(
+    title = "Phonotype",
+    shortcutIcon = Res.drawable.phonotype,
+    websiteURL = "https://github.com/CyrusCastle/Phonotype"
 )
