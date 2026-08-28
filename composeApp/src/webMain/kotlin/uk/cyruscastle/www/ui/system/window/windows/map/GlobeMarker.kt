@@ -195,6 +195,18 @@ fun getMarkers() = listOf(
 //        )
     ),
 
+    GlobeMarker(
+        name = "Highlands",
+        description = "Had a lovely week in and around Kinloch Rannoch, including watching some Highland Games, visiting Aviemore and Aberfeldy, and climbing Schiehallion!",
+        location = DpOffset(5146.6665.dp, 2056.6665.dp),
+        type = GlobeMarkerType.BEEN_TO,
+        country = Res.drawable.mapFlagScotland,
+        pictures = listOf(
+            GlobeMarkerPicture("highlands ruins.jpeg", "A view of the ruins of Dunalastair House, taken on the walk up to MacGregor's cave."),
+            GlobeMarkerPicture("schiehallion.jpeg", "Half way up Schiehallion!"),
+        )
+    ),
+
     // BELGIUM
     GlobeMarker(
         name = "Belgium",
@@ -779,14 +791,6 @@ fun getMarkers() = listOf(
         location = DpOffset(4956.6665.dp, 2253.3333.dp),
         type = GlobeMarkerType.WANT_TO_GO,
         country = Res.drawable.mapFlagie
-    ),
-
-    GlobeMarker(
-        name = "Highlands",
-        description = "I'm going to the highlands for the first time this August.",
-        location = DpOffset(5146.6665.dp, 2056.6665.dp),
-        type = GlobeMarkerType.WANT_TO_GO,
-        country = Res.drawable.mapFlagScotland
     ),
 
     // Baltics
