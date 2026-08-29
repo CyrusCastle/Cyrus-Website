@@ -1,5 +1,4 @@
 rootProject.name = "CyrusWebsite"
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
     repositories {
@@ -30,4 +29,5 @@ dependencyResolutionManagement {
     }
 }
 
-include(":composeApp")
+include(":shared")
+include(":webApp")
