@@ -3,7 +3,6 @@ package uk.cyruscastle.www.ui.system.window.windows.folders
 import cyruswebsite.shared.generated.resources.Res
 import cyruswebsite.shared.generated.resources.cyrusIconShortcut
 import cyruswebsite.shared.generated.resources.farsigraphy
-import cyruswebsite.shared.generated.resources.internetExplorerHTML
 import cyruswebsite.shared.generated.resources.phonotype
 import cyruswebsite.shared.generated.resources.scriptFolder
 import cyruswebsite.shared.generated.resources.scriptYellow

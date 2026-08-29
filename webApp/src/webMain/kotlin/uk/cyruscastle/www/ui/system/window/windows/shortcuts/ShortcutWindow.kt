@@ -4,6 +4,8 @@ import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import uk.cyruscastle.www.controller.WindowController
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
+import kotlin.js.ExperimentalWasmJsInterop
+import kotlin.js.js
 
 @OptIn(ExperimentalResourceApi::class)
 open class ShortcutWindow(

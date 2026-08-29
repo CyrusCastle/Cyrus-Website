@@ -39,7 +39,6 @@ import uk.cyruscastle.www.ui.system.toolbar.TOOL_BAR_HEIGHT
 import uk.cyruscastle.www.ui.system.window.resize.WindowResizeControls
 import uk.cyruscastle.www.ui.system.window.topbar.TopBarSeparator
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarControls
-import uk.cyruscastle.www.ui.system.window.windows.folders.FileExplorerWindow
 import uk.cyruscastle.www.ui.theme.ColorPalette
 import kotlin.reflect.KClass
 

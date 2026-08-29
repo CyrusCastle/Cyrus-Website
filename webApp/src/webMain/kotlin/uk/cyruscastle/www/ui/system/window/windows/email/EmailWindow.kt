@@ -1,20 +1,14 @@
 package uk.cyruscastle.www.ui.system.window.windows.email
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.focus.focusProperties
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.input.key.KeyEventType
@@ -30,7 +24,6 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.unit.dp
 import com.mohamedrejeb.richeditor.model.RichTextState
 import com.mohamedrejeb.richeditor.ui.material3.RichTextEditor
 import com.mohamedrejeb.richeditor.ui.material3.RichTextEditorDefaults
@@ -55,14 +48,9 @@ import uk.cyruscastle.www.ui.system.window.UniqueWindow
 import uk.cyruscastle.www.ui.system.window.topbar.TopBarEntry
 import uk.cyruscastle.www.ui.system.window.topbar.TopBarSeparator
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarButtons
-import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarDefaultMenus
-import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenuItem
-import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenuSubItemEntry
-import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenus
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarTextField
 import uk.cyruscastle.www.ui.system.window.windows.text.printPage
 import uk.cyruscastle.www.ui.system.window.windows.text.toggleFormatting
-import uk.cyruscastle.www.ui.theme.ColorPalette
 import kotlin.js.ExperimentalWasmJsInterop
 import kotlin.js.js
 

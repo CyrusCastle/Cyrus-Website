@@ -8,15 +8,12 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.gestures.waitForUpOrCancellation
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -43,10 +40,6 @@ import cyruswebsite.shared.generated.resources.Res
 import cyruswebsite.shared.generated.resources.emptyImage
 import cyruswebsite.shared.generated.resources.mapFlagRed
 import cyruswebsite.shared.generated.resources.minesweeper
-import cyruswebsite.shared.generated.resources.minesweeperFaceCool
-import cyruswebsite.shared.generated.resources.minesweeperFaceDead
-import cyruswebsite.shared.generated.resources.minesweeperFaceHappy
-import cyruswebsite.shared.generated.resources.minesweeperFaceShock
 import cyruswebsite.shared.generated.resources.minesweeperNumber0
 import cyruswebsite.shared.generated.resources.minesweeperNumber1
 import cyruswebsite.shared.generated.resources.minesweeperNumber2
@@ -69,7 +62,6 @@ import cyruswebsite.shared.generated.resources.minesweeperTile8
 import cyruswebsite.shared.generated.resources.minesweeperTileMineBoom
 import cyruswebsite.shared.generated.resources.minesweeperTileQuestion
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
@@ -82,7 +74,6 @@ import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenuSubItemEntry
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenus
 import uk.cyruscastle.www.ui.theme.ColorPalette
 import kotlin.time.Clock
-import kotlin.time.Instant
 
 @OptIn(ExperimentalResourceApi::class, ExperimentalFoundationApi::class)
 open class Minesweeper(state: MinesweeperState = MinesweeperState()) : UniqueWindow, FacsimileWindow(

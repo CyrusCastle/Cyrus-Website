@@ -2,7 +2,6 @@ package uk.cyruscastle.www.ui.system.window.windows.start
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -52,14 +51,12 @@ import uk.cyruscastle.www.ui.system.window.FacsimileWindow
 import uk.cyruscastle.www.ui.system.window.UniqueWindow
 import uk.cyruscastle.www.ui.system.window.topbar.TopBarSeparator
 import uk.cyruscastle.www.ui.system.window.windows.email.EmailWindow
-import uk.cyruscastle.www.ui.system.window.windows.folders.XXCawlfytholFolder
 import uk.cyruscastle.www.ui.system.window.windows.folders.XXFriendSitesFolder
 import uk.cyruscastle.www.ui.system.window.windows.folders.XXGithubFolder
 import uk.cyruscastle.www.ui.system.window.windows.folders.XXPapersFolder
 import uk.cyruscastle.www.ui.system.window.windows.html.edge.ZZInternetExplorer
-import uk.cyruscastle.www.ui.system.window.windows.pdf.ZZSamplePdf
 import uk.cyruscastle.www.ui.system.window.windows.map.GlobeWindow
-import uk.cyruscastle.www.ui.system.window.windows.misc.Minesweeper
+import uk.cyruscastle.www.ui.system.window.windows.pdf.ZZSamplePdf
 import uk.cyruscastle.www.ui.system.window.windows.picture.PaintWindow
 import uk.cyruscastle.www.ui.system.window.windows.picture.ZZImageWindow
 import uk.cyruscastle.www.ui.system.window.windows.text.NotepadWindow

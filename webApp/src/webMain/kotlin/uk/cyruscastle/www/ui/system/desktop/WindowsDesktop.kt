@@ -31,15 +31,13 @@ import uk.cyruscastle.www.controller.TooltipController
 import uk.cyruscastle.www.controller.WindowController
 import uk.cyruscastle.www.ui.system.toolbar.ToolBar
 import uk.cyruscastle.www.ui.system.window.windows.email.EmailWindow
-import uk.cyruscastle.www.ui.system.window.windows.folders.XXCawlfytholFolder
 import uk.cyruscastle.www.ui.system.window.windows.folders.XXFriendSitesFolder
 import uk.cyruscastle.www.ui.system.window.windows.folders.XXGithubFolder
 import uk.cyruscastle.www.ui.system.window.windows.folders.XXPapersFolder
 import uk.cyruscastle.www.ui.system.window.windows.html.edge.ZZInternetExplorer
+import uk.cyruscastle.www.ui.system.window.windows.map.GlobeWindow
 import uk.cyruscastle.www.ui.system.window.windows.pdf.ZZCVPdfWindow
 import uk.cyruscastle.www.ui.system.window.windows.pdf.ZZWelshForSoldiersWindow
-import uk.cyruscastle.www.ui.system.window.windows.map.GlobeWindow
-import uk.cyruscastle.www.ui.system.window.windows.misc.Minesweeper
 import uk.cyruscastle.www.ui.system.window.windows.picture.PaintWindow
 import uk.cyruscastle.www.ui.system.window.windows.start.StartMenu
 import uk.cyruscastle.www.ui.system.window.windows.text.NotepadWindow
