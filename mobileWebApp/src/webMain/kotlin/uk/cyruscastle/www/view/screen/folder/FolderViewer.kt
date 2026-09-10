@@ -3,27 +3,28 @@ package uk.cyruscastle.www.view.screen.folder
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import cyruswebsite.shared.generated.resources.Res
 import cyruswebsite.shared.generated.resources.phoneFilesAlt
 import org.jetbrains.compose.resources.DrawableResource
@@ -63,10 +64,10 @@ open class FolderViewer(
             Column {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.height(50.dp)
                 ) {
                     Image(
-                        imageResource(icon),
+                        bitmap = imageResource(icon),
                         contentDescription = null
                     )
 
@@ -77,13 +78,21 @@ open class FolderViewer(
                     )
                 }
 
-                LazyVerticalGrid(
-                    columns = GridCells.Fixed(3),
-                    horizontalArrangement = Arrangement.Center,
-                    modifier = Modifier.fillMaxWidth().weight(3f)
-                ) {
-                    itemsIndexed(apps) { i, app ->
-                        app.HomeButton(index == i)
+                var viewSize by remember { mutableStateOf(0.dp) }
+
+                BoxWithConstraints(Modifier.fillMaxWidth().weight(1f)) {
+                    LaunchedEffect(maxHeight){
+                        viewSize = maxHeight
+                    }
+
+                    LazyVerticalGrid(
+                        columns = GridCells.Fixed(3),
+                        horizontalArrangement = Arrangement.Center,
+                        modifier = Modifier.matchParentSize()
+                    ) {
+                        itemsIndexed(apps) { i, app ->
+                            app.HomeButton(index == i, viewSize / 3)
+                        }
                     }
                 }
             }
@@ -92,21 +101,23 @@ open class FolderViewer(
 )
 
 @Composable
-fun App.HomeButton(hovered: Boolean){
+fun App.HomeButton(hovered: Boolean, height: Dp){
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxSize().background(if (hovered) Color.White.copy(alpha = 0.5f) else Color.Transparent)
+        modifier = Modifier.height(height).background(if (hovered) Color.White.copy(alpha = 0.5f) else Color.Transparent)
     ) {
         Image(
-            imageResource(this@HomeButton.icon),
-            contentDescription = null
+            bitmap = imageResource(this@HomeButton.icon),
+            contentDescription = null,
+            modifier = Modifier.weight(1f)
         )
 
         Text(
             text = this@HomeButton.name,
             style = MaterialTheme.typography.bodyMedium,
-            color = if (hovered) Color.Black else Color.White
+            color = if (hovered) Color.Black else Color.White,
+            modifier = Modifier.height(20.dp)
         )
     }
 }
