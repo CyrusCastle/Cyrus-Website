@@ -42,7 +42,7 @@ open class FolderViewer(
     name = name,
     icon = icon,
     content = {
-        var index by remember { mutableIntStateOf(0) }
+        var index by remember(name) { mutableIntStateOf(0) }
 
         ScreenScaffold(
             leftButtonLabel = "",
