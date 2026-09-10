@@ -3,6 +3,8 @@ package uk.cyruscastle.www.view.screen
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,17 +22,19 @@ fun ScreenScaffold(
     leftButtonLabel: String? = null,
     rightButtonLabel: String? = null,
     onControl: (Control) -> Boolean,
-    content: @Composable () -> Unit
+    content: @Composable BoxScope.() -> Unit
 ) {
     HandleControls(true, onControl)
 
-    Box(Modifier.fillMaxSize()){
-        content()
+    Column(Modifier.fillMaxSize()){
+        Box(Modifier.weight(1f)){
+            content()
+        }
 
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.fillMaxWidth().background(Color.White.copy(alpha = 0.2f)).align(Alignment.BottomCenter)
+            modifier = Modifier.fillMaxWidth().background(Color.White.copy(alpha = 0.2f))//.align(Alignment.BottomCenter)
         ){
             Text(
                 text = leftButtonLabel ?: "",
