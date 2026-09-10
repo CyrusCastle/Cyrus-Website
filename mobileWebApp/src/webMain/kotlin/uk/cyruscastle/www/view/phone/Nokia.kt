@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -23,11 +22,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cyruswebsite.shared.generated.resources.NokiaKokia
+import cyruswebsite.shared.generated.resources.NokiaSansModern
+import cyruswebsite.shared.generated.resources.Res
 import uk.cyruscastle.www.view.ColorPalette
 import uk.cyruscastle.www.view.phone.components.Controls
 import uk.cyruscastle.www.view.phone.components.LcdScreen
 import uk.cyruscastle.www.view.phone.shapes.TaperedRoundedShape
 import uk.cyruscastle.www.view.phone.textures.brushedMetal
+import uk.cyruscastle.www.view.typography
 
 
 @Composable
@@ -48,7 +51,11 @@ fun MainChassis(content: @Composable () -> Unit){
             Spacer(Modifier.width(35.dp))
             Spacer(Modifier.height(7.5.dp).width(7.5.dp).background(ColorPalette.CaseDark).border(1.dp, ColorPalette.CaseEdge))
             Spacer(Modifier.width(10.dp))
-            Text("N70", color = ColorPalette.KeyText)
+            Text(
+                text = "N70",
+                color = ColorPalette.KeyText,
+                style = typography(Res.font.NokiaSansModern).bodySmall
+            )
         }
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -102,9 +109,9 @@ fun NokiaN70() {
                 Text(
                     text = "NOKIA",
                     color = Color(0xFFD8D8DC),
-                    style = MaterialTheme.typography.headlineSmall,
+                    style = typography(Res.font.NokiaKokia).headlineSmall,
                     fontWeight = FontWeight.Bold,
-                    letterSpacing = 2.5.sp
+                    letterSpacing = 2.5.sp,
                 )
                 Spacer(Modifier.height(10.dp))
                 LcdScreen()

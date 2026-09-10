@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,7 +18,10 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import cyruswebsite.shared.generated.resources.NokiaSansModern
+import cyruswebsite.shared.generated.resources.Res
 import uk.cyruscastle.www.view.ColorPalette
+import uk.cyruscastle.www.view.typography
 
 @Composable
 fun ColumnScope.KeyButton(number: Char, letters: List<Char>, rightMost: Boolean, onClick: () -> Unit){
@@ -38,14 +40,14 @@ fun ColumnScope.KeyButton(number: Char, letters: List<Char>, rightMost: Boolean,
         Text(
             text = "$number",
             color = ColorPalette.KeyText,
-            style = MaterialTheme.typography.headlineSmall,
+            style = typography(Res.font.NokiaSansModern).headlineSmall,
             textAlign = if (rightMost) TextAlign.Center else TextAlign.End,
             modifier = Modifier.fillMaxWidth(0.5f).align(if (rightMost) Alignment.CenterEnd else Alignment.CenterStart)
         )
         Text(
             text = buildString { letters.forEach { append(it) } },
             color = ColorPalette.KeyText,
-            style = MaterialTheme.typography.labelSmall,
+            style = typography(Res.font.NokiaSansModern).labelSmall,
             textAlign = if (rightMost) TextAlign.End else TextAlign.Center,
             modifier = Modifier.fillMaxWidth(0.5f).align(if (rightMost) Alignment.CenterStart else Alignment.CenterEnd)
         )
