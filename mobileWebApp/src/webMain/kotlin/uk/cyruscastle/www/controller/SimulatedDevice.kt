@@ -16,7 +16,7 @@ object SimulatedDevice {
     private var batteryLevel = 1f
     private var signalLevel = MAX_SIGNAL
 
-    const val MAX_SIGNAL = 4
+    const val MAX_SIGNAL = 5
     const val MIN_SIGNAL = 0
 
     val battery: StateFlow<Float> = flow {
