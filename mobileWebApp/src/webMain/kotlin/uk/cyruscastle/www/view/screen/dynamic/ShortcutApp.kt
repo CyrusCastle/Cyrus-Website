@@ -6,13 +6,13 @@ import uk.cyruscastle.www.view.screen.App
 import kotlin.js.ExperimentalWasmJsInterop
 import kotlin.js.js
 
-class ShortcutApp(
-    name: String,
-    icon: DrawableResource,
+open class ShortcutApp(
+    title: String,
+    shortcutIcon: DrawableResource,
     websiteURL: String
 ) : App(
-    name = name,
-    icon = icon,
+    name = title,
+    icon = shortcutIcon,
     content = {
         openShortcut(
             websiteURL
