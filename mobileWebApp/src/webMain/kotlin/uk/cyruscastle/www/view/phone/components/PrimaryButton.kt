@@ -24,17 +24,13 @@ import androidx.compose.ui.unit.dp
 import uk.cyruscastle.www.view.ColorPalette
 
 @Composable
-fun PrimaryButton(corner: BracketCorner, color: Color, onClick: () -> Boolean){
+fun PrimaryButton(corner: BracketCorner, color: Color, repeatOnHold: Boolean = false, onClick: () -> Boolean){
     Box(Modifier
         .width(100.dp)
         .height(50.dp)
         .background(ColorPalette.CaseEdge)
         .border(1.dp, ColorPalette.CaseLight)
-        .pointerInput(Unit) {
-            detectTapGestures { tap ->
-                onClick()
-            }
-        }
+        .repeatingPress(repeatingEnabled = repeatOnHold) { onClick() }
     ){
         CornerBracket(
             corner = corner,

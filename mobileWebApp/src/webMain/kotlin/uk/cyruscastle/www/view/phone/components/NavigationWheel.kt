@@ -103,10 +103,8 @@ private fun BoxScope.DirectionButton(direction: Alignment){
 
     Spacer(
         modifier = modifier
-            .pointerInput(Unit) {
-                detectTapGestures { tap ->
-                    control?.let { Controller.dispatch(it) }
-                }
+            .repeatingPress(repeatingEnabled = true) {
+                control?.let { Controller.dispatch(it) }
             }
     )
 }

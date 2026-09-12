@@ -2,7 +2,10 @@ package uk.cyruscastle.www.view.phone.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.gestures.awaitEachGesture
+import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.gestures.waitForUpOrCancellation
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,6 +14,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -24,18 +29,14 @@ import uk.cyruscastle.www.view.ColorPalette
 import uk.cyruscastle.www.view.typography
 
 @Composable
-fun ColumnScope.KeyButton(number: Char, letters: List<Char>, rightMost: Boolean, onClick: () -> Unit){
+fun ColumnScope.KeyButton(number: Char, letters: List<Char>, rightMost: Boolean, repeatOnHold: Boolean = false, onClick: () -> Unit){
     Box(
         modifier = Modifier
             .width(75.dp)
             .weight(1f)
             .background(ColorPalette.CaseEdge)
             .border(1.dp, ColorPalette.CaseLight)
-            .pointerInput(Unit) {
-                detectTapGestures { tap ->
-                    onClick()
-                }
-            }
+            .repeatingPress(repeatingEnabled = repeatOnHold) { onClick() }
     ){
         Text(
             text = "$number",
@@ -55,18 +56,14 @@ fun ColumnScope.KeyButton(number: Char, letters: List<Char>, rightMost: Boolean,
 }
 
 @Composable
-fun ColumnScope.VerticalKeyButton(icon: ImageVector, tint: Color, altText: String, onClick: () -> Unit){
+fun ColumnScope.VerticalKeyButton(icon: ImageVector, tint: Color, altText: String, repeatOnHold: Boolean = false, onClick: () -> Unit){
     Box(
         modifier = Modifier
             .width(75.dp)
             .weight(1f)
             .background(ColorPalette.CaseEdge)
             .border(1.dp, ColorPalette.CaseLight)
-            .pointerInput(Unit) {
-                detectTapGestures { tap ->
-                    onClick()
-                }
-            }
+            .repeatingPress(repeatingEnabled = repeatOnHold) { onClick() }
     ){
         Icon(
             imageVector = icon,
@@ -74,5 +71,33 @@ fun ColumnScope.VerticalKeyButton(icon: ImageVector, tint: Color, altText: Strin
             contentDescription = altText,
             modifier = Modifier.align(Alignment.Center).size(20.dp)
         )
+    }
+}
+
+@Composable
+fun Modifier.repeatingPress(
+    enabled: Boolean = true,
+    repeatingEnabled: Boolean = false,
+    initialDelayMillis: Long = 450,
+    minIntervalMillis: Long = 60,
+    decay: Float = 0.8f,
+    onPress: () -> Unit,
+): Modifier {
+    if (!enabled) return this
+
+    return this.pointerInput(Unit) {
+        awaitEachGesture {
+            awaitFirstDown(requireUnconsumed = false).consume()
+            onPress()
+
+            var interval = initialDelayMillis
+            while (repeatingEnabled) {
+                val finished = withTimeoutOrNull(interval) { waitForUpOrCancellation() != null }
+                if (finished != null) break
+
+                onPress()
+                interval = (interval * decay).toLong().coerceAtLeast(minIntervalMillis)
+            }
+        }
     }
 }
