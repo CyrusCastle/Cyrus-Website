@@ -1,4 +1,4 @@
-package uk.cyruscastle.www.ui.system.window.windows.map
+package uk.cyruscastle.www.helpers.map
 
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp

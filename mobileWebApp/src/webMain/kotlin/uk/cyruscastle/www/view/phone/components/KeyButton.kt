@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.awaitEachGesture
 import androidx.compose.foundation.gestures.awaitFirstDown
-import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.gestures.waitForUpOrCancellation
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ColumnScope
@@ -14,8 +13,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,8 +22,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import cyruswebsite.shared.generated.resources.NokiaSansModern
 import cyruswebsite.shared.generated.resources.Res
+import uk.cyruscastle.www.helpers.typography
 import uk.cyruscastle.www.view.ColorPalette
-import uk.cyruscastle.www.view.typography
 
 @Composable
 fun ColumnScope.KeyButton(number: Char, letters: List<Char>, rightMost: Boolean, repeatOnHold: Boolean = false, onClick: () -> Unit){

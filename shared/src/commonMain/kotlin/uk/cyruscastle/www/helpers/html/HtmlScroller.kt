@@ -1,4 +1,4 @@
-package uk.cyruscastle.www.ui.system.window.windows.html.helpers
+package uk.cyruscastle.www.helpers.html
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect

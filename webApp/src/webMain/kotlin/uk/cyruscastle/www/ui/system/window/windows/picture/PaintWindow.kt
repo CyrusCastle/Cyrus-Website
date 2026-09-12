@@ -79,9 +79,9 @@ import uk.codecymru.drawbox.box.DrawBox
 import uk.codecymru.drawbox.controller.DrawBoxBackground
 import uk.codecymru.drawbox.controller.DrawController
 import uk.codecymru.drawbox.model.CanvasTool
+import uk.cyruscastle.www.helpers.ScrollBarType
 import uk.cyruscastle.www.ui.extensions.modifier.checkerboardBackground
 import uk.cyruscastle.www.ui.extensions.modifier.intrudeExtrudeBorder
-import uk.cyruscastle.www.ui.system.scroll.ScrollBarType
 import uk.cyruscastle.www.ui.system.scroll.ScrollableContainer
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
 import uk.cyruscastle.www.ui.system.window.resize.getResizePointerIcons

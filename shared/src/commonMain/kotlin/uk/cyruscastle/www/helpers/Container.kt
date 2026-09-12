@@ -1,4 +1,4 @@
-package uk.cyruscastle.www.ui.extensions
+package uk.cyruscastle.www.helpers
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -6,20 +6,19 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import uk.cyruscastle.www.helpers.ScrollBarType
 
 interface ContainerScope{
     fun Modifier.weight(weight: Float, fill: Boolean = true): Modifier
 }
 
-internal class ColumnContainerScope(
+class ColumnContainerScope(
     private val scope: ColumnScope
 ) : ContainerScope {
     override fun Modifier.weight(weight: Float, fill: Boolean): Modifier =
         with(scope) { this@weight.weight(weight, fill) }
 }
 
-internal class RowContainerScope(
+class RowContainerScope(
     private val scope: RowScope
 ) : ContainerScope {
     override fun Modifier.weight(weight: Float, fill: Boolean): Modifier =

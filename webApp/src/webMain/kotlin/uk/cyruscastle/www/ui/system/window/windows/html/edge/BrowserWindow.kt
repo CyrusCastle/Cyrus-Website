@@ -34,14 +34,15 @@ import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.HTMLIFrameElement
+import uk.cyruscastle.www.helpers.html.HtmlController
+import uk.cyruscastle.www.helpers.html.URLChecker
+import uk.cyruscastle.www.helpers.html.URLDisguiser
+import uk.cyruscastle.www.helpers.html.subscribeToHtmlController
 import uk.cyruscastle.www.ui.system.scroll.HtmlScrollableContainer
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
 import uk.cyruscastle.www.ui.system.window.topbar.TopBarSeparator
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarTextField
-import uk.cyruscastle.www.ui.system.window.windows.html.helpers.HtmlController
-import uk.cyruscastle.www.ui.system.window.windows.html.helpers.URLChecker
-import uk.cyruscastle.www.ui.system.window.windows.html.helpers.URLDisguiser
-import uk.cyruscastle.www.ui.system.window.windows.html.helpers.subscribeToHtmlController
+import kotlin.collections.listOf
 
 @OptIn(ExperimentalComposeUiApi::class)
 open class BrowserWindow(
@@ -237,5 +238,3 @@ class HtmlView(val url: String, val elementID: String) {
 
     fun getCurrentUrl(): String? = iframeRef?.src
 }
-
-fun getHost(): String = window.location.origin

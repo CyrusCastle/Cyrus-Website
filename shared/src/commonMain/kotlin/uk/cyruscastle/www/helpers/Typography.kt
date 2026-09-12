@@ -1,4 +1,4 @@
-package uk.cyruscastle.www.view
+package uk.cyruscastle.www.helpers
 
 import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable

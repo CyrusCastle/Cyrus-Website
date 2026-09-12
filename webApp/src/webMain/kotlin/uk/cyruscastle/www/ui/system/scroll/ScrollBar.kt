@@ -33,6 +33,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
+import uk.cyruscastle.www.helpers.ScrollBarType
 import uk.cyruscastle.www.ui.extensions.Container
 import uk.cyruscastle.www.ui.extensions.ContainerScope
 import uk.cyruscastle.www.ui.extensions.modifier.checkerboardBackground
@@ -40,9 +41,6 @@ import uk.cyruscastle.www.ui.extensions.modifier.intrudeExtrudeBorder
 import uk.cyruscastle.www.ui.theme.ColorPalette
 import uk.cyruscastle.www.ui.theme.ColorPalette.disabledTint
 import kotlin.math.roundToInt
-
-
-enum class ScrollBarType { VERTICAL, HORIZONTAL; companion object { fun all() = listOf(VERTICAL, HORIZONTAL) } }
 
 @Composable
 fun ContainerScope?.ScrollBar(scrollState: ScrollState, modifier: Modifier = Modifier, type: ScrollBarType = ScrollBarType.VERTICAL, size: Dp) {

@@ -4,9 +4,9 @@ import cyruswebsite.shared.generated.resources.Res
 import cyruswebsite.shared.generated.resources.cawlfythol
 import cyruswebsite.shared.generated.resources.cawlfytholFolder
 import cyruswebsite.shared.generated.resources.internetExplorerHTML
+import uk.cyruscastle.www.helpers.html.getHost
 import uk.cyruscastle.www.ui.system.window.UniqueWindow
 import uk.cyruscastle.www.ui.system.window.windows.html.edge.BrowserWindow
-import uk.cyruscastle.www.ui.system.window.windows.html.edge.getHost
 import uk.cyruscastle.www.ui.system.window.windows.shortcuts.ShortcutWindow
 
 class XXCawlfytholFolder : FileExplorerWindow(

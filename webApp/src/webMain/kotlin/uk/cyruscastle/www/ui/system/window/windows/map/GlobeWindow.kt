@@ -69,13 +69,15 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import uk.cyruscastle.www.controller.TooltipController
-import uk.cyruscastle.www.ui.system.scroll.ScrollBarType
+import uk.cyruscastle.www.helpers.ScrollBarType
+import uk.cyruscastle.www.helpers.map.GlobeMarker
+import uk.cyruscastle.www.helpers.map.getMarkers
 import uk.cyruscastle.www.ui.system.scroll.ScrollableContainer
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
 import kotlin.js.ExperimentalWasmJsInterop
 
 @OptIn(ExperimentalComposeUiApi::class)
-class GlobeWindow() : FacsimileWindow(
+class GlobeWindow : FacsimileWindow(
     programTitle = "Map",
     icon = Res.drawable.globe,
     initiallyVisible = true,

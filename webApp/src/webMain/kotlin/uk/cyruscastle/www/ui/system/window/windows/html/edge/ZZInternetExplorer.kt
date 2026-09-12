@@ -2,6 +2,7 @@ package uk.cyruscastle.www.ui.system.window.windows.html.edge
 
 import cyruswebsite.shared.generated.resources.Res
 import cyruswebsite.shared.generated.resources.internetExplorer
+import uk.cyruscastle.www.helpers.html.getHost
 
 class ZZInternetExplorer : BrowserWindow(
     "Internet Explorer",

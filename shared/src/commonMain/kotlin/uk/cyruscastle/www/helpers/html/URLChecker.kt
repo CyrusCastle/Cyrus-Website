@@ -1,6 +1,6 @@
-package uk.cyruscastle.www.ui.system.window.windows.html.helpers
+package uk.cyruscastle.www.helpers.html
 
-import uk.cyruscastle.www.ui.system.window.windows.html.edge.getHost
+import kotlinx.browser.window
 
 object URLChecker {
     private val validDomains = arrayOf(
@@ -22,3 +22,5 @@ object URLChecker {
         }
     }
 }
+
+fun getHost(): String = window.location.origin

@@ -1,4 +1,4 @@
-package uk.cyruscastle.www.ui.system.window.windows.html.helpers
+package uk.cyruscastle.www.helpers.html
 
 import org.w3c.dom.HTMLIFrameElement
 import org.w3c.dom.events.Event

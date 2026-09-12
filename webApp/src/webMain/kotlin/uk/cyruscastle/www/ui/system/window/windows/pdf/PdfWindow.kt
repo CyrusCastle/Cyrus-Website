@@ -49,14 +49,14 @@ import dev.nucleusframework.pdfium.PdfReaderState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import org.jetbrains.compose.resources.painterResource
+import uk.cyruscastle.www.helpers.ScrollBarType
+import uk.cyruscastle.www.helpers.html.getHost
 import uk.cyruscastle.www.model.PdfCitation
-import uk.cyruscastle.www.ui.system.scroll.ScrollBarType
 import uk.cyruscastle.www.ui.system.scroll.ScrollableLazyColumn
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
 import uk.cyruscastle.www.ui.system.window.topbar.TopBarEntry
 import uk.cyruscastle.www.ui.system.window.topbar.TopBarSeparator
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarButtons
-import uk.cyruscastle.www.ui.system.window.windows.html.edge.getHost
 import uk.cyruscastle.www.ui.system.window.windows.shortcuts.openShortcut
 import kotlin.js.ExperimentalWasmJsInterop
 import kotlin.js.js

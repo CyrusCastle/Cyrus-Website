@@ -28,9 +28,10 @@ import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import uk.cyruscastle.www.helpers.ScrollBarType
+import uk.cyruscastle.www.helpers.html.HtmlController
+import uk.cyruscastle.www.helpers.html.rememberHtmlScrollState
 import uk.cyruscastle.www.ui.extensions.RowContainerScope
-import uk.cyruscastle.www.ui.system.window.windows.html.helpers.HtmlController
-import uk.cyruscastle.www.ui.system.window.windows.html.helpers.rememberHtmlScrollState
 import uk.cyruscastle.www.ui.theme.ColorPalette
 
 @Composable

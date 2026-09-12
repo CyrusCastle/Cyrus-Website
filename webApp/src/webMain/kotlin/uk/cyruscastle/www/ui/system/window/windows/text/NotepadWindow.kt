@@ -21,9 +21,9 @@ import io.github.vinceglb.filekit.readString
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import uk.cyruscastle.www.helpers.ScrollBarType
 import uk.cyruscastle.www.ui.system.context.ContextMenuWrapper
 import uk.cyruscastle.www.ui.system.context.TextFieldValueTarget
-import uk.cyruscastle.www.ui.system.scroll.ScrollBarType
 import uk.cyruscastle.www.ui.system.scroll.ScrollableContainer
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
 import uk.cyruscastle.www.ui.system.window.topbar.WindowTopBarMenuItem

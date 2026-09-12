@@ -25,12 +25,12 @@ import androidx.compose.ui.unit.sp
 import cyruswebsite.shared.generated.resources.NokiaKokia
 import cyruswebsite.shared.generated.resources.NokiaSansModern
 import cyruswebsite.shared.generated.resources.Res
+import uk.cyruscastle.www.helpers.typography
 import uk.cyruscastle.www.view.ColorPalette
 import uk.cyruscastle.www.view.phone.components.Controls
 import uk.cyruscastle.www.view.phone.components.LcdScreen
 import uk.cyruscastle.www.view.phone.shapes.TaperedRoundedShape
 import uk.cyruscastle.www.view.phone.textures.brushedMetal
-import uk.cyruscastle.www.view.typography
 
 
 @Composable

@@ -39,9 +39,9 @@ import cyruswebsite.shared.generated.resources.textBold
 import cyruswebsite.shared.generated.resources.textEmph
 import cyruswebsite.shared.generated.resources.textUnderline
 import kotlinx.coroutines.flow.MutableStateFlow
+import uk.cyruscastle.www.helpers.ScrollBarType
 import uk.cyruscastle.www.ui.system.context.ContextMenuWrapper
 import uk.cyruscastle.www.ui.system.context.RichTextTarget
-import uk.cyruscastle.www.ui.system.scroll.ScrollBarType
 import uk.cyruscastle.www.ui.system.scroll.ScrollableContainer
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
 import uk.cyruscastle.www.ui.system.window.UniqueWindow

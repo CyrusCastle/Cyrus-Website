@@ -1,6 +1,4 @@
-package uk.cyruscastle.www.ui.system.window.windows.html.helpers
-
-import uk.cyruscastle.www.ui.system.window.windows.html.edge.getHost
+package uk.cyruscastle.www.helpers.html
 
 object URLDisguiser {
     private val disguises = mapOf(

@@ -26,6 +26,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.painterResource
+import uk.cyruscastle.www.helpers.map.GlobeMarkerType
 
 @Composable
 fun BoxScope.GlobeLegend() {

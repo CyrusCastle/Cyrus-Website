@@ -37,9 +37,11 @@ import coil3.compose.AsyncImage
 import cyruswebsite.shared.generated.resources.Res
 import org.jetbrains.compose.resources.painterResource
 import uk.cyruscastle.www.controller.WindowController
+import uk.cyruscastle.www.helpers.ScrollBarType
+import uk.cyruscastle.www.helpers.map.GlobeMarker
+import uk.cyruscastle.www.helpers.map.GlobeMarkerPicture
 import uk.cyruscastle.www.ui.extensions.RowContainerScope
 import uk.cyruscastle.www.ui.system.scroll.ScrollBar
-import uk.cyruscastle.www.ui.system.scroll.ScrollBarType
 import uk.cyruscastle.www.ui.system.window.windows.picture.ImageWindow
 
 @OptIn(ExperimentalComposeUiApi::class)

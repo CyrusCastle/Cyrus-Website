@@ -64,9 +64,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import uk.cyruscastle.www.helpers.ScrollBarType
 import uk.cyruscastle.www.ui.system.context.ContextMenuWrapper
 import uk.cyruscastle.www.ui.system.context.RichTextTarget
-import uk.cyruscastle.www.ui.system.scroll.ScrollBarType
 import uk.cyruscastle.www.ui.system.scroll.ScrollableContainer
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
 import uk.cyruscastle.www.ui.system.window.topbar.TopBarEntry
