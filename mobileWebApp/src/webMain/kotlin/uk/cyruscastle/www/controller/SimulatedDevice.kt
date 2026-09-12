@@ -8,6 +8,8 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
+import kotlin.math.abs
+import kotlin.math.exp
 import kotlin.random.Random
 
 object SimulatedDevice {
@@ -18,6 +20,7 @@ object SimulatedDevice {
 
     const val MAX_SIGNAL = 5
     const val MIN_SIGNAL = 0
+    const val TARGET_PULL = 1.2f
 
     val battery: StateFlow<Float> = flow {
         emit(batteryLevel)
@@ -29,16 +32,23 @@ object SimulatedDevice {
     }.stateIn(scope, SharingStarted.Eagerly, batteryLevel)
 
     val signal: StateFlow<Int> = flow {
-        emit(signalLevel)
+        val target = MAX_SIGNAL - 1
+        var level = signalLevel
+        emit(level)
+
         while (true) {
-            delay(Random.nextLong(1_000, 20_000))
-            val delta = when (Random.nextInt(5)) {
-                0 -> -1
-                1 -> 1
-                else -> 0
+            delay(Random.nextLong(1_000, 6_000))
+
+            val proposed = level + if (Random.nextBoolean()) 1 else -1
+            if (proposed in MIN_SIGNAL..MAX_SIGNAL) {
+                val cost = abs(proposed - target) - abs(level - target)
+                if (cost <= 0 || Random.nextFloat() < exp(-TARGET_PULL * cost)) {
+                    level = proposed
+                }
             }
-            signalLevel = (signalLevel + delta).coerceIn(MIN_SIGNAL, MAX_SIGNAL)
-            emit(signalLevel)
+
+            signalLevel = level
+            emit(level)
         }
     }.stateIn(scope, SharingStarted.Eagerly, signalLevel)
 }
