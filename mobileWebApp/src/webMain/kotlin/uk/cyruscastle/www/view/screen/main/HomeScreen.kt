@@ -14,6 +14,7 @@ import uk.cyruscastle.www.view.screen.static.MapApp
 class HomeScreen : FolderViewer(
     name = "Home",
     icon = Res.drawable.phoneAppAlt,
+    showSignal = true,
     listOf(
         MapApp(), BrowserApp(), EmailApp(),
         NotesApp(), CameraApp(), ImageViewerApp(),

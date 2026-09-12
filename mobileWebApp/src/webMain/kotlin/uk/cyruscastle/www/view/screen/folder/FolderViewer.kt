@@ -6,8 +6,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
@@ -31,12 +33,15 @@ import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.imageResource
 import uk.cyruscastle.www.controller.Navigator
 import uk.cyruscastle.www.model.Control
+import uk.cyruscastle.www.view.phone.components.onscreen.SignalIndicator
+import uk.cyruscastle.www.view.phone.components.onscreen.rememberSlightlyVaryingSignal
 import uk.cyruscastle.www.view.screen.App
 import uk.cyruscastle.www.view.screen.ScreenScaffold
 
 open class FolderViewer(
     name: String = "Folder",
     icon: DrawableResource = Res.drawable.phoneFilesAlt,
+    showSignal: Boolean = false,
     apps: List<App>
 ) : App(
     name = name,
@@ -62,10 +67,21 @@ open class FolderViewer(
             }
         ) {
             Column {
+                Spacer(Modifier.height(2.dp))
+
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.height(50.dp)
                 ) {
+                    if (showSignal){
+                        Spacer(Modifier.width(2.dp))
+
+                        val signal = rememberSlightlyVaryingSignal()
+                        SignalIndicator(signal = signal, maxSignal = 5)
+
+                        Spacer(Modifier.width(5.dp))
+                    }
+
                     Image(
                         bitmap = imageResource(icon),
                         contentDescription = null
