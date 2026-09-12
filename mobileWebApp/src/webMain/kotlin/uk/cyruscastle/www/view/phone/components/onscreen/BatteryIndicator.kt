@@ -16,8 +16,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
+import uk.cyruscastle.www.controller.SimulatedDevice
 import kotlin.random.Random
 
 const val BATTERY_BLOCKS = 4
@@ -113,18 +115,4 @@ fun BatteryIndicator(
 }
 
 @Composable
-fun rememberRandomSlowlyDrainingBattery(): Float {
-    var battery by remember { mutableFloatStateOf(1f) }
-
-    LaunchedEffect(Unit){
-        while (isActive){
-            delay(Random.nextLong(900000, 2400000)) // 15 min to 40 mins
-
-            if (battery > 0.3f){
-                battery -= 0.25f
-            }
-        }
-    }
-
-    return battery
-}
+fun rememberRandomSlowlyDrainingBattery(): Float = SimulatedDevice.battery.collectAsStateWithLifecycle().value

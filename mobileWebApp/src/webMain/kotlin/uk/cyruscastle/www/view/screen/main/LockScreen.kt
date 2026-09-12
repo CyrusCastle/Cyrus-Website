@@ -52,7 +52,7 @@ class LockScreen : App(
 
                 Row {
                     val time = rememberAndUpdateTime()
-                    val signal = rememberSlightlyVaryingSignal(1, 5)
+                    val signal = rememberSlightlyVaryingSignal()
                     val battery = rememberRandomSlowlyDrainingBattery()
 
                     Spacer(Modifier.width(2.dp))

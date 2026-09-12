@@ -19,8 +19,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
+import uk.cyruscastle.www.controller.SimulatedDevice
 import kotlin.random.Random
 
 @Composable
@@ -52,22 +54,4 @@ fun SignalIndicator(
 }
 
 @Composable
-fun rememberSlightlyVaryingSignal(minSignal: Int, maxSignal: Int): Int {
-    var signal by remember { mutableIntStateOf(maxSignal) }
-
-    LaunchedEffect(Unit){
-        while (isActive){
-            delay(Random.nextLong(1000, 20_000))
-
-            val delta = when (Random.nextInt(5)) {
-                0 -> -1
-                1 -> 1
-                else -> 0
-            }
-
-            signal = (signal + delta).coerceIn(minSignal, maxSignal)
-        }
-    }
-
-    return signal
-}
+fun rememberSlightlyVaryingSignal(): Int = SimulatedDevice.signal.collectAsStateWithLifecycle().value
