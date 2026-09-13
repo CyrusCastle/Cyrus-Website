@@ -140,29 +140,6 @@ class MarkerDetailsScreen(location: GlobeMarker): App(
                         )
                     }
                 }
-//                Row(
-//                    modifier = Modifier.fillMaxWidth().height(120.dp).horizontalScroll(picturesListScroll),
-//                    horizontalArrangement = Arrangement.Center
-//                ){
-//                    location.pictures.forEachIndexed  { i, picture ->
-//                        val path = GlobeMarker.getImageDirectory() + picture.fileName
-//
-//                        AsyncImage(
-//                            model = Res.getUri(path),
-//                            contentDescription = picture.fileName,
-//                            contentScale = ContentScale.Fit,
-//                            modifier = Modifier
-//                                .height(120.dp)
-//                                .then(
-//                                    if (i == index){
-//                                        Modifier.border(2.dp, Color.Yellow)
-//                                    }else {
-//                                        Modifier
-//                                    }
-//                                )
-//                        )
-//                    }
-//                }
             }
         }
     }
