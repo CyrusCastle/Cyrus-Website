@@ -275,7 +275,7 @@ class MapApp : App(
                             verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier
                                 .align(Alignment.Center)
-                                .offset(0.dp, -tooltipHeight)
+                                .offset(0.dp, -tooltipHeight / 2)
                                 .onGloballyPositioned { coords ->
                                     tooltipHeight = coords.size.height.dp
                                 }
