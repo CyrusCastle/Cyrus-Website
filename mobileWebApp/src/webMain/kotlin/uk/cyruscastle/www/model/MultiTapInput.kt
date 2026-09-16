@@ -88,6 +88,11 @@ class MultiTapInput(
         activeKey = null; cycleIndex = 0
     }
 
+    fun overwrite(text: String){
+        commit()
+        value = TextFieldValue(text)
+    }
+
     private fun moveCursor(delta: Int) {
         val wasPending = hasPending
         commit()
