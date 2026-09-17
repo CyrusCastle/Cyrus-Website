@@ -93,7 +93,7 @@ fun MultiTapTextField(
         readOnly = true,
         visualTransformation = transformation,
         onTextLayout = { layout = it; input.onTextLayout(it) },
-        textStyle = textStyle.copy(color = LocalContentColor.current),
+        textStyle = textStyle.copy(color = textColor),
         cursorBrush = SolidColor(Color.Transparent),
         modifier = modifier
             .fillMaxWidth()
