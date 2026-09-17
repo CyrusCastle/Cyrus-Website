@@ -30,8 +30,9 @@ enum class CaseMode { Sentence, Lower, Upper }
 class MultiTapInput(
     private val scope: CoroutineScope,
     private val timeoutMs: Long = 900L,
+    startingText: String = "",
 ) {
-    var value by mutableStateOf(TextFieldValue(""))
+    var value by mutableStateOf(TextFieldValue(startingText, selection = TextRange(startingText.length)))
         private set
 
     var caseMode by mutableStateOf(CaseMode.Sentence)
@@ -90,7 +91,7 @@ class MultiTapInput(
 
     fun overwrite(text: String){
         commit()
-        value = TextFieldValue(text)
+        value = TextFieldValue(text, TextRange(text.length))
     }
 
     private fun moveCursor(delta: Int) {
