@@ -40,7 +40,7 @@ class BrowserApp(
         val scope = rememberCoroutineScope()
         val input = remember { MultiTapInput(scope) }
 
-        // Bringing together
+        // Bringing together // TODO browser window doesn't show cursor correctly. is this even fixable?
         val iterateElement: ((FocusedElement?) -> Boolean) = { element ->
             if (element != null && element.editable){
                 input.overwrite(element.text)
