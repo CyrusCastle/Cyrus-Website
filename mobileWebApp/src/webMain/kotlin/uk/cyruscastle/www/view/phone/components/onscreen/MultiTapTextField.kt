@@ -91,6 +91,7 @@ fun MultiTapTextField(
         value = input.value,
         onValueChange = { },
         readOnly = true,
+        enabled = false,
         visualTransformation = transformation,
         onTextLayout = { layout = it; input.onTextLayout(it) },
         textStyle = textStyle.copy(color = textColor),

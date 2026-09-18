@@ -2,6 +2,7 @@ package uk.cyruscastle.www.view.screen.folder
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -121,7 +122,7 @@ fun App.HomeButton(hovered: Boolean, height: Dp){
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.height(height).background(if (hovered) Color.White.copy(alpha = 0.5f) else Color.Transparent)
+        modifier = Modifier.height(height).background(if (hovered) Color.White.copy(alpha = 0.5f) else Color.Transparent).clickable { Navigator.push(this) }
     ) {
         Image(
             bitmap = imageResource(this@HomeButton.icon),

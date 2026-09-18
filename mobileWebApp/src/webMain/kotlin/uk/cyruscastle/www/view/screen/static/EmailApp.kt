@@ -2,9 +2,11 @@ package uk.cyruscastle.www.view.screen.static
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -59,7 +61,7 @@ class EmailApp  : App(
                     Control.PRIMARY_LEFT -> { sendEmail(recipientInput.value.text, subjectInput.value.text, bodyInput.value.text); Navigator.pop() }
 
                     Control.Up -> { inputType = inputType.shifted(-1); true }
-                    Control.Down -> { inputType = inputType.shifted(-1); true }
+                    Control.Down -> { inputType = inputType.shifted(1); true }
 
                     else -> when (inputType) {
                         EmailInput.TO -> { recipientInput.onControl(control) }
@@ -88,10 +90,10 @@ class EmailApp  : App(
                     )
                 }
 
-                InputRow("To", recipientInput, inputType == EmailInput.TO)
+                InputRow("To", recipientInput, inputType == EmailInput.TO) { inputType = EmailInput.TO }
                 Spacer(Modifier.height(5.dp))
 
-                InputRow("Subject", subjectInput, inputType == EmailInput.SUBJECT)
+                InputRow("Subject", subjectInput, inputType == EmailInput.SUBJECT) { inputType = EmailInput.SUBJECT }
                 Spacer(Modifier.height(5.dp))
 
                 MultiTapTextField(
@@ -99,7 +101,7 @@ class EmailApp  : App(
                     textColor = Color.White,
                     caretColor = if (inputType == EmailInput.BODY) Color.White else Color.Transparent,
                     ruleColor = Color.Black.copy(alpha = 0.3f),
-                    modifier = Modifier.fillMaxWidth(0.8f)
+                    modifier = Modifier.fillMaxWidth(0.8f).weight(1f).clickable { inputType = EmailInput.BODY }
                 )
             }
         }
@@ -107,8 +109,8 @@ class EmailApp  : App(
 )
 
 @Composable
-fun InputRow(title: String, input: MultiTapInput, isActive: Boolean){
-    Row(Modifier.fillMaxWidth(0.6f)) {
+fun InputRow(title: String, input: MultiTapInput, isActive: Boolean, setActive: () -> Unit){
+    Row(Modifier.fillMaxWidth(0.6f).clickable(onClick = setActive)) {
         Text(
             text = title,
             color = Color.White,
