@@ -182,34 +182,34 @@ fun OptionsEntry(
         Text(
             text = "$optionTitle:",
             style = MaterialTheme.typography.bodyLarge,
-            color = Color.White
+            color = if (selected) Color.Black else Color.White
         )
 
         Icon(
             imageVector = Icons.Default.ArrowLeft,
             contentDescription = null,
-            tint = Color.White,
+            tint = if (selected) Color.Black else Color.White,
             modifier = Modifier.size(20.dp)
         )
 
         Icon(
             imageVector = icon,
             contentDescription = null,
-            tint = Color.White,
+            tint = if (selected) Color.Black else Color.White,
             modifier = Modifier.size(20.dp)
         )
 
         Text(
             text = optionSelected,
             style = MaterialTheme.typography.bodyLarge,
-            color = Color.White,
+            color = if (selected) Color.Black else Color.White,
             modifier = Modifier.background(if (valid) Color.Transparent else Color.Red.copy(alpha = 0.5f))
         )
 
         Icon(
             imageVector = Icons.Default.ArrowRight,
             contentDescription = null,
-            tint = Color.White,
+            tint = if (selected) Color.Black else Color.White,
             modifier = Modifier.size(20.dp)
         )
     }
@@ -225,7 +225,7 @@ fun OptionsEntryButton(optionTitle: String, selected: Boolean, valid: Boolean){
         Text(
             text = optionTitle,
             style = MaterialTheme.typography.bodyLarge,
-            color = Color.White,
+            color = if (selected) Color.Black else Color.White,
             modifier = Modifier.background(if (valid) Color.Transparent else Color.Gray.copy(alpha = 0.5f))
         )
     }
