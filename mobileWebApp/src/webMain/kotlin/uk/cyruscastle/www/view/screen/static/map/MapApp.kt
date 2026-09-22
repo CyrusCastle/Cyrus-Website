@@ -359,13 +359,14 @@ fun MapSelectorCursor(
     }
 }
 
-private fun DrawScope.drawReticule(
+fun DrawScope.drawReticule(
     center: Offset,
     half: Float,
-    arm: Float,
+    arm: Float = 0f,
     gap: Float,
     color: Color,
     stroke: Float,
+    drawCorners: Boolean = true
 ) {
     val l = center.x - half
     val r = center.x + half
@@ -375,11 +376,12 @@ private fun DrawScope.drawReticule(
     fun line(x1: Float, y1: Float, x2: Float, y2: Float) =
         drawLine(color, Offset(x1, y1), Offset(x2, y2), stroke, StrokeCap.Square)
 
-    // corner brackets
-    line(l, t, l + arm, t); line(l, t, l, t + arm)
-    line(r, t, r - arm, t); line(r, t, r, t + arm)
-    line(l, b, l + arm, b); line(l, b, l, b - arm)
-    line(r, b, r - arm, b); line(r, b, r, b - arm)
+    if (drawCorners){
+        line(l, t, l + arm, t); line(l, t, l, t + arm)
+        line(r, t, r - arm, t); line(r, t, r, t + arm)
+        line(l, b, l + arm, b); line(l, b, l, b - arm)
+        line(r, b, r - arm, b); line(r, b, r, b - arm)
+    }
 
     // crosshair
     line(center.x, t, center.x, center.y - gap)

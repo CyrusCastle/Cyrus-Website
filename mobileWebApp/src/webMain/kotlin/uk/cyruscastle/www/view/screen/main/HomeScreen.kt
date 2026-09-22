@@ -6,9 +6,9 @@ import uk.cyruscastle.www.view.screen.dynamic.GalleryApp
 import uk.cyruscastle.www.view.screen.folder.FilesApp
 import uk.cyruscastle.www.view.screen.folder.FolderViewer
 import uk.cyruscastle.www.view.screen.static.BrowserApp
-import uk.cyruscastle.www.view.screen.static.CameraApp
 import uk.cyruscastle.www.view.screen.static.ContactsApp
 import uk.cyruscastle.www.view.screen.static.EmailApp
+import uk.cyruscastle.www.view.screen.static.paint.PaintApp
 import uk.cyruscastle.www.view.screen.static.map.MapApp
 
 class HomeScreen : FolderViewer(
@@ -17,7 +17,7 @@ class HomeScreen : FolderViewer(
     showSignal = true,
     listOf(
         MapApp(), BrowserApp(), EmailApp(),
-        ContactsApp(), CameraApp(), GalleryApp(),
+        ContactsApp(), PaintApp(), GalleryApp(),
         FilesApp(),
     )
 )
