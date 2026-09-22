@@ -1,5 +1,14 @@
 package uk.cyruscastle.www.controller
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Language
+import androidx.compose.material.icons.filled.Mail
+import androidx.compose.material.icons.filled.Terminal
+import cyruswebsite.shared.generated.resources.Res
+import cyruswebsite.shared.generated.resources.alex
+import cyruswebsite.shared.generated.resources.cyrusIconShortcut
+import cyruswebsite.shared.generated.resources.emily
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -8,6 +17,9 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
+import uk.cyruscastle.www.model.Contact
+import uk.cyruscastle.www.model.ContactEntry
+import uk.cyruscastle.www.view.screen.dynamic.openShortcut
 import kotlin.math.abs
 import kotlin.math.exp
 import kotlin.random.Random
@@ -51,4 +63,31 @@ object SimulatedDevice {
             emit(level)
         }
     }.stateIn(scope, SharingStarted.Eagerly, signalLevel)
+
+    val contacts = listOf(
+        Contact(
+            name = "Alex",
+            picture = Res.drawable.alex,
+            entries = listOf(
+                ContactEntry("Website", "https://a-doye.github.io/" /*https://a-doye.io*/, Icons.Default.Language)
+            )
+        ),
+        Contact(
+            name = "Cyrus (me!)",
+            picture = Res.drawable.cyrusIconShortcut,
+            entries = listOf(
+                ContactEntry("Email", "cyrus@codecymru.uk", Icons.Default.Mail) { openShortcut("mailto:cyrus@codecymru.uk") },
+                ContactEntry("GitHub", "https://github.com/CyrusCastle/", Icons.Default.Terminal),
+                ContactEntry("LinkedIn", "https://www.linkedin.com/in/cyrus-castle/", Icons.Default.AccountCircle),
+                ContactEntry("Website", "https://cyruscastle.com", Icons.Default.Language)
+            )
+        ),
+        Contact(
+            name = "Emily",
+            picture = Res.drawable.emily,
+            entries = listOf(
+                ContactEntry("Website", "https://emilyprust.com", Icons.Default.Language)
+            )
+        )
+    )
 }
