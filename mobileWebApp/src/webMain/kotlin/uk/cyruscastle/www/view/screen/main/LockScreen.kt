@@ -24,6 +24,9 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.format
 import kotlinx.datetime.format.char
 import kotlinx.datetime.toLocalDateTime
+import uk.cyruscastle.www.controller.DEFAULT_MESSAGE_SHORT
+import uk.cyruscastle.www.controller.HelpManager
+import uk.cyruscastle.www.controller.HelpMessage
 import uk.cyruscastle.www.controller.Navigator
 import uk.cyruscastle.www.model.Control
 import uk.cyruscastle.www.view.phone.components.onscreen.BatteryIndicator
@@ -43,6 +46,15 @@ class LockScreen : App(
             onControl = { control ->
                 when (control) {
                     Control.PRIMARY_LEFT -> Navigator.push(HomeScreen())
+
+                    Control.HELP -> {
+                        HelpManager.message.value = HelpMessage(
+                            "Lock Screen",
+                            "$DEFAULT_MESSAGE_SHORT If you've never used this type of phone before, the blue buttons correspond to the text found at the bottom-left and bottom-right of the screen respectively."
+                        )
+                        true
+                    }
+
                     else -> false
                 }
             }
