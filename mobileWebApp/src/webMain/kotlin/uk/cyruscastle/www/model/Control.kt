@@ -6,7 +6,7 @@ enum class Control {
     Up, Down, Left, Right,
     Select, Back,
     ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, ZERO, STAR, HASH,
-    SHARE, EDIT, MUSIC, CLEAR
+    SHARE, EDIT, HELP, CLEAR
 }
 
 fun interface ControlHandler {

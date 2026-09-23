@@ -45,7 +45,7 @@ fun PrimaryButton(corner: BracketCorner, color: Color, repeatOnHold: Boolean = f
 enum class BracketCorner { TopStart, TopEnd, BottomStart, BottomEnd }
 
 @Composable
-private fun CornerBracket(
+fun CornerBracket(
     corner: BracketCorner,
     modifier: Modifier = Modifier,
     color: Color = Color.Black,

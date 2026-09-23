@@ -15,6 +15,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import uk.cyruscastle.www.controller.Navigator
 import uk.cyruscastle.www.view.ColorPalette
+import uk.cyruscastle.www.view.phone.components.onscreen.HelpMessage
 import uk.cyruscastle.www.view.phone.textures.lcdGrain
 
 @Composable
@@ -43,6 +44,7 @@ fun LcdScreen() {
                     .align(Alignment.Center)
             ){
                 Navigator.current.content()
+                HelpMessage()
             }
         }
     }
