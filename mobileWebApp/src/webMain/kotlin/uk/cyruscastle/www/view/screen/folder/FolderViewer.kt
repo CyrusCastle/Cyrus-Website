@@ -32,6 +32,8 @@ import cyruswebsite.shared.generated.resources.Res
 import cyruswebsite.shared.generated.resources.phoneFilesAlt
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.imageResource
+import uk.cyruscastle.www.controller.HelpManager
+import uk.cyruscastle.www.controller.HelpMessage
 import uk.cyruscastle.www.controller.Navigator
 import uk.cyruscastle.www.model.Control
 import uk.cyruscastle.www.view.phone.components.onscreen.SignalIndicator
@@ -41,6 +43,7 @@ import uk.cyruscastle.www.view.screen.ScreenScaffold
 
 open class FolderViewer(
     name: String = "Folder",
+    helpMessage: HelpMessage? = null,
     icon: DrawableResource = Res.drawable.phoneFilesAlt,
     showSignal: Boolean = false,
     apps: List<App>
@@ -58,6 +61,15 @@ open class FolderViewer(
                     Control.Select -> { Navigator.push(apps[index]) }
 
                     Control.PRIMARY_RIGHT -> Navigator.pop()
+
+                    Control.HELP -> {
+                        if (helpMessage == null){
+                            false
+                        }else {
+                            HelpManager.message.value = helpMessage
+                            true
+                        }
+                    }
 
                     Control.Up -> { index = (index - 3).coerceAtLeast(0); true }
                     Control.Down -> { index = (index + 3).coerceAtMost(apps.lastIndex); true }

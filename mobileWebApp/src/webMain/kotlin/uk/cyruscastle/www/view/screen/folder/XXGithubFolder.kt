@@ -7,10 +7,16 @@ import cyruswebsite.shared.generated.resources.phoneFarsigraphy
 import cyruswebsite.shared.generated.resources.phoneFolderTwo
 import cyruswebsite.shared.generated.resources.phonePhonotype
 import cyruswebsite.shared.generated.resources.phoneSettings
+import uk.cyruscastle.www.controller.DEFAULT_MESSAGE_SHORT
+import uk.cyruscastle.www.controller.HelpMessage
 import uk.cyruscastle.www.view.screen.dynamic.ShortcutApp
 
 class XXGithubFolder : FolderViewer(
     name = "Github",
+    helpMessage = HelpMessage(
+        "Github",
+        "A collection of my main GitHub projects."
+    ),
     apps = listOf(ZZCyrusWebsiteGithub(), ZZFarsigraphyGitHubShortcut(), /*ZZPhonotypeGithubShortcut(),*/ ZZDrawBoxEnhancedGitHubShortcut()),
     icon = Res.drawable.phoneFolderTwo
 )
