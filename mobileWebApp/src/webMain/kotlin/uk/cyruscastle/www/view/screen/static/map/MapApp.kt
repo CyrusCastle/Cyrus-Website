@@ -57,6 +57,7 @@ import androidx.compose.ui.zIndex
 import cyruswebsite.shared.generated.resources.Res
 import cyruswebsite.shared.generated.resources.phoneNavigator
 import cyruswebsite.shared.generated.resources.world
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import uk.cyruscastle.www.controller.Navigator
@@ -65,6 +66,7 @@ import uk.cyruscastle.www.helpers.map.getMarkers
 import uk.cyruscastle.www.model.Control
 import uk.cyruscastle.www.view.screen.App
 import uk.cyruscastle.www.view.screen.ScreenScaffold
+import kotlin.math.roundToInt
 
 class MapApp : App(
     name = "Map",
@@ -203,17 +205,28 @@ class MapApp : App(
                 }
 
                 // Set the map to look at Europe
-                LaunchedEffect(Unit){
-                    val mapCenter = Offset(4343f, 1546f)
+                val density = LocalDensity.current
+                val markers = remember { getMarkers() }
 
-                    horizontalScrollState.scrollTo(mapCenter.x.toInt())
-                    verticalScrollState.scrollTo(mapCenter.y.toInt())
+                val centerOn: suspend (GlobeMarker) -> Unit = { marker ->
+                    val vp = viewportSize
+                    with(density) {
+                        val half = 11.dp.toPx() / 2f
+                        val markerX = (marker.location.x * contentScale).toPx() + half
+                        val markerY = (marker.location.y * contentScale).toPx() + half
+
+                        horizontalScrollState.scrollTo((markerX - vp.width / 2f).roundToInt())
+                        verticalScrollState.scrollTo((markerY - vp.height / 2f).roundToInt())
+                    }
+                }
+
+                LaunchedEffect(Unit) {
+                    snapshotFlow { viewportSize }.first { it != IntSize.Zero }
+                    val start = markers.firstOrNull { it.name == "Beverley" } ?: return@LaunchedEffect
+                    centerOn(start)
                 }
 
                 // Find our selected position
-                val markers = remember { getMarkers() }
-                val density = LocalDensity.current
-
                 val snapRadius = with(density) { 10.dp.toPx() }
                 val pullRadius = with(density) { 32.dp.toPx() }
                 val hitRadius  = with(density) { 14.dp.toPx() }
