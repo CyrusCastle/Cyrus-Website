@@ -10,8 +10,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material.icons.filled.Help
 import androidx.compose.material.icons.filled.NetworkCheck
+import androidx.compose.material.icons.filled.QuestionMark
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -76,7 +76,7 @@ fun Controls(){
             }
 
             Column(Modifier.weight(0.5f)) {
-                VerticalKeyButton(Icons.Default.Help, ColorPalette.KeyText, "Help") { Controller.dispatch(Control.HELP) }
+                VerticalKeyButton(Icons.Default.QuestionMark, ColorPalette.KeyText, "Help") { Controller.dispatch(Control.HELP) }
                 VerticalKeyButton(Icons.Default.Clear, ColorPalette.KeyText, "Clear") { Controller.dispatch(Control.CLEAR) }
             }
         }
