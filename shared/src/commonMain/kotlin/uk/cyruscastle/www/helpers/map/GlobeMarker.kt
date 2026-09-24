@@ -152,18 +152,31 @@ fun getMarkers() = listOf(
             GlobeMarkerPicture(
                 "caerdydd.jpg",
                 "A picture of me somewhere in the town centre."
+            ),
+            GlobeMarkerPicture(
+                "lesser monolith.jpeg",
+                "Had a good wander around Sir Penfro."
             )
         )
     ),
 
     // Yr Hen Ogledd
-//
     GlobeMarker(
         name = "Beverley",
-        description = "I currently live in Beverley, Yorkshire, where I am training to become a Computer Science teacher",
+        description = "I currently live in Beverley, East Yorkshire, where I am training to become a Computer Science teacher.",
         location = DpOffset(5296.6665.dp, 2246.6665.dp),
         type = GlobeMarkerType.LIVED_AT,
         country = Res.drawable.mapFlagYorkshire,
+        pictures = listOf(
+            GlobeMarkerPicture(
+                "westwood.jpeg",
+                "A picture from my first day seeing Beverley."
+            ),
+            GlobeMarkerPicture(
+                "the monolith.jpeg",
+                "My good friend Dan at the local monolith."
+            )
+        )
     ),
 
     //////////
