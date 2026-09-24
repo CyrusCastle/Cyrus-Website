@@ -140,6 +140,11 @@
             }
 
             [hidden] { display: none !important; }
+
+            .hmc-focus {
+                outline: 2px solid #1a4fba;
+                outline-offset: 2px;
+            }
         </style>
     </head>
     <body>
@@ -159,7 +164,7 @@
                 </div>
 
                 <form id="search-form" class="search-form">
-                    <input id="search-input" type="text" placeholder="Ask a question..." autocomplete="off">
+                    <input id="search-input" type="text" inputmode="none" placeholder="Ask a question..." autocomplete="off">
                     <button type="submit">Ask!</button>
                 </form>
 
@@ -196,11 +201,12 @@
                     <div class="snippet">Statistically speaking, most questions have better answers elsewhere. Engine recommends trying again anyway.</div>
                 </div>
 
-                <span class="back-link" id="back-link">&larr; New Search</span>
+                <a class="back-link" id="back-link" href="#">&larr; New Search</a>
             </div>
         </div>
 
         <script type="module" src="HtmlController.js"></script>
+        <script type="module" src="HtmlMobileController.js"></script>
         <script src="browser.js"></script>
     </body>
 </html>
