@@ -30,7 +30,7 @@ To avoid trying to re-invent the wheel, I am using a couple of libraries for thi
 - Vincent Guillebaud's [FileKit](https://github.com/vinceglb/FileKit) (for uploading/downloading files from the site)
 - NucleusFramework's [CompsePdfReader](https://github.com/NucleusFramework/ComposePdfReader) (PDF renderer)
 
-(Also, a special thanks to Alex Meub for providing the [Windows 98 icons](https://win98icons.alexmeub.com/))
+(Also, a special thanks to Alex Meub for providing the [Windows 98 icons](https://win98icons.alexmeub.com/) and x1unix for the [S60 icons](https://github.com/x1unix/s60-icon-pack) used in the mobile verison of the site)
 
 ## Building & Running
 To build and run a development version, run the following through Gradle:
