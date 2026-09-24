@@ -3,6 +3,9 @@
 /////////////
 
 const FOCUSABLE = 'a[href], button, input, select, textarea, [contenteditable=""], [contenteditable="true"], [tabindex]';
+const HIGHLIGHT_CLASS = 'hmc-focus';
+
+let current = null;
 
 function getFocusable(root = document) {
   return [...root.querySelectorAll(FOCUSABLE)]
@@ -20,30 +23,57 @@ function getFocusable(root = document) {
     });
 }
 
+function setCurrent(el) {
+  if (current && current !== el) current.classList.remove(HIGHLIGHT_CLASS);
+  current = el;
+  if (!el) return;
+  el.classList.add(HIGHLIGHT_CLASS);
+  el.focus({ preventScroll: true });
+  el.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+}
+
+function getCurrent(list = getFocusable()) {
+  const active = document.activeElement;
+  if (active && active !== document.body && list.includes(active)) return active;
+  if (current && list.includes(current)) return current;
+  return null;
+}
+
+document.addEventListener('focusin', e => {
+  if (e.target !== document.body) setCurrentSilently(e.target);
+});
+
+document.addEventListener('pointerdown', e => {
+  const el = e.target.closest?.(FOCUSABLE);
+  if (el) setCurrentSilently(el);
+}, true);
+
+function setCurrentSilently(el) {
+  if (current && current !== el) current.classList.remove(HIGHLIGHT_CLASS);
+  current = el;
+  el.classList.add(HIGHLIGHT_CLASS);
+}
+
 function focusNext(step = 1) {
   const list = getFocusable();
   if (!list.length) return null;
-  const i = list.indexOf(document.activeElement);
-  const next = list[(i + step + list.length) % list.length];
-  next.focus();
+  const i = list.indexOf(getCurrent(list));
+  const next = i === -1
+    ? (step > 0 ? list[0] : list[list.length - 1])
+    : list[(i + step + list.length) % list.length];
+  setCurrent(next);
   return next;
 }
 
-function activate(el = document.activeElement) {
-  if (!el || el === document.body) return;
+function activate(el = getCurrent()) {
+  if (!el) return;
 
   const tag = el.tagName.toLowerCase();
   const type = (el.type || '').toLowerCase();
 
-  if (tag === 'a' && el.href) {
-    if (el.target === '_blank') window.open(el.href, '_blank');
-    else location.href = el.href;
-    return;
-  }
-
   if (tag === 'textarea') return;
 
-  if (tag === 'input' && !['checkbox','radio','button','submit','reset'].includes(type)) {
+  if (tag === 'input' && !['checkbox', 'radio', 'button', 'submit', 'reset'].includes(type)) {
     el.form?.requestSubmit?.();
     return;
   }
@@ -51,9 +81,9 @@ function activate(el = document.activeElement) {
   el.click();
 }
 
-function setText(str, el = document.activeElement) {
+function setText(str, el = getCurrent()) {
   const tag = el?.tagName?.toLowerCase();
-  const TEXTY = ['text','search','url','tel','email','password','number',''];
+  const TEXTY = ['text', 'search', 'url', 'tel', 'email', 'password', 'number', ''];
 
   const isInput = tag === 'input' && TEXTY.includes((el.type || '').toLowerCase());
   const isTextarea = tag === 'textarea';
@@ -71,7 +101,7 @@ function setText(str, el = document.activeElement) {
     Object.getOwnPropertyDescriptor(proto, 'value').set.call(el, str);
   }
 
-  el.dispatchEvent(new Event('input',  { bubbles: true }));
+  el.dispatchEvent(new Event('input', { bubbles: true }));
   el.dispatchEvent(new Event('change', { bubbles: true }));
   return true;
 }
@@ -94,14 +124,13 @@ function setText(str, el = document.activeElement) {
   });
 
   window.HtmlMobileController = {
-    list()          { return JSON.stringify(getFocusable().map(describe)); },
-    next()          { return JSON.stringify(describe(focusNext(1))); },
-    prev()          { return JSON.stringify(describe(focusNext(-1))); },
-    current()       { return JSON.stringify(describe(document.activeElement)); },
-    activate()      { activate(); return true; },
-    setText(str)    { return setText(str); },
-    focusIndex(i)   { const l = getFocusable(); l[i]?.focus(); return JSON.stringify(describe(l[i])); },
-    blur()          { document.activeElement?.blur(); return true; }
+    list()        { return JSON.stringify(getFocusable().map(describe)); },
+    next()        { return JSON.stringify(describe(focusNext(1))); },
+    prev()        { return JSON.stringify(describe(focusNext(-1))); },
+    current()     { return JSON.stringify(describe(getCurrent())); },
+    activate()    { activate(); return true; },
+    setText(str)  { return setText(str); },
+    focusIndex(i) { const l = getFocusable(); setCurrent(l[i] || null); return JSON.stringify(describe(l[i])); },
+    blur()        { current?.classList.remove(HIGHLIGHT_CLASS); current = null; document.activeElement?.blur(); return true; }
   };
-  return true;
 })();
