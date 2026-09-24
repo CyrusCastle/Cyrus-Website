@@ -29,7 +29,7 @@ import uk.cyruscastle.www.view.ColorPalette
 fun ColumnScope.KeyButton(number: Char, letters: List<Char>, rightMost: Boolean, repeatOnHold: Boolean = false, onClick: () -> Unit){
     Box(
         modifier = Modifier
-            .width(75.dp)
+            .fillMaxWidth()
             .weight(1f)
             .background(ColorPalette.CaseEdge)
             .border(1.dp, ColorPalette.CaseLight)
