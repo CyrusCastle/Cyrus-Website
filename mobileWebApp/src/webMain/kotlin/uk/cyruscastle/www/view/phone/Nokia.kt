@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -39,24 +40,26 @@ fun MainChassis(content: @Composable () -> Unit){
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .clip(chassisShape)
+            .fillMaxSize()
             .background(ColorPalette.CaseLight)
-            .border(1.dp, ColorPalette.CaseEdge, chassisShape)
+//            .clip(chassisShape)
+//            .background(ColorPalette.CaseLight)
+//            .border(1.dp, ColorPalette.CaseEdge, chassisShape)
             .padding(top = 10.dp, start = 15.dp, end = 15.dp, bottom = 5.dp)
     ){
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.height(40.dp).fillMaxWidth()
-        ) {
-            Spacer(Modifier.width(35.dp))
-            Spacer(Modifier.height(7.5.dp).width(7.5.dp).background(ColorPalette.CaseDark).border(1.dp, ColorPalette.CaseEdge))
-            Spacer(Modifier.width(10.dp))
-            Text(
-                text = "N70",
-                color = ColorPalette.KeyText,
-                style = typography(Res.font.NokiaSansModern).bodySmall
-            )
-        }
+//        Row(
+//            verticalAlignment = Alignment.CenterVertically,
+//            modifier = Modifier.height(40.dp).fillMaxWidth()
+//        ) {
+//            Spacer(Modifier.width(35.dp))
+//            Spacer(Modifier.height(7.5.dp).width(7.5.dp).background(ColorPalette.CaseDark).border(1.dp, ColorPalette.CaseEdge))
+//            Spacer(Modifier.width(10.dp))
+//            Text(
+//                text = "N70",
+//                color = ColorPalette.KeyText,
+//                style = typography(Res.font.NokiaSansModern).bodySmall
+//            )
+//        }
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center,
