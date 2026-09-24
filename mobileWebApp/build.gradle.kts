@@ -8,13 +8,13 @@ plugins {
 
 kotlin {
     js {
-        browser()
+        browser { commonWebpackConfig { outputFileName = "mobileApp.js" } }
         binaries.executable()
     }
 
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
-        browser()
+        browser { commonWebpackConfig { outputFileName = "mobileApp.js" } }
         binaries.executable()
     }
 
