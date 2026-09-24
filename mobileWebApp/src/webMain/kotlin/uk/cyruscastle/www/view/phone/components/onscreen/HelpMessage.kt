@@ -55,7 +55,7 @@ fun BoxScope.HelpMessage() {
             .fillMaxWidth(0.8f)
             .defaultMinSize(minHeight = 120.dp)
             .align(Alignment.Center)
-            .background(Color.Black.copy(alpha = 0.5f))
+            .background(Color.Black.copy(alpha = 0.75f))
             .border(1.dp, Color.Black)
             .padding(horizontal = 5.dp, vertical = 5.dp)
     ) {
