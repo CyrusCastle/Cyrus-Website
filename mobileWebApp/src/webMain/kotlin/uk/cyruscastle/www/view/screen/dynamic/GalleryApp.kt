@@ -1,12 +1,28 @@
 package uk.cyruscastle.www.view.screen.dynamic
 
+import androidx.compose.material3.Text
 import cyruswebsite.shared.generated.resources.Res
 import cyruswebsite.shared.generated.resources.phoneGallery
+import uk.cyruscastle.www.controller.Navigator
+import uk.cyruscastle.www.model.Control
 import uk.cyruscastle.www.view.screen.App
+import uk.cyruscastle.www.view.screen.ScreenScaffold
 
-class GalleryApp() : App(
+class GalleryApp : App(
     name = "Gallery",
     icon = Res.drawable.phoneGallery,
     content = {
+        ScreenScaffold(
+            rightButtonLabel = "Exit",
+            onControl = { control ->
+                when (control){
+                    Control.PRIMARY_RIGHT -> Navigator.pop()
+
+                    else -> false
+                }
+            }
+        ){
+            Text("Come back later")
+        }
     }
 )
