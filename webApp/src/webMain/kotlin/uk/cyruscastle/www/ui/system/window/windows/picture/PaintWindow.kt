@@ -266,13 +266,11 @@ open class PaintWindow(
                             updateSize
                         )
 
-                        // TODO changing size deletes the opened image!!!
                         DrawBox(
                             controller = _controller,
                             modifier = Modifier
                                 .padding(15.dp)
                                 .pointerHoverIcon(PointerIcon.Crosshair)
-//                                .offset(rect.left.dp, rect.top.dp)
                                 .size(rect.right.dp, rect.bottom.dp)
                         )
                     }
@@ -396,15 +394,15 @@ private fun PaintToolBar(controller: DrawController){
             PaintToolSelector(
                 Res.drawable.paintPencil,
                 "Pencil",
-                canvasTool.value == CanvasTool.BRUSH,
+                canvasTool.value == CanvasTool.PENCIL,
                 true
-            ) { controller.canvasTool.value = CanvasTool.BRUSH }
+            ) { controller.canvasTool.value = CanvasTool.PENCIL }
             PaintToolSelector(
                 Res.drawable.paintBrush,
                 "Brush",
-                false,
-                false
-            ) {}
+                canvasTool.value == CanvasTool.BRUSH,
+                true
+            ) { controller.canvasTool.value = CanvasTool.BRUSH }
         }
 
         Row {
@@ -417,9 +415,9 @@ private fun PaintToolBar(controller: DrawController){
             PaintToolSelector(
                 Res.drawable.paintText,
                 "Text",
-                false,
-                false
-            ) {}
+                canvasTool.value == CanvasTool.TEXT,
+                true
+            ) { controller.canvasTool.value = CanvasTool.TEXT }
         }
 
         Row {
@@ -432,9 +430,9 @@ private fun PaintToolBar(controller: DrawController){
             PaintToolSelector(
                 Res.drawable.paintCurve,
                 "Curved Line",
-                false,
-                false
-            ) {}
+                canvasTool.value == CanvasTool.SHAPE_CURVE,
+                true
+            ) { controller.canvasTool.value = CanvasTool.SHAPE_CURVE }
         }
 
         Row {
@@ -447,9 +445,9 @@ private fun PaintToolBar(controller: DrawController){
             PaintToolSelector(
                 Res.drawable.paintPolygon,
                 "Polygon",
-                false,
-                false
-            ) {}
+                canvasTool.value == CanvasTool.SHAPE_POLYGON,
+                true
+            ) { controller.canvasTool.value = CanvasTool.SHAPE_POLYGON }
         }
 
         Row {
@@ -462,9 +460,9 @@ private fun PaintToolBar(controller: DrawController){
             PaintToolSelector(
                 Res.drawable.paintRoundedRect,
                 "Rounded Rectangle",
-                false,
-                false
-            ) {}
+                canvasTool.value == CanvasTool.SHAPE_ROUNDED_RECT,
+                true
+            ) { controller.canvasTool.value = CanvasTool.SHAPE_ROUNDED_RECT }
         }
     }
 }
