@@ -6,12 +6,13 @@ import cyruswebsite.shared.generated.resources.farsigraphy
 import cyruswebsite.shared.generated.resources.phonotype
 import cyruswebsite.shared.generated.resources.scriptFolder
 import cyruswebsite.shared.generated.resources.scriptYellow
+import cyruswebsite.shared.generated.resources.whiteboard
 import uk.cyruscastle.www.ui.system.window.windows.shortcuts.ShortcutWindow
 
 class XXGithubFolder : FileExplorerWindow(
     title = "GitHub Projects",
     folderIcon = Res.drawable.scriptFolder,
-    items = listOf(ZZCyrusWebsiteGithub(), ZZFarsigraphyGitHubShortcut(), /*ZZPhonotypeGithubShortcut(),*/ ZZDrawBoxEnhancedGitHubShortcut())
+    items = listOf(ZZCyrusWebsiteGithub(), ZZFarsigraphyGitHubShortcut(), /*ZZPhonotypeGithubShortcut(),*/ ZZDrawBoxEnhancedGitHubShortcut(), ZZWhiteboardsGithubShortcut())
 )
 
 class ZZCyrusWebsiteGithub : ShortcutWindow(
@@ -36,4 +37,10 @@ class ZZPhonotypeGithubShortcut : ShortcutWindow(
     title = "Phonotype",
     shortcutIcon = Res.drawable.phonotype,
     websiteURL = "https://github.com/CyrusCastle/Phonotype"
+)
+
+class ZZWhiteboardsGithubShortcut : ShortcutWindow(
+    title = "Whiteboard",
+    shortcutIcon = Res.drawable.whiteboard,
+    websiteURL = "https://github.com/CyrusCastle/CheckForUnderstanding/"
 )

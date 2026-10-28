@@ -7,6 +7,7 @@ import cyruswebsite.shared.generated.resources.phoneFarsigraphy
 import cyruswebsite.shared.generated.resources.phoneFolderTwo
 import cyruswebsite.shared.generated.resources.phonePhonotype
 import cyruswebsite.shared.generated.resources.phoneSettings
+import cyruswebsite.shared.generated.resources.whiteboard
 import uk.cyruscastle.www.controller.DEFAULT_MESSAGE_SHORT
 import uk.cyruscastle.www.controller.HelpMessage
 import uk.cyruscastle.www.view.screen.dynamic.ShortcutApp
@@ -17,7 +18,7 @@ class XXGithubFolder : FolderViewer(
         "Github",
         "A collection of my main GitHub projects."
     ),
-    apps = listOf(ZZCyrusWebsiteGithub(), ZZFarsigraphyGitHubShortcut(), /*ZZPhonotypeGithubShortcut(),*/ ZZDrawBoxEnhancedGitHubShortcut()),
+    apps = listOf(ZZCyrusWebsiteGithub(), ZZFarsigraphyGitHubShortcut(), /*ZZPhonotypeGithubShortcut(),*/ ZZDrawBoxEnhancedGitHubShortcut(), ZZWhiteboardsGithubShortcut()),
     icon = Res.drawable.phoneFolderTwo
 )
 
@@ -43,4 +44,10 @@ class ZZPhonotypeGithubShortcut : ShortcutApp(
     title = "Phonotype",
     shortcutIcon = Res.drawable.phonePhonotype,
     websiteURL = "https://github.com/CyrusCastle/Phonotype"
+)
+
+class ZZWhiteboardsGithubShortcut : ShortcutApp(
+    title = "Whiteboard",
+    shortcutIcon = Res.drawable.whiteboard,
+    websiteURL = "https://github.com/CyrusCastle/CheckForUnderstanding/"
 )
