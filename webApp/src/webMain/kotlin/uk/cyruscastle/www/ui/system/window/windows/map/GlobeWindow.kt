@@ -31,6 +31,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -49,6 +50,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.boundsInParent
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.center
 import androidx.compose.ui.unit.dp
@@ -65,6 +67,7 @@ import cyruswebsite.shared.generated.resources.mapScrollUp
 import cyruswebsite.shared.generated.resources.mapZoomIn
 import cyruswebsite.shared.generated.resources.mapZoomOut
 import cyruswebsite.shared.generated.resources.world
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
@@ -75,6 +78,7 @@ import uk.cyruscastle.www.helpers.map.getMarkers
 import uk.cyruscastle.www.ui.system.scroll.ScrollableContainer
 import uk.cyruscastle.www.ui.system.window.FacsimileWindow
 import kotlin.js.ExperimentalWasmJsInterop
+import kotlin.math.roundToInt
 
 @OptIn(ExperimentalComposeUiApi::class)
 class GlobeWindow : FacsimileWindow(
@@ -200,28 +204,34 @@ class GlobeWindow : FacsimileWindow(
                 }
             }
 
-            val centerMap: suspend () -> Unit = {
-//                val mapCenter = Offset(5423f, 2101f)
-                val mapCenter = Offset(4706.67f, 1666.67f) // TODO not really happy with how centerMap works, think about re-writing this!!
-                // TODO currently it makes sure that the top-left corner goes to Iceland, not really what we want at larger zooms than 0.5f~
+            // Set the map to look at Europe
+            val density = LocalDensity.current
+            val markers = remember { getMarkers() }
 
-                val viewportWidth = viewportSize.width.toFloat()
-                val viewportHeight = viewportSize.height.toFloat()
+            val centerOn: suspend (GlobeMarker) -> Unit = { marker ->
+                val vp = viewportSize
+                with(density) {
+                    val half = 11.dp.toPx() / 2f
+                    val markerX = (marker.location.x * contentScale).toPx() + half
+                    val markerY = (marker.location.y * contentScale).toPx() + half
 
-                val newScrollX = (mapCenter.x * contentScale)// - viewportWidth / 2f
-                val newScrollY = (mapCenter.y * contentScale)// - viewportHeight / 2f
-
-                horizontalScrollState.scrollTo(newScrollX.toInt())
-                verticalScrollState.scrollTo(newScrollY.toInt())
+                    horizontalScrollState.scrollTo((markerX - vp.width / 2f).roundToInt())
+                    verticalScrollState.scrollTo((markerY - vp.height / 2f).roundToInt())
+                }
             }
 
-            // Set the map to look at Europe
+            val centerMap: suspend () -> Unit = {
+                snapshotFlow { viewportSize }.first { it != IntSize.Zero }
+                val start = markers.firstOrNull { it.name == "Beverley" }
+
+                if (start != null){
+                    centerOn(start)
+                }
+            }
+
             LaunchedEffect(Unit){
                 centerMap()
             }
-
-            // Debug
-//            Text("$contentScale (${horizontalScrollState.value} x ${verticalScrollState.value} )", Modifier.align(Alignment.TopCenter))
 
             // Marker-Marker connector
             if (selectedLocation != null && markerGlobalCenter != null && detailsFlagGlobalCenter != null) {
