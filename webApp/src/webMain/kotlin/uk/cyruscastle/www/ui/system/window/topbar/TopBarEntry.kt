@@ -13,6 +13,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.BlendMode
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
@@ -20,6 +22,7 @@ import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import uk.cyruscastle.www.ui.extensions.modifier.intrudeExtrudeBorder
 import uk.cyruscastle.www.ui.theme.ColorPalette
+import uk.cyruscastle.www.ui.theme.ColorPalette.SELECTED_COLOR
 
 @Composable
 fun TopBarEntry(
@@ -27,6 +30,7 @@ fun TopBarEntry(
     isIntruding: Boolean? = null,
     modifier: Modifier = Modifier,
     size: DpSize = DpSize(25.dp, 25.dp),
+    isEnabled: Boolean = true,
     onClick: () -> Unit
 ){
     if (drawable == null){
@@ -50,6 +54,7 @@ fun TopBarEntry(
         Image(
             painter = painterResource(drawable),
             contentDescription = null,
+            colorFilter = if (isEnabled) null else ColorFilter.tint(ColorPalette.WINDOW_CONTAINER_BEZEL.copy(alpha = 0.6f), BlendMode.SrcAtop),
             modifier = Modifier.fillMaxSize()
         )
     }

@@ -52,9 +52,11 @@ import cyruswebsite.shared.generated.resources.buttonOpen
 import cyruswebsite.shared.generated.resources.buttonPrint
 import cyruswebsite.shared.generated.resources.buttonSave
 import cyruswebsite.shared.generated.resources.buttonSpellcheck
+import cyruswebsite.shared.generated.resources.redo
 import cyruswebsite.shared.generated.resources.textBold
 import cyruswebsite.shared.generated.resources.textEmph
 import cyruswebsite.shared.generated.resources.textUnderline
+import cyruswebsite.shared.generated.resources.undo
 import cyruswebsite.shared.generated.resources.wordpad
 import io.github.vinceglb.filekit.FileKit
 import io.github.vinceglb.filekit.dialogs.openFilePicker
@@ -101,6 +103,16 @@ open class WordpadWindow (
                 CoroutineScope(Dispatchers.Default).launch {
                     FileKit.download(bytes = _textState.value.toMarkdown().encodeToByteArray(), fileName = "file.md")
                 }
+            } },
+
+            { TopBarSeparator() },
+
+            { TopBarEntry(Res.drawable.undo, isIntruding = !_textState.value.history.canUndo, isEnabled = _textState.value.history.canUndo) {
+                _textState.value.history.undo()
+            } },
+
+            { TopBarEntry(Res.drawable.redo, isIntruding = !_textState.value.history.canRedo, isEnabled = _textState.value.history.canRedo) {
+                _textState.value.history.redo()
             } },
 
             { TopBarSeparator() },
@@ -241,8 +253,10 @@ open class WordpadWindow (
                                     Key.P -> {
                                         printPage(_textState.value.toHtml())
                                     } // Won't work because of browser's default print behaviour methinks
-                                    Key.Z -> {} // TODO undo
-                                    Key.Y -> {} // TODO redo
+
+                                    Key.Z -> { _textState.value.history.undo() }
+                                    Key.Y -> { _textState.value.history.redo() }
+
                                     else -> {
                                         return@onPreviewKeyEvent false
                                     }
