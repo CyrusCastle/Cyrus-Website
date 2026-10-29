@@ -1,6 +1,7 @@
 package uk.cyruscastle.www.view.screen.folder
 
 import cyruswebsite.shared.generated.resources.Res
+import cyruswebsite.shared.generated.resources.cyfeiriad
 import cyruswebsite.shared.generated.resources.cyrusIconHigherRes
 import cyruswebsite.shared.generated.resources.phoneBooks
 import cyruswebsite.shared.generated.resources.phoneFarsigraphy
@@ -18,7 +19,7 @@ class XXGithubFolder : FolderViewer(
         "Github",
         "A collection of my main GitHub projects."
     ),
-    apps = listOf(ZZCyrusWebsiteGithub(), ZZFarsigraphyGitHubShortcut(), /*ZZPhonotypeGithubShortcut(),*/ ZZDrawBoxEnhancedGitHubShortcut(), ZZWhiteboardsGithubShortcut()),
+    apps = listOf(ZZCyrusWebsiteGithub(), ZZFarsigraphyGitHubShortcut(), /*ZZPhonotypeGithubShortcut(),*/ ZZDrawBoxEnhancedGitHubShortcut(), ZZWhiteboardsGithubShortcut(), ZZCyfeiriadGithubShortcut()),
     icon = Res.drawable.phoneFolderTwo
 )
 
@@ -50,4 +51,10 @@ class ZZWhiteboardsGithubShortcut : ShortcutApp(
     title = "Whiteboard",
     shortcutIcon = Res.drawable.whiteboard,
     websiteURL = "https://github.com/CyrusCastle/CheckForUnderstanding/"
+)
+
+class ZZCyfeiriadGithubShortcut : ShortcutApp(
+    title = "Cyfeiriad",
+    shortcutIcon = Res.drawable.cyfeiriad,
+    websiteURL = "https://github.com/CyrusCastle/Cyfeiriad/"
 )
